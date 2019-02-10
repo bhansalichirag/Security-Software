@@ -12,7 +12,7 @@
 	<artifactId>Banking_System_Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Banking_System_Project</name>
-	<description>Spring Boot Starter</description>
+	<description>Spring Boot Starter(Add Log4J)</description>
 
 	<properties>
 		<java.version>1.8</java.version>
