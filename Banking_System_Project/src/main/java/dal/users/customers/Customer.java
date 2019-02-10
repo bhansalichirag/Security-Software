@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Customer extends User{
 
-	private List<Object> accountsList;
+	private List<Account> accountsList;
 	private String address;
 	private String ssn;
 	private String seqQuestion;
@@ -30,14 +31,14 @@ public abstract class Customer extends User{
 			String seqQuestion)
 	{
 		super(firstName,middleName,lastName,username,password,phoneNumber,firstName);
-		this.accountsList = new ArrayList<Object>();
+		this.accountsList = new ArrayList<Account>();
 		this.address = address;
 		this.ssn = ssn;
 		this.seqQuestion = seqQuestion;
 	}
 	
 	
-	public List<Object> getAccountsList() {
+	public List<Account> getAccountsList() {
 		return accountsList;
 	}
 	public String getAddress() {
