@@ -1,16 +1,26 @@
 package main.java.dal.users;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name="DTYPE",
+        discriminatorType = DiscriminatorType.STRING
+    )
 public abstract class User {
 	
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	@Id
+	@Column(name = "username", updatable = false, nullable = false)
 	private String username;
 	private String password;
 	private Integer phoneNumber;

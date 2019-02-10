@@ -2,22 +2,22 @@ package main.java.dal.accounts;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.data.annotation.CreatedDate;
-
 import main.java.dal.Transaction;
 
-@Entity
+
+@Entity(name = "Account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Account {
 
@@ -30,6 +30,7 @@ public abstract class Account {
 	private Integer accountNumber;
 	private Double balance;
 	private Double interest;
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Transaction> Transactions;
 	
 	public Account(Integer accountNumber,

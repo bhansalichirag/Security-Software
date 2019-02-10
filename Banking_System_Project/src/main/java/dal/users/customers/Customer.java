@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
+import javax.persistence.OneToMany;
 import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
-@Entity
+@Entity(name = "Customer")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Customer extends User{
 
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Account> accountsList;
 	private String address;
 	private String ssn;
