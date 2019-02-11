@@ -13,8 +13,11 @@ public abstract class Employee extends User{
 	
 	private String employeeID;
 	
+	public Employee() {
+	}
+	
 	public Employee(String firstName, String middleName, String lastName, String username, String password,
-			Integer phoneNumber, String email, String employeeID) {
+			String phoneNumber, String email, String employeeID) {
 		
 		super(firstName, middleName, lastName, username, password, phoneNumber, email);
 		this.employeeID = employeeID;

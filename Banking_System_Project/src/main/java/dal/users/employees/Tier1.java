@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 @Entity
 public class Tier1 extends Employee {
 
+	public Tier1() {
+		
+	}
+	
 	public Tier1(String firstName, String middleName, String lastName, String username, String password,
-			Integer phoneNumber, String email, String employeeID) {
+			String phoneNumber, String email, String employeeID) {
 		super(firstName, middleName, lastName, username, password, phoneNumber, email, employeeID);
 		// TODO Auto-generated constructor stub
 	}

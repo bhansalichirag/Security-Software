@@ -33,6 +33,9 @@ public abstract class Account {
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Transaction> Transactions;
 	
+	public Account() {
+	}
+	
 	public Account(Integer accountNumber,
 			Double balance,
 			Double interest)

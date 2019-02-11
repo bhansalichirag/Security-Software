@@ -3,11 +3,14 @@ package main.java.dal.users.customers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
@@ -18,21 +21,25 @@ public abstract class Customer extends User{
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Account> accountsList;
 	private String address;
+	@Column(name = "ssn", nullable = false, unique = true)
 	private String ssn;
 	private String seqQuestion;
+	
+	public Customer() {
+	}
 	
 	public Customer(String firstName,
 			String middleName,
 			String lastName,
 			String username,
 			String password,
-			Integer phoneNumber,
+			String phoneNumber,
 			String email,
 			String address,
 			String ssn,
 			String seqQuestion)
 	{
-		super(firstName,middleName,lastName,username,password,phoneNumber,firstName);
+		super(firstName,middleName,lastName,username,password,phoneNumber,email);
 		this.accountsList = new ArrayList<Account>();
 		this.address = address;
 		this.ssn = ssn;

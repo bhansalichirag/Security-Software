@@ -23,19 +23,23 @@ public abstract class User {
 	@Column(name = "username", updatable = false, nullable = false)
 	private String username;
 	private String password;
-	private Integer phoneNumber;
+	private String phoneNumber;
 	private String email;
+	
+	public User() {
+		
+	}
 	
 	public User(String firstName,
 			String middleName,
 			String lastName,
 			String username,
 			String password,
-			Integer phoneNumber,
+			String phoneNumber,
 			String email)
 	{
 		this.firstName = firstName;
-		this.middleName = lastName;
+		this.middleName = middleName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
@@ -73,10 +77,10 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getEmail() {

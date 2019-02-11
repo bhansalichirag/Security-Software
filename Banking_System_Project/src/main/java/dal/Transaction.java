@@ -34,6 +34,9 @@ public class Transaction {
 	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	private Date date;
+
+	public Transaction() {
+	}
 	
 	public Transaction(Account payer,
 			Account payee,
@@ -45,6 +48,7 @@ public class Transaction {
 		this.amount = amount;
 	}
 	
+
 	public boolean isApprovalStatus() {
 		return approvalStatus;
 	}
