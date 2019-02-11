@@ -2,15 +2,12 @@ package main.java.dal.users.customers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
 import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
