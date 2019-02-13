@@ -3,6 +3,8 @@ package main.java.dal.accounts;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,14 +13,19 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.data.annotation.CreatedDate;
 import main.java.dal.Transaction;
-
+import main.java.dal.users.employees.Employee;
 
 @Entity(name = "Account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name="AccountType",
+        discriminatorType = DiscriminatorType.STRING
+    )
 public abstract class Account {
 
 	@CreatedDate
@@ -30,19 +37,50 @@ public abstract class Account {
 	private Integer accountNumber;
 	private Double balance;
 	private Double interest;
+	@OneToOne(fetch = FetchType.EAGER)
+	private Employee approver;
+	@Temporal(TemporalType.DATE)
+	private Date approvalDate;
+	private boolean approvalStatus; 
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Transaction> Transactions;
+	private Integer failedAttempts;
 	
 	public Account() {
 	}
 	
-	public Account(Integer accountNumber,
-			Double balance,
+	public Account(Double balance,
 			Double interest)
 	{
-		this.accountNumber = accountNumber;
+		this.creationDate = new Date();
 		this.balance = balance;
 		this.interest = interest;
+		this.failedAttempts = 0;
+		this.approvalStatus = false;
+	}
+	
+	public Employee getApprover() {
+		return approver;
+	}
+
+	public void setApprover(Employee approver) {
+		this.approver = approver;
+	}
+
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+
+	public boolean isApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(boolean approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 	
 	public Integer getAccountNumber() {
@@ -65,6 +103,18 @@ public abstract class Account {
 	}
 	public List<Transaction> getTransactions() {
 		return Transactions;
+	}
+
+	public Integer getFailedAttempts() {
+		return failedAttempts;
+	}
+
+	public void incrementFailedAttempts(Integer failedAttempts) {
+		this.failedAttempts++;
+	}
+	
+	public void clearFailedAttempts(Integer failedAttempts) {
+		this.failedAttempts = 0;
 	}
 	
 	

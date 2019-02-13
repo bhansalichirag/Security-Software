@@ -8,8 +8,8 @@ public class SavingsAccount extends Account {
 	public SavingsAccount() {
 	}
 	
-	public SavingsAccount(Integer accountNumber, Double balance, Double interest) {
-		super(accountNumber, balance, interest);
+	public SavingsAccount(Double balance, Double interest) {
+		super(balance, interest);
 		// TODO Auto-generated constructor stub
 	}
 

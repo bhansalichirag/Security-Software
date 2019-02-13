@@ -31,6 +31,8 @@ public class Transaction {
 	private boolean approvalStatus; 
 	@OneToOne(fetch = FetchType.EAGER)
 	private Employee approver;
+	@Temporal(TemporalType.DATE)
+	private Date approvalDate;
 	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	private Date date;
@@ -42,18 +44,23 @@ public class Transaction {
 			Account payee,
 			Double amount)
 	{
-		
+		this.date = new Date();
 		this.payer = payer;
 		this.payee = payee;
 		this.amount = amount;
 	}
 	
-
 	public boolean isApprovalStatus() {
 		return approvalStatus;
 	}
 	public void setApprovalStatus(boolean approvalStatus) {
 		this.approvalStatus = approvalStatus;
+	}
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
 	}
 	public Employee getApprover() {
 		return approver;

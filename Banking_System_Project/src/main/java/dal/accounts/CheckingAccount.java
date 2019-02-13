@@ -8,8 +8,8 @@ public class CheckingAccount extends Account {
 	public CheckingAccount() {
 	}
 	
-	public CheckingAccount(Integer accountNumber, Double balance, Double interest) {
-		super(accountNumber, balance, interest);
+	public CheckingAccount(Double balance) {
+		super(balance, 0.0);
 		// TODO Auto-generated constructor stub
 	}
 
