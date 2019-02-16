@@ -23,7 +23,7 @@ public class UserServiesImpl implements IUserServices {
 	
 	@Override
 	public void createUser() {
-		Individual customer = new Individual("John", null, "Doe", "jhdoe", "password", "4804808000", "abc@abc", "somewhere", "123456409", "Super");
+		Individual customer = new Individual("John", null, "Doe", "jhdoe", null, "password", "4804808000", "abc@abc", "somewhere", "123456409", "Super", null);
 		Account account = new SavingsAccount(100000.0, 2.0);
 		accountRepository.save(account);
 		List<Account> accs = customer.getAccountsList();

@@ -1,6 +1,7 @@
 package main.java.dal.users.customers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public abstract class Customer extends User{
 	@Column(name = "ssn", nullable = false, unique = true)
 	private String ssn;
 	private String seqQuestion;
+	private String seqQuestion2;
 	
 	public Customer() {
 	}
@@ -29,18 +31,22 @@ public abstract class Customer extends User{
 			String middleName,
 			String lastName,
 			String username,
+			Date dateOfBirth,
 			String password,
 			String phoneNumber,
 			String email,
 			String address,
 			String ssn,
-			String seqQuestion)
+			String seqQuestion,
+			String seqQuestion2)
 	{
-		super(firstName,middleName,lastName,username,password,phoneNumber,email);
+		super(firstName,middleName,lastName,username,
+				dateOfBirth,password,phoneNumber,email);
 		this.accountsList = new ArrayList<Account>();
 		this.address = address;
 		this.ssn = ssn;
 		this.seqQuestion = seqQuestion;
+		this.seqQuestion2 = seqQuestion2;
 	}
 	
 	
@@ -64,5 +70,13 @@ public abstract class Customer extends User{
 	}
 	public void setSeqQuestion(String seqQuestion) {
 		this.seqQuestion = seqQuestion;
+	}
+
+	public String getSeqQuestion2() {
+		return seqQuestion2;
+	}
+
+	public void setSeqQuestion2(String seqQuestion2) {
+		this.seqQuestion2 = seqQuestion2;
 	}
 }
