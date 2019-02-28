@@ -27,6 +27,8 @@ public class UserServiesImpl implements IUserServices {
 	private AccountRepository accountRepository;
 	@Autowired
 	private EmployeeRepository emprepository;
+	@Autowired
+	EmployeeUserDao dao;
 	
 	@Override
 	public void createUser() {
@@ -48,9 +50,10 @@ public class UserServiesImpl implements IUserServices {
 		
 		Admin admin=new Admin("Pranay", null, "Jagtap", "psjagtap", null, "password", "4804808000", "admin@abc", "G01091383","somewhere", "852811234", "Super", null);
 		userRepository.save(admin);
+		System.out.println(userRepository);
 		System.out.println("Saved Pranay");
 		
-		EmployeeUserDao dao = new EmployeeUserDao();
+		
 		Admin emp = dao.checkLogin(userId,password);
 		
 		//If user does not exist return null object. Login will fail 

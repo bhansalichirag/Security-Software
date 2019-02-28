@@ -12,7 +12,7 @@ import main.java.dal.users.employees.Employee;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
-	public Admin findFirstByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+	public Admin findFirstByUsernameAndPassword(String username, String password);
 
 	
 }
