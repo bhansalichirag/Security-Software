@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import main.java.business.services.IUserServices;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"main.java.web","main.java.business.services","main.java.business.repositories"})
+@ComponentScan(basePackages = {"main.java.web","main.java.business.services","main.java.business.repositories","main.java.dal.emp"})
 public class BankingSystemProjectApplication implements CommandLineRunner{
 
 	@Autowired

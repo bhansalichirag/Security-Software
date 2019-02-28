@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.SavingsAccount;
-import main.java.dal.emp.EmployeeUserDao;
+import main.java.dal.emp.EmpUserDao;
+import main.java.dal.emp.EmpUserDaoImpl;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Individual;
 import main.java.dal.users.employees.Admin;
@@ -22,13 +23,13 @@ import main.java.repositories.UserRepository;
 public class UserServiesImpl implements IUserServices {
 
 	@Autowired
+	EmpUserDao dao;
+	@Autowired
 	private UserRepository userRepository;
 	@Autowired
 	private AccountRepository accountRepository;
-	@Autowired
-	private EmployeeRepository emprepository;
-	@Autowired
-	EmployeeUserDao dao;
+	
+	
 	
 	@Override
 	public void createUser() {

@@ -3,6 +3,7 @@ package main.java.dal.emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import main.java.dal.users.User;
 import main.java.dal.users.employees.Admin;
@@ -10,8 +11,8 @@ import main.java.dal.users.employees.Employee;
 import main.java.repositories.EmployeeRepository;
 import main.java.repositories.UserRepository;
 
-@Repository
-public class EmployeeUserDao {
+@Service
+public class EmpUserDaoImpl implements EmpUserDao {
 
 	
 /*	

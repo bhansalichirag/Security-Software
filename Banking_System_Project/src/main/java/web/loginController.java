@@ -43,7 +43,7 @@ public class loginController {
 	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response) {
 		// System.out.println(model);
 		String username = (String) request.getParameter("username");
-		String password = (String) request.getParameter("username");
+		String password = (String) request.getParameter("password");
 		System.out.println(username+password);
 
 
