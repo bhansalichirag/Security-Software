@@ -6,5 +6,6 @@ import main.java.dal.users.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
-
+	public Iterable<User> findByUsernameAndPassword(String username, String password);
+	
 }

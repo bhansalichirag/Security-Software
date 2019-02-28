@@ -2,12 +2,11 @@ package main.java.business.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.SavingsAccount;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Individual;
 import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
@@ -31,6 +30,13 @@ public class UserServiesImpl implements IUserServices {
 			accs = new ArrayList<Account>();
 		accs.add(account);
 		userRepository.save(customer);
+	}
+	
+	public boolean ValidateUser(String username, String password)
+	{
+		Iterable<User> x = userRepository.findByUsernameAndPassword(username,password);
+		x.forEach(a -> System.out.println(a.getFirstName()));
+		return false;
 	}
 
 }

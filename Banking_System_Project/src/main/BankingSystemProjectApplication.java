@@ -21,6 +21,7 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	@Override
     public void run(String... arg0) throws Exception {
 		userServices.createUser();
+		userServices.ValidateUser("jhdoe","password");
     }
 
 }
