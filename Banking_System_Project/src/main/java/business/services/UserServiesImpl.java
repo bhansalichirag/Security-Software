@@ -8,8 +8,13 @@ import org.springframework.stereotype.Service;
 
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.SavingsAccount;
+import main.java.dal.emp.EmployeeUserDao;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Individual;
+import main.java.dal.users.employees.Admin;
+import main.java.dal.users.employees.Employee;
 import main.java.repositories.AccountRepository;
+import main.java.repositories.EmployeeRepository;
 import main.java.repositories.UserRepository;
 
 
@@ -20,6 +25,8 @@ public class UserServiesImpl implements IUserServices {
 	private UserRepository userRepository;
 	@Autowired
 	private AccountRepository accountRepository;
+	@Autowired
+	private EmployeeRepository emprepository;
 	
 	@Override
 	public void createUser() {
@@ -30,7 +37,35 @@ public class UserServiesImpl implements IUserServices {
 		if (accs == null)
 			accs = new ArrayList<Account>();
 		accs.add(account);
+		System.out.println("hello");
+		System.out.println();
 		userRepository.save(customer);
+		
 	}
+
+	@Override
+	public Admin validateEmpUser(String userId, String password) throws Exception{
+		
+		Admin admin=new Admin("Pranay", null, "Jagtap", "psjagtap", null, "password", "4804808000", "admin@abc", "G01091383","somewhere", "852811234", "Super", null);
+		userRepository.save(admin);
+		System.out.println("Saved Pranay");
+		
+		EmployeeUserDao dao = new EmployeeUserDao();
+		Admin emp = dao.checkLogin(userId,password);
+		
+		//If user does not exist return null object. Login will fail 
+		if(emp==null) {
+			return null;
+		}
+		//If user exists and username and password match return the user.
+		else {
+			return emp;
+		}
+		
+	}
+		
+		
+		
+	
 
 }

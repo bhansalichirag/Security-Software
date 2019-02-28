@@ -12,8 +12,8 @@ public class Tier1 extends Employee {
 	}
 	
 	public Tier1(String firstName, String middleName, String lastName, String username, Date dateOfBirth, String password,
-			String phoneNumber, String email, String employeeID) {
-		super(firstName, middleName, lastName, username, dateOfBirth, password, phoneNumber, email, employeeID);
+			String phoneNumber, String email,String employeeID, String address, String ssn, String seqQuestion,String seqQuestion2) {
+		super(firstName, middleName, lastName, username, dateOfBirth, password, phoneNumber, email,employeeID, address, ssn, seqQuestion, seqQuestion2);
 		// TODO Auto-generated constructor stub
 	}
 
