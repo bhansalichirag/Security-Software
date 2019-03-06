@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 public class Controllers {
 
 
-    @RequestMapping(value="/opener", method = RequestMethod.GET)
-    public String opener(ModelMap model){
+	@RequestMapping(value= {"/","/login"}, method = RequestMethod.GET)
+    public String welcome(ModelMap model){
         String name = (String) model.get("name");
-        model.put("open", name);
-        return "open";
+        model.put("Login", name);
+        return "Login";
     }
 }
