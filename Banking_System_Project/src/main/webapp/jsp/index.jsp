@@ -7,6 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<table align = "center">
+<tr>
+<td>User Information</td>
+<td></td>
+</tr>
+<tr>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td>User Name</td>
+<td></td>
+</tr>
+</table>
 </body>
 </html>

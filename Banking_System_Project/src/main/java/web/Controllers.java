@@ -15,4 +15,8 @@ public class Controllers {
         model.put("open", name);
         return "open";
     }
+    @RequestMapping(value = "/reg_emp.jsp", method = RequestMethod.GET)
+    public String redirect() {
+       return "redirect:finalPage";
+    }
 }

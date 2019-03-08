@@ -33,4 +33,22 @@ public class UserServiesImpl implements IUserServices {
 		userRepository.save(customer);
 	}
 
+	@Override
+	public boolean validateUser(String username,String password) {
+		
+		if(username ==null||password==null) {
+			return false;
+		}
+		if(username.equals("SYSTEM")&&password.contentEquals("system")) {
+			return true;
+		}
+		
+		return false;
+		
+		// TODO Auto-generated method stub
+		
+		
+		
+	}
+
 }
