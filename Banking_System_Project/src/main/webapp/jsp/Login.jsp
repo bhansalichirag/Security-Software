@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="/resources/css/loginCSS.css" rel="stylesheet">
+<link href="css/loginCSS.css" rel="stylesheet">
 <title>Login Page</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
 		<h2>Login Form</h2>
 	
 		<form action="/action_page.php">
-		  <a href="#" style="padding-left: 20px"> <img src="Banking_System_Project/src/main/resources/img/avatar.png"
+		  <a href="#" style="padding-left: 20px"> <img src="img/avatar.png"
 						 style="vertical-align:top;"
 						 width="35px" height="65px" alt="avatar"></a>
 		   <div class="container">
@@ -24,7 +24,10 @@
 		  </div>	 
 		
 		  <div class="container" style="background-color:#f1f1f1;height:30px">
-		    <span class="psw"><a href="#">Forgot password?</a></span>
+		    <span><a href="#">Forgot password?</a></span>
+		  </div>
+		  <div class="container" style="background-color:#f1f1f1;height:30px">
+		    <span><a href="jsp/RegistrationExternal.jsp">New User?</a></span>
 		  </div>
 		  
 		</form>
