@@ -14,3 +14,15 @@ function ButtonFormAction(path, params) {
     document.body.appendChild(form);
     form.submit();
 }
+
+function ViewTransactions(transid)
+{
+	var params = { transactionid: transid };
+	ButtonFormAction("/transactions", params);
+}
+
+function OpenPayments(transid)
+{
+	var params = { transactionid: transid };
+	ButtonFormAction("/payments", params);
+}

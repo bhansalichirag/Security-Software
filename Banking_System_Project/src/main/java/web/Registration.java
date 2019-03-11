@@ -2,11 +2,9 @@ package main.java.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,29 +38,29 @@ public class Registration {
 		int flag =0;
 		ModelAndView mav = null;
 		System.out.println("hello");
-		System.out.println(access);
+		System.out.println(firstname);
 		
-		if(firstname.equals("")) {
+		if(("").equals(firstname)) {
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "first name cannot be empty");
 		}
-		else if(lastname.equals("")){
+		else if(("").equals(lastname)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "last name cannot be empty");
 		}
-		else if(username.equals("")){
+		else if(("").equals(username)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "user name cannot be empty");
 		}
-		else if(password.equals("")){
+		else if(("").equals(password)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "password cannot be empty");
 		}
-		else if(!confirmpassword.equals(password)){
+		else if(!password.equals(confirmpassword)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "password and confirm password does not match");
 		}
-		else if(DOB.equals("")){
+		else if(("").equals(DOB)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "date cannot be empty");
 		}
@@ -70,11 +68,11 @@ public class Registration {
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "specify the access granted to the employee");
 		}
-		else if(phonenumber.equals("")){
+		else if(("").equals(phonenumber)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "phone number cannot be empty");
 		}
-		else if(email.equals("")){
+		else if(("").equals(email)){
 			mav = new ModelAndView("redirect:emp_register");
 		    mav.addObject("message", "email cannot be empty");
 		}

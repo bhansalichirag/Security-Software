@@ -11,15 +11,15 @@
 	<center>
 		<h2>Login Form</h2>
 	
-		<form action="/action_page.php">
+		<form action="/redirectuser" method="post">
 		  <a href="#" style="padding-left: 20px"> <img src="img/avatar.png"
 						 style="vertical-align:top;"
 						 width="35px" height="65px" alt="avatar"></a>
 		   <div class="container">
 		    <label for="uname"><b>Username</b></label>
-		    <input type="text" placeholder="Enter Username" name="uname" required>	
+		    <input type="text" placeholder="Enter Username" id = "userName" name="uname" required>	
 		    <label for="psw"><b>Password</b></label>
-		    <input type="password" placeholder="Enter Password" name="psw" required>	        
+		    <input type="password" placeholder="Enter Password" id = "password" name="psw" required>	        
 		    <button type="submit">Login</button>	   
 		  </div>	 
 		
