@@ -2,14 +2,13 @@ package main.java.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import main.java.business.services.IUserServices;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
@@ -93,5 +92,12 @@ public class Controllers {
         model.addAttribute("savings", savings);
         model.addAttribute("creditcards", creditcards);
         return "MainCustomerPage";
+    }
+
+	@RequestMapping(value= {",","/login"}, method = RequestMethod.GET)
+    public String welcome(ModelMap model){
+        String name = (String) model.get("name");
+        model.put("Login", name);
+        return "Login";
     }
 }
