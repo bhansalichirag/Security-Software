@@ -18,7 +18,7 @@
 						<th>Transaction ID</th>
 						<th>Recipient Account Number</th>
 						<th>Amount</th>
-						<th>Is Approved</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,7 +28,12 @@
 				    		<td>${transaction.transactionID}</td>
 				    		<td>${transaction.payee.accountNumber}</td>
 				    		<td>$ ${transaction.amount}</td>
-				    		<td>${transaction.approvalStatus}</td>
+				    		<td>
+				    			<c:choose>
+				    				<c:when test="${transaction.approvalStatus}">Approved</c:when>
+				    				<c:otherwise>Pending</c:otherwise>
+				    			</c:choose>
+				    		</td>
 				    	</tr>
 				    </c:forEach>
 			    </tbody>
