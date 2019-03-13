@@ -7,7 +7,7 @@
     				<h3 class="panel-title">Registration</h3>
  				 </div>
 	  			 <div class="panel-body">
-					<form class="form-horizontal" id="RegistrationExternal" action="externalregister" method="post">
+					<form class="form-horizontal" id="RegistrationExternal" action="/externalregister" method="post">
 			  			<fieldset>
 			  				<div class="form-group">
 						      <label for="select" class="col-lg-2 control-label">Customer Type</label>
@@ -21,6 +21,24 @@
 						     </div>
 			  				
 			  				<div class="form-group">
+						      <label for="email" class="col-lg-2 control-label">Desired UserName</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label for="password" class="col-lg-2 control-label">Desired Password</label>
+						      <div class="col-lg-5">
+						        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label for="confirmpassword" class="col-lg-2 control-label">Confirm Password</label>
+						      <div class="col-lg-5">
+						        <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" required>
+						      </div>
+						    </div>
+			  				<div class="form-group">
 						      <label for="email" class="col-lg-2 control-label">Email</label>
 						      <div class="col-lg-5">
 						        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
@@ -29,19 +47,19 @@
 						    <div class="form-group">
 						      <label for="firstname" class="col-lg-2 control-label">First Name</label>
 						      <div class="col-lg-5">
-						        <input type="text" class="form-control" id="firstname" placeholder="First Name" required>
+						        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
 						      <label for="middlename" class="col-lg-2 control-label">Middle Name</label>
 						      <div class="col-lg-5">
-						        <input type="text" class="form-control" id="middlename" placeholder="Middle Name" required>
+						        <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name">
 						      </div>
 						    </div>
 						    <div class="form-group">
 						      <label for="lastname" class="col-lg-2 control-label">Last Name</label>
 						      <div class="col-lg-5">
-						        <input type="text" class="form-control" id="lastname" placeholder="Last Name" required>
+						        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
