@@ -26,6 +26,18 @@
 						        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
 						      </div>
 						    </div>
+						    <div class="form-group">
+						      <label for="password" class="col-lg-2 control-label">Desired Password</label>
+						      <div class="col-lg-5">
+						        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label for="confirmpassword" class="col-lg-2 control-label">Confirm Password</label>
+						      <div class="col-lg-5">
+						        <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" required>
+						      </div>
+						    </div>
 			  				<div class="form-group">
 						      <label for="email" class="col-lg-2 control-label">Email</label>
 						      <div class="col-lg-5">

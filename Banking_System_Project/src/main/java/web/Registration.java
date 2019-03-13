@@ -31,7 +31,7 @@ public class Registration {
 		String confirmpassword = (String) request.getParameter("confirmpassword");
 		String phonenumber = (String) request.getParameter("phonenumber");
 		String email = (String) request.getParameter("email");
-		String access = (String)request.getParameter("access");	
+		String access = (String)request.getParameter("designation");	
 		String DOB = (String)request.getParameter("DOB");
 		
 		
@@ -41,43 +41,47 @@ public class Registration {
 		System.out.println(firstname);
 		
 		if(("").equals(firstname)) {
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "first name cannot be empty");
 		}
 		else if(("").equals(lastname)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "last name cannot be empty");
 		}
+		else if(("").equals(middlename)){
+			mav = new ModelAndView("redirect:jsp/Registration");
+		    mav.addObject("message", "middle name cannot be empty");
+		}
 		else if(("").equals(username)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "user name cannot be empty");
 		}
 		else if(("").equals(password)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "password cannot be empty");
 		}
 		else if(!password.equals(confirmpassword)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "password and confirm password does not match");
 		}
 		else if(("").equals(DOB)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "date cannot be empty");
 		}
 		else if(access == null){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "specify the access granted to the employee");
 		}
 		else if(("").equals(phonenumber)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "phone number cannot be empty");
 		}
 		else if(("").equals(email)){
-			mav = new ModelAndView("redirect:emp_register");
+			mav = new ModelAndView("redirect:jsp/Registration");
 		    mav.addObject("message", "email cannot be empty");
 		}
 		else {
-	     mav =  new ModelAndView("Login");
+	     mav =  new ModelAndView("redirect:jsp/Login.jsp");
 		}
 	    return mav;
 	  }
