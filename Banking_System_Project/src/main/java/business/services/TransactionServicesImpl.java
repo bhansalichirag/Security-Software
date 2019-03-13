@@ -11,8 +11,6 @@ import main.java.repositories.TransactionRepository;
 @Service
 public class TransactionServicesImpl implements ITransactionServices{
 
-	
-
 	@Autowired
 	private TransactionRepository transactionRepository;
 	
@@ -24,6 +22,12 @@ public class TransactionServicesImpl implements ITransactionServices{
 		transaction.setApprover(approver);
 		try
 		{
+			if(transaction.getAmount() > transaction.getPayer().getBalance())
+			{
+				return null;
+			}
+			transaction.getPayee().creditAmount(transaction.getAmount());
+			transaction.getPayer().debitAmount(transaction.getAmount());
 			transactionRepository.save(transaction);
 			return transaction;
 		}

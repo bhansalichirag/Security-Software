@@ -103,6 +103,19 @@ public abstract class Account {
 	public Double getBalance() {
 		return balance;
 	}
+	
+	public double debitAmount(double amount)
+	{
+		balance -= amount;
+		return balance;
+	}
+	
+	public double creditAmount(double amount)
+	{
+		balance += amount;
+		return balance;
+	}
+	
 	public List<Transaction> getTransactions() {
 		return Transactions;
 	}
