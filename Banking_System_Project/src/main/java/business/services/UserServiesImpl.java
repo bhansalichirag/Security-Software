@@ -2,8 +2,10 @@ package main.java.business.services;
 
 import java.util.Date;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.customers.Individual;

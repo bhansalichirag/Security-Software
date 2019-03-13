@@ -16,7 +16,8 @@
 					<tr>
 						<th>Date</th>
 						<th>Transaction ID</th>
-						<th>Recipient Account Number</th>
+						<th>Transaction Type</th>
+						<th>Recipient/Sender Account Number</th>
 						<th>Amount</th>
 						<th>Status</th>
 					</tr>
@@ -26,8 +27,24 @@
 				    	<tr>
 				    		<td>${transaction.date}</td>
 				    		<td>${transaction.transactionID}</td>
-				    		<td>${transaction.payee.accountNumber}</td>
-				    		<td>$ ${transaction.amount}</td>
+				    		<td>
+				    			<c:choose>
+				    				<c:when test="${transaction.payee.accountNumber == accountid}">Credit</c:when>
+				    				<c:otherwise>Debit</c:otherwise>
+				    			</c:choose>
+				    		</td>
+				    		<td>
+				    			<c:choose>
+				    				<c:when test="${transaction.payee.accountNumber == accountid}">${transaction.payer.accountNumber}</c:when>
+				    				<c:otherwise>${transaction.payee.accountNumber}</c:otherwise>
+				    			</c:choose>
+				    		</td>
+				    		<td>
+				    		<c:choose>
+				    				<c:when test="${transaction.payee.accountNumber == accountid}">$ ${transaction.amount}</c:when>
+				    				<c:otherwise>-$ ${transaction.amount}</c:otherwise>
+				    			</c:choose>
+				    		</td>
 				    		<td>
 				    			<c:choose>
 				    				<c:when test="${transaction.approvalStatus}">Approved</c:when>

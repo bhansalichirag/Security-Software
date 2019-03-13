@@ -15,14 +15,14 @@ function ButtonFormAction(path, params) {
     form.submit();
 }
 
-function ViewTransactions(transid)
+function ViewTransactions(accountnum)
 {
-	var params = { transactionid: transid };
+	var params = { accountid: accountnum };
 	ButtonFormAction("/transactions", params);
 }
 
-function OpenPayments(transid)
+function OpenPayments(accountnum)
 {
-	var params = { transactionid: transid };
+	var params = { accountid: accountnum };
 	ButtonFormAction("/payments", params);
 }

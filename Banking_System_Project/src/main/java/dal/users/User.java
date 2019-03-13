@@ -24,7 +24,7 @@ public abstract class User {
 	private String middleName;
 	private String lastName;
 	@Id
-	@Column(name = "username", updatable = false, nullable = false)
+	@Column(name = "username", updatable = false, nullable = true)
 	private String username;
 	private String password;
 	private String phoneNumber;

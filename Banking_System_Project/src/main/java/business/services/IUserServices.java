@@ -3,7 +3,6 @@ package main.java.business.services;
 import java.util.Date;
 
 import main.java.dal.users.User;
-import main.java.dal.users.customers.Customer;
 
 public interface IUserServices {
 
