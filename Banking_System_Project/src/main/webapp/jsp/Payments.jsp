@@ -9,6 +9,7 @@
 	<body>
 		<%@include file="HeaderPage.jsp" %>
 		<div class="content-container">
+		Pay from Account Number: ${accountid}
 			<form action="/paymentaction" method="post">
 				<div>
 					<label for="Recipient" class="lbel">Recipient Name</label>
