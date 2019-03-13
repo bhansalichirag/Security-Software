@@ -19,7 +19,7 @@ public abstract class Customer extends User{
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Account> accountsList;
 	private String address;
-	@Column(name = "ssn", nullable = false, unique = true)
+	@Column(name = "ssn", nullable = false, unique = true, columnDefinition = "string default \"0\"")
 	private String ssn;
 	private String seqQuestion;
 	private String seqQuestion2;

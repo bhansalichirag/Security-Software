@@ -1,5 +1,6 @@
 package main.java.dal.accounts;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -42,7 +44,7 @@ public abstract class Account {
 	@Temporal(TemporalType.DATE)
 	private Date approvalDate;
 	private boolean approvalStatus; 
-	@OneToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Transaction> Transactions;
 	private Integer failedAttempts;
 	
@@ -103,6 +105,14 @@ public abstract class Account {
 	}
 	public List<Transaction> getTransactions() {
 		return Transactions;
+	}
+	
+	public void addTransaction(Transaction transaction) {
+		if(Transactions == null)
+		{
+			Transactions = new ArrayList<Transaction>();
+		}
+		Transactions.add(transaction);
 	}
 
 	public Integer getFailedAttempts() {
