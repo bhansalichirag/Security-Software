@@ -29,8 +29,19 @@
 		  <div class="container" style="background-color:#f1f1f1;height:30px">
 		    <span><a href="jsp/RegistrationExternal.jsp">New User?</a></span>
 		  </div>
-		  
+		  <!--<div class="container" style="background-color:#f1f1f1;height:30px">
+		    <span><a href="jsp/Employee_Login.jsp">Employee Login</a></span>
+		  </div>
+		    -->
 		</form>
  	</center>
 </body>
+<div>
+						    <table align="center">
+                			<tr>
+                    		<td >${message}</td>
+                			</tr>
+            				</table>
+            				</div> 
+
 </html>

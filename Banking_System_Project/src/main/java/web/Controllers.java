@@ -22,6 +22,7 @@ import main.java.dal.accounts.CreditCard;
 import main.java.dal.accounts.SavingsAccount;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
+import main.java.dal.users.employees.Admin;
 
 @Controller
 public class Controllers {
@@ -48,9 +49,15 @@ public class Controllers {
                 session.setAttribute("CustomerObject", (Customer)user);
                 return new ModelAndView("redirect:/accinfo");
             }
+            else if(user instanceof Admin)
+            {
+            	session.setAttribute("AdminObject", (Admin)user);
+            	return new ModelAndView("redirect:/AdminHome");
+            }
         }
 		return null;
     }
+    
     
     @RequestMapping(value="/accinfo", method = RequestMethod.GET)
     public ModelAndView accinfo(HttpServletRequest request, HttpSession session){
