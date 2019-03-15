@@ -136,7 +136,7 @@ public class Controllers {
 		
 		accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
 		model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
-		return new ModelAndView(("Transactions"), model);
+		return new ModelAndView(("redirect:/transactions"), model);
     }
 	
 	
