@@ -14,8 +14,8 @@
 						      <div class="col-lg-5">
 						        <select class="form-control" name="designation" id="designation" required>
 						          <option value="">Select Option</option>
-						          <option value="ROLE_CUSTOMER">Customer</option>
-						          <option value="ROLE_MERCHANT">Merchant</option>
+						          <option value="Individual">Individual</option>
+						          <option value="Merchant">Merchant</option>
 						        </select>
 						       </div>
 						     </div>
@@ -86,6 +86,20 @@
 						      <label for="ssn" class="col-lg-2 control-label">SSN</label>
 						      <div class="col-lg-5">
 						        <input type="text" class="form-control" name="ssn" id="ssn" placeholder="SSN Number" required>
+						      </div>
+						    </div>
+						    
+						    <div class="form-group">
+						      <label for="SecurityQuestion1" class="col-lg-2 control-label">What is your childhood nickname?</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="secquestion1" id="secquestion1" placeholder="Security Question 1" required>
+						      </div>
+						    </div>
+						    
+						    <div class="form-group">
+						      <label for="SecurityQuestion2" class="col-lg-2 control-label">Who was your childhood hero?</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="secquestion2" id="secquestion2" placeholder="Security Question 2" required>
 						      </div>
 						    </div>
 						    
