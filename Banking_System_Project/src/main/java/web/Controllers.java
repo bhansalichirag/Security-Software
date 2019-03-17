@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IAccountServices;
@@ -23,6 +27,22 @@ import main.java.dal.accounts.SavingsAccount;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.employees.Admin;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+//import com.shri.service.OtpService;
+import main.java.web.*;
 
 @Controller
 public class Controllers {
@@ -31,6 +51,8 @@ public class Controllers {
 	IUserServices userServices;
 	@Autowired
 	IAccountServices accountServices;
+	@Autowired
+	OtpService otpService;
     
     @RequestMapping(value="/redirectuser", method = RequestMethod.POST)
     public ModelAndView sortUser(HttpServletRequest request, HttpSession session){
@@ -137,6 +159,18 @@ public class Controllers {
 		accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
 		model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
 		return new ModelAndView(("redirect:/transactions"), model);
+    }
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+    public @ResponseBody String logout(HttpServletRequest request, HttpServletResponse response){
+       org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+       if (auth != null){    
+       String username = auth.getName();
+	//Remove the recently used OTP from server. 
+       otpService.clearOTP(username);
+       new SecurityContextLogoutHandler().logout(request, response, auth);
+       }
+   return "redirect:/login?logout";    
     }
 	
 	
