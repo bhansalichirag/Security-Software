@@ -11,8 +11,14 @@ public interface IUserServices {
 	boolean CreateCustomerUser(String customerType, String firstName, String middleName, String lastName,
 			String username, Date dateOfBirth, String password, String phoneNumber, String email, String address,
 			String ssn, String seqQuestion, String seqQuestion2);
+
+	boolean CreateEmployeeUser(String employeeType, String firstName, String middleName, 
+			String lastName, String username, Date dateOfBirth, 
+			String phoneNumber, String email);
+	
 	boolean DeleteUser(String username);
 	boolean UpdateUser(String firstName, String middleName, String lastName, String username, Date dateOfBirth,
 			String password, String phoneNumber, String email, String address, String ssn, String seqQuestion,
 			String seqQuestion2);
+
 }

@@ -19,10 +19,9 @@ public abstract class Employee extends User{
 	}
 	
 	public Employee(String firstName, String middleName, String lastName, String username, Date dateOfBirth, String password,
-			String phoneNumber, String email, String employeeID) {
+			String phoneNumber, String email) {
 		
 		super(firstName, middleName, lastName, username, dateOfBirth, password, phoneNumber, email);
-		this.employeeID = employeeID;
 	}
 
 	public String getEmployeeID() {

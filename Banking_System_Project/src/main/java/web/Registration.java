@@ -1,10 +1,7 @@
 package main.java.web;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IUserServices;
-import main.java.business.services.UserServiesImpl;
-import main.java.dal.users.User;
 
 @Controller
 public class Registration {

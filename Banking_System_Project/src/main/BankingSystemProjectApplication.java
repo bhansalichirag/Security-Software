@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
 import main.java.business.services.IUserServices;
 import main.java.repositories.UserRepository;
 
@@ -25,7 +24,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Override
     public void run(String... arg0) throws Exception {
-//		userServices.createUser();
+//		userServices.CreateEmployeeUser("Tier1", "Quaker", "Oats", "Eater", "Quaeater", new Date(), "12256998", "asdasdas");
+		System.out.println(userServices.DeleteUser("Quaeater"));
 //		userServices.ValidateUser("jhdoe","password");
     }
 

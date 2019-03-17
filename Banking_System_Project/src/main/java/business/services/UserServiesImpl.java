@@ -2,14 +2,15 @@ package main.java.business.services;
 
 import java.util.Date;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.customers.Individual;
 import main.java.dal.users.customers.Merchant;
+import main.java.dal.users.employees.Employee;
+import main.java.dal.users.employees.Tier1;
+import main.java.dal.users.employees.Tier2;
 import main.java.repositories.AccountRepository;
 import main.java.repositories.TransactionRepository;
 import main.java.repositories.UserRepository;
@@ -68,12 +69,45 @@ public class UserServiesImpl implements IUserServices {
 	}
 	
 	@Override
+	public boolean CreateEmployeeUser(String employeeType, String firstName, String middleName, 
+			String lastName, String username, Date dateOfBirth, 
+			String phoneNumber, String email)
+	{
+		Employee employee = null;
+		if("Tier1".equals(employeeType))
+		{
+			employee = new Tier1(firstName, middleName, lastName, 
+					username, dateOfBirth, null, phoneNumber, email);
+		}
+		else if("Tier2".equals(employeeType))
+		{
+			employee = new Tier2(firstName, middleName, lastName, 
+					username, dateOfBirth, null, phoneNumber, email);
+		}
+		
+		try 
+		{
+			userRepository.save(employee);
+			return true;
+		} 
+		catch (Exception e) 
+		{
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean DeleteUser(String username)
 	{
 		try 
 		{
-			userRepository.deleteById(username);
-			return true;
+			Optional<User> user = userRepository.findById(username);
+			if(user.isPresent() && user.get() instanceof Employee)
+			{
+				userRepository.deleteById(username);
+				return true;
+			}
 		} 
 		catch (Exception e) 
 		{
