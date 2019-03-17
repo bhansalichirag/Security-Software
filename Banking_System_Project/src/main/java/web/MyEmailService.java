@@ -22,6 +22,6 @@ public void sendOtpMessage(String to, String subject, String message) {
  logger.info(to);
  logger.info(message);
  //Uncomment to send mail
- //javaMailSender.send(simpleMailMessage);
+ javaMailSender.send(simpleMailMessage);
 }
 }
