@@ -24,6 +24,11 @@
                  To delete an employee in TIER-1 or TIER-2 level <a href="EmployeeDelete">Delete Employee</a>
               </td>
             </tr>
+            <tr>
+            	<td>
+            	<a href="/login">Log Out</a>
+            	</td>
+            	</tr>
     </table>
  </form>
 </body>

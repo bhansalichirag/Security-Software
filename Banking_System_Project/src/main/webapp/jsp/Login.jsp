@@ -27,7 +27,7 @@
 		    <span><a href="#">Forgot password?</a></span>
 		  </div>
 		  <div class="container" style="background-color:#f1f1f1;height:30px">
-		    <span><a href="jsp/RegistrationExternal.jsp">New User?</a></span>
+		    <span><a href="/NewCustomerRegister">New User?</a></span>
 		  </div>
 		  <!--<div class="container" style="background-color:#f1f1f1;height:30px">
 		    <span><a href="jsp/Employee_Login.jsp">Employee Login</a></span>
