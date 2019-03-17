@@ -117,6 +117,20 @@ public class UserServiesImpl implements IUserServices {
 	}
 	
 	@Override
+	public boolean isNewUser(String username)
+	{
+		Optional<User> user = userRepository.findById(username);
+		if(user.isPresent() && user.get().getPassword() == null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	@Override
 	public boolean updatePassword(String username, String oldPassword, String newPassword)
 	{
 		try 

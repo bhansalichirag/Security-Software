@@ -23,4 +23,6 @@ public interface IUserServices {
 
 	boolean updatePassword(String username, String oldPassword, String newPassword);
 
+	boolean isNewUser(String username);
+
 }
