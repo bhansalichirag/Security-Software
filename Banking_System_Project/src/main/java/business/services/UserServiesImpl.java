@@ -117,6 +117,31 @@ public class UserServiesImpl implements IUserServices {
 	}
 	
 	@Override
+	public boolean updatePassword(String username, String oldPassword, String newPassword)
+	{
+		try 
+		{
+			Optional<User> user = userRepository.findById(username);
+			if(user.isPresent())
+			{
+				User currentUser = user.get();
+				if(currentUser instanceof Employee && 
+						(currentUser.getPassword() == null || currentUser.getPassword().equals(oldPassword)))
+				{
+					currentUser.setPassword(newPassword);
+					userRepository.save(currentUser);
+					return true;
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean UpdateUser(String firstName, String middleName, 
 			String lastName, String username, Date dateOfBirth, String password, 
 			String phoneNumber, String email, String address, String ssn, String seqQuestion, 

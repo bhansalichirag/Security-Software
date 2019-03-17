@@ -21,4 +21,6 @@ public interface IUserServices {
 			String password, String phoneNumber, String email, String address, String ssn, String seqQuestion,
 			String seqQuestion2);
 
+	boolean updatePassword(String username, String oldPassword, String newPassword);
+
 }
