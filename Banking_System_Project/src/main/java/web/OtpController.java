@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-/*import com.shri.service.MyEmailService;
-import com.shri.service.OtpService;
-import com.shri.utility.EmailTemplate;*/
+
 import main.java.web.*;
 @Controller
 public class OtpController {
