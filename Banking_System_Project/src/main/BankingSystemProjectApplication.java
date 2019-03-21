@@ -25,7 +25,7 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	@Override
     public void run(String... arg0) throws Exception {
 //		userServices.CreateEmployeeUser("Tier1", "Quaker", "Oats", "Eater", "Quaeater", new Date(), "12256998", "asdasdas");
-		System.out.println(userServices.DeleteUser("Quaeater"));
+		System.out.println("Deleted User: " + userServices.DeleteUser("Quaeater"));
 //		userServices.ValidateUser("jhdoe","password");
     }
 
