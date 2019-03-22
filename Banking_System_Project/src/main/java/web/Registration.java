@@ -1,6 +1,8 @@
 package main.java.web;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +45,7 @@ public class Registration {
 		String username = (String) request.getParameter("username").trim();
 		String password = (String) request.getParameter("password").trim();
 		String confirmpassword = (String) request.getParameter("confirmpassword").trim();
-		String phonenumber = (String) request.getParameter("phonenumber");
+		String phonenumber = (String) request.getParameter("phone");
 		String email = (String) request.getParameter("email").trim();
 		String access = (String)request.getParameter("designation").trim();	
 		String DOB = (String)request.getParameter("date_of_birth").trim();
@@ -102,9 +104,9 @@ public class Registration {
 		    mav.addObject("message", "Please enter value for Security Question 2");
 		}
 		else {
-			//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd",Locale.US);
-			Date date1 = new Date();
-			Boolean user = userServices.CreateCustomerUser(access, firstname, middlename, lastname, username,date1, password, phonenumber, email, address,SSN, SecQuestion1,SecQuestion2);
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = (Date)formatter.parse(DOB);
+			Boolean user = userServices.CreateCustomerUser(access, firstname, middlename, lastname, username,date, password, phonenumber, email, address,SSN, SecQuestion1,SecQuestion2);
 			if (user)
 			{
 				mav =  new ModelAndView("redirect:/login");

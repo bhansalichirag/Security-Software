@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IAccountServices;
 import main.java.business.services.IUserServices;
+import main.java.business.services.UserServiesImpl;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
@@ -23,6 +24,8 @@ import main.java.dal.accounts.SavingsAccount;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.employees.Admin;
+import main.java.dal.users.employees.Tier1;
+import main.java.dal.users.employees.Tier2;
 
 @Controller
 public class Controllers {
@@ -32,30 +35,81 @@ public class Controllers {
 	@Autowired
 	IAccountServices accountServices;
     
+	
+	@RequestMapping(value="/passwordchanges",method = RequestMethod.POST)
+	public ModelAndView passwordChanges(HttpServletRequest request, HttpSession session){
+		String userName = (String) request.getParameter("username");
+		String password = (String) request.getParameter("password");
+		String confirmpassword = (String) request.getParameter("confirmpassword");
+		ModelAndView mav = null;
+		if(userServices.isNewUser(userName))
+        {
+			if(("").equals(password)){
+				mav = new ModelAndView("redirect:/ChangePassword");
+			    mav.addObject("message", "password cannot be empty");
+			}
+			else if(!password.equals(confirmpassword)){
+				mav = new ModelAndView("redirect:/ChangePassword");
+			    mav.addObject("message", "password and confirm password does not match");
+			}
+			else
+			{
+				if(userServices.updatePassword(userName, null, password))
+				{
+					mav = new ModelAndView("redirect:/login");
+				}
+				else
+				{
+					mav = new ModelAndView("redirect:/ChangePassword");
+				    mav.addObject("message", "password couldnt be updated!!");
+				}
+			}
+        }
+		return mav;
+	}
+	
     @RequestMapping(value="/redirectuser", method = RequestMethod.POST)
     public ModelAndView sortUser(HttpServletRequest request, HttpSession session){
     	String userName = (String) request.getParameter("uname");
 		String password = (String) request.getParameter("psw");
-        User user = userServices.ValidateUser(userName, password);
-        if (user == null)
+        if(userServices.isNewUser(userName))
         {
-        	return new ModelAndView("Login");
+        	session.setAttribute("EmployeeUsername", userName);
+        	return new ModelAndView("redirect:/ChangePassword");
         }
-        else 
+        else
         {
-            if(user instanceof Customer)
-            {
-            	user.setPassword("");
-                session.setAttribute("CustomerObject", (Customer)user);
-                return new ModelAndView("redirect:/accinfo");
-            }
-            else if(user instanceof Admin)
-            {
-            	session.setAttribute("AdminObject", (Admin)user);
-            	return new ModelAndView("redirect:/AdminHome");
-            }
+        	User user = userServices.ValidateUser(userName, password);
+        	if (user == null)
+        	{
+        		return new ModelAndView("Login");
+        	}
+        	else 
+        	{
+        		if(user instanceof Customer)
+        		{
+        			user.setPassword("");
+        			session.setAttribute("CustomerObject", (Customer)user);
+        			return new ModelAndView("redirect:/accinfo");
+        		}
+        		else if(user instanceof Admin)
+        		{
+        			session.setAttribute("EmployeeObject", (Admin)user);
+        			return new ModelAndView("redirect:/AdminHome");
+        		}
+        		else if(user instanceof Tier1)
+        		{
+        			session.setAttribute("EmployeeObject", (Tier1)user);
+        			return new ModelAndView("redirect:/TierEmployeeDashboard");
+        		}
+        		else
+        		{
+        			session.setAttribute("EmployeeObject", (Tier2)user);
+        			return new ModelAndView("redirect:/TierEmployeeDashboard");
+        		}
+        	}
         }
-		return null;
+        //return null;
     }
     
     
@@ -114,6 +168,13 @@ public class Controllers {
         String name = (String) model.get("name");
         model.put("Login", name);
         return "Login";
+    }
+	
+	@RequestMapping(value= {"/ChangePassword"}, method = RequestMethod.GET)
+    public String ForgotPassword(ModelMap model){
+        String name = (String) model.get("name");
+        model.put("ChangePassword", name);
+        return "ChangePassword";
     }
 	
 	@RequestMapping(value= {"/payments"}, method = RequestMethod.POST)

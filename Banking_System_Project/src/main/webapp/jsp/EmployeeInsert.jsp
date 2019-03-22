@@ -51,12 +51,6 @@
 						      </div>
 						    </div>
 						    <div class="form-group">
-						      <label for="address" class="col-lg-2 control-label">Address</label>
-						      <div class="col-lg-5">
-						        <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
-						      </div>
-						    </div>
-						    <div class="form-group">
 						      <label for="phone" class="col-lg-2 control-label">Phone Number</label>
 						      <div class="col-lg-5">
 						        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" required>
@@ -68,7 +62,20 @@
 						        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" required>
 						      </div>
 						    </div>
-						    <!-- 
+						    <!--
+						    <div class="form-group">
+						      <label for="securityquestion1" class="col-lg-2 control-label">What is your childhood nickname?</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="seqquestion1" id="seqquestion1" placeholder="Security Question 1" required>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label for="securityquestion2" class="col-lg-2 control-label">Who was your childhood hero?</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="seqquestion2" id="seqquestion2" placeholder="Security Question 2" required>
+						      </div>
+						    </div>
+						     
 						    <div class="form-group">
 						      <label for="ssn" class="col-lg-2 control-label">SSN</label>
 						      <div class="col-lg-5">
