@@ -40,19 +40,18 @@ pageEncoding="ISO-8859-1"%>
               <label for="targetAccountInput">Target Account</label>
               <input type="text" class="form-control" id="targetAccountInput" aria-describedby="targetAccountHelp"
                 placeholder="Account#">
-              <small id="targetAccountHelp" class="form-text text-muted">Which account would you like to deposit the
-                money
+              <small id="targetAccountHelp" class="form-text text-muted">Which account would you like to deposit the money
                 in?</small>
             </div>
             <div class="form-group">
               <label for="depositAmountInput">Target Account</label>
               <input type="text" class="form-control" id="depositAmountInput" placeholder="$$$">
             </div>
-
+            
             <button type="button" onclick="javascript:SubmitForm()">Test Function</button>
-
+            
             <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-
+            
             <script type="text/javascript">
               SubmitForm = function () {
                 console.log("Test Function activated.");
@@ -60,7 +59,6 @@ pageEncoding="ISO-8859-1"%>
                 depositForm.submit();
               }
             </script>
-
           </form>
         </div>
         <!-- <c:set var = "sideBarSelection" scope = "session" value = "${1}"/> -->
@@ -70,7 +68,7 @@ pageEncoding="ISO-8859-1"%>
         <!-- render cashier check form -->
         <div className="col col-offset-2">
           <h1>Issue Cashier Check</h1>
-          <form name='depositForm'>
+          <form name='issueCashierCheckForm'>
             <div class="form-group">
               <label for="targetAccountInput">Target Account</label>
               <input type="text" class="form-control" id="targetAccountInput" aria-describedby="targetAccountHelp"
@@ -102,31 +100,40 @@ pageEncoding="ISO-8859-1"%>
         <!-- render money transfer form -->
         <div className="col col-offset-2">
           <h1>Money Transfer</h1>
-          <form name='depositForm'>
-            <div class="form-group">
-              <label for="targetAccountInput">Target Account</label>
-              <input type="text" class="form-control" id="targetAccountInput" aria-describedby="targetAccountHelp"
-                placeholder="Account#">
-              <small id="targetAccountHelp" class="form-text text-muted">Which account would you like to deposit the money
-                in?</small>
-            </div>
-            <div class="form-group">
-              <label for="depositAmountInput">Target Account</label>
-              <input type="text" class="form-control" id="depositAmountInput" placeholder="$$$">
-            </div>
 
-            <button type="button" onclick="javascript:SubmitForm()">Test Function</button>
-
-            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-
-            <script type="text/javascript">
-              SubmitForm = function () {
-                console.log("Test Function activated.");
-                console.log(document.getElementById("targetAccountInput").value)
-                depositForm.submit();
-              }
-            </script>
-          </form>
+          <form name='moneyTransferForm'>
+              <div class="form-group">
+                <label for="fromAccount">From Account</label>
+                <input type="text" class="form-control" id="fromAccount" aria-describedby="targetAccountHelp"
+                  placeholder="Account#">
+                <small id="targetAccountHelp" class="form-text text-muted">Which account would you like to deposit the money
+                  in?</small>
+              </div>
+              <div class="form-group">
+                <label for="toAccount">To Account</label>
+                <input type="text" class="form-control" id="toAccount" aria-describedby="targetAccountHelp"
+                  placeholder="Account#">
+                <small id="targetAccountHelp" class="form-text text-muted">Which account would you like to deposit the money
+                  in?</small>
+              </div>
+              <div class="form-group">
+                <label for="depositAmountInput">Target Account</label>
+                <input type="text" class="form-control" id="depositAmountInput" placeholder="$$$">
+              </div>
+  
+              <button type="button" onclick="javascript:SubmitForm()">Test Function</button>
+  
+              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+  
+              <script type="text/javascript">
+                SubmitForm = function () {
+                  console.log("Test Function activated.");
+                  console.log(document.getElementById("targetAccountInput").value)
+                  depositForm.submit();
+                }
+              </script>
+            </form>
+          
         </div>
       </c:when>
     </c:choose>
