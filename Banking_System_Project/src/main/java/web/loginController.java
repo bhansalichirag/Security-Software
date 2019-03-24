@@ -39,7 +39,7 @@ public class loginController {
 	  }
 	 
  
-	 @RequestMapping(value = "/banklogin", method = RequestMethod.POST)
+	 @RequestMapping(value = "/Tier3Home", method = RequestMethod.POST)
 	  public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response) {
 		// System.out.println(model);
 		String username = (String) request.getParameter("username");

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form id="tier3home" modelAttribute="tier3home" method="post">
+	<form:form id="tier3home" modelAttribute="tier3home" action ="index2" method="post">
     	<table align="center">
         	<tr>
 	           <td>

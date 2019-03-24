@@ -9,7 +9,7 @@
 
 <body>
 
-<form:form id="emp_login" modelAttribute="emp_login" action="banklogin" method="post">
+<form:form id="emp_login" modelAttribute="emp_login" action="Tier3Home" method="post">
                 <table align="center">
                     <tr>
                         <td>

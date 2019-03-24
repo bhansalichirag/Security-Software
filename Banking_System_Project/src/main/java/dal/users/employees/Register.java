@@ -3,7 +3,15 @@ package main.java.dal.users.employees;
 import java.util.Date;
 
 public class Register {
-private String firstname, middlename, lastname, username, password, confirmpassword, phonenumber, email, access ;
+private String firstname, middlename, lastname, username, password, confirmpassword, phonenumber, email, access, gender ;
+public String getGender() {
+	return gender;
+}
+
+public void setGender(String gender) {
+	this.gender = gender;
+}
+
 public String getConfirmpassword() {
 	return confirmpassword;
 }

@@ -58,12 +58,24 @@
                             <form:password path="confirmpassword" name="confirmpassword" id="confirmpassword" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <form:label path="gender"> Gender : </form:label>
+                        </td>
+                        <td>
+                            <INPUT TYPE="radio" name="gender" value="Female"/>Female
+							<INPUT TYPE="radio" name="gender" VALUE="Male"/>Male
+                        </td>
+                    </tr>
                      <tr>
                         <td>
                             <form:label path="DOB">Date Of Birth: </form:label>
                         </td>
                         <td>
                             <form:input path="DOB" name="DOB" id="DOB"  />
+                        </td>
+                        <td>
+                        	<label>Format: mm/dd/yyyy</label>
                         </td>
                     </tr>
                     <tr>
