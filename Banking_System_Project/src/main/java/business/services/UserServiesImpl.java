@@ -153,7 +153,7 @@ public class UserServiesImpl implements IUserServices {
 			if(user.isPresent())
 			{
 				User currentUser = user.get();
-				if(currentUser instanceof Employee && 
+				if(currentUser instanceof User && 
 						(currentUser.getPassword() == null || currentUser.getPassword().equals(oldPassword)))
 				{
 					currentUser.setPassword(newPassword);
