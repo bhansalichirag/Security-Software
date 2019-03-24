@@ -137,8 +137,10 @@
 		        day = '0' + day.toString();
 		    
 		    var maxDate = year + '-' + month + '-' + day;
-		    //alert(maxDate);
+		    var minDate = year - 100 + '-' + month + '-' + day;
+		    //alert(minDate);
 		    $('#date_of_birth').attr('max', maxDate);
+		    $('#date_of_birth').attr('min', minDate);
 		});
 			</script>
 </body>

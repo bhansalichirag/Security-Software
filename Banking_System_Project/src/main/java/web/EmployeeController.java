@@ -59,6 +59,10 @@ public class EmployeeController {
         {
         	return new ModelAndView("redirect:/login");
         }
+        /*if(request.getAttribute("alertMsg")==null)
+        {
+        	request.setAttribute("alertMsg", "");
+        }*/
         return new ModelAndView(("EmployeeInsert"), model);
     }
     
@@ -131,10 +135,6 @@ public class EmployeeController {
 			mav = new ModelAndView("redirect:/EmployeeUpdate");
 		    mav.addObject("message", "last name cannot be empty");
 		}
-		else if(("").equals(middlename)){
-			mav = new ModelAndView("redirect:/EmployeeUpdate");
-		    mav.addObject("message", "middle name cannot be empty");
-		}
 		else if(("").equals(DOB)){
 			mav = new ModelAndView("redirect:/EmployeeUpdate");
 		    mav.addObject("message", "date cannot be empty");
@@ -199,10 +199,6 @@ public class EmployeeController {
 			mav = new ModelAndView("redirect:/EmployeeRegister");
 		    mav.addObject("message", "last name cannot be empty");
 		}
-		else if(("").equals(middlename)){
-			mav = new ModelAndView("redirect:/EmployeeRegister");
-		    mav.addObject("message", "middle name cannot be empty");
-		}
 		else if(("").equals(username)){
 			mav = new ModelAndView("redirect:/EmployeeRegister");
 		    mav.addObject("message", "user name cannot be empty");
@@ -231,6 +227,7 @@ public class EmployeeController {
 			{
 				mav =  new ModelAndView("redirect:/AdminHome");
 				mav.addObject("message","Employee created successfully!!");
+				//request.setAttribute("alertMsg", "Employee created successfully");
 			}
 			else
 			{

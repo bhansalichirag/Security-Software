@@ -63,10 +63,6 @@ public class Registration {
 			mav = new ModelAndView("redirect:/NewCustomerRegister");
 		    mav.addObject("message", "last name cannot be empty");
 		}
-		else if(("").equals(middlename)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
-		    mav.addObject("message", "middle name cannot be empty");
-		}
 		else if(("").equals(username)){
 			mav = new ModelAndView("redirect:/NewCustomerRegister");
 		    mav.addObject("message", "user name cannot be empty");
@@ -114,8 +110,8 @@ public class Registration {
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:jsp/RegsitrationExternal.jsp");
-				mav.addObject("message",user+" Try again after sometime!!");
+				mav = new ModelAndView("redirect:/NewCustomerRegister");
+				mav.addObject("message",user+"Username already exist!!");
 			}
 		}
 		

@@ -55,11 +55,18 @@ public class UserServiesImpl implements IUserServices {
 					username, dateOfBirth, password, phoneNumber, email, 
 					address, ssn, seqQuestion, seqQuestion2);
 		}
-		
+		Optional<User> user = userRepository.findById(username);//added on 23/03/2019 for checking if the username already exists 
 		try 
 		{
-			userRepository.save(customer);
-			return true;
+			if(!user.isPresent())
+			{
+				userRepository.save(customer);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		} 
 		catch (Exception e) 
 		{
@@ -84,11 +91,18 @@ public class UserServiesImpl implements IUserServices {
 			employee = new Tier2(firstName, middleName, lastName, 
 					username, dateOfBirth, null, phoneNumber, email);
 		}
-		
+		Optional<User> user = userRepository.findById(username);//added on 23/03/2019 for checking if the username already exists
 		try 
 		{
-			userRepository.save(employee);
-			return true;
+			if(!user.isPresent())
+			{
+				userRepository.save(employee);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		} 
 		catch (Exception e) 
 		{
