@@ -125,7 +125,8 @@ public class Controllers {
         List<CheckingAccount> checking = new ArrayList<CheckingAccount>();
         List<SavingsAccount> savings = new ArrayList<SavingsAccount>();
         List<CreditCard> creditcards = new ArrayList<CreditCard>();
-        for (Account account : customer.getAccountsList()) 
+        List<Account> accounts = customer.getAccountsList();
+        for (Account account : accounts) 
         {
         	if(account instanceof CheckingAccount)
         	{

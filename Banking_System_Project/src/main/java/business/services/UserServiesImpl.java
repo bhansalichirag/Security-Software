@@ -216,6 +216,43 @@ public class UserServiesImpl implements IUserServices {
 		return false;
 	}
 	
+	@Override
+	public boolean UpdateEmployee(String firstName, String middleName, 
+			String lastName, String username, Date dateOfBirth, String password, 
+			String phoneNumber, String email)
+	{
+		Optional<User> user = userRepository.findById(username);
+		if(user.isPresent())
+		{
+			Employee employee = (Employee) user.get();
+			if(firstName != null && !"".equals(firstName))
+				employee.setFirstName(firstName);
+			if(middleName != null && !"".equals(middleName))
+				employee.setMiddleName(middleName);
+			if(lastName != null && !"".equals(lastName))
+				employee.setLastName(lastName);
+			if(dateOfBirth != null)
+				employee.setDateOfBirth(dateOfBirth);
+			if(password != null && !"".equals(password))
+				employee.setPassword(password);
+			if(phoneNumber != null && !"".equals(phoneNumber))
+				employee.setPhoneNumber(phoneNumber);
+			if(email != null && !"".equals(email))
+				employee.setEmail(email);
+			try 
+			{
+				userRepository.save(employee);
+				return true;
+			} 
+			catch (Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
 //	public boolean PopulateAccounts(String username, String password)
 //	{
 //		Account accnt = accountRepository.findById(288).get();
