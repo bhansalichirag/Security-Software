@@ -50,6 +50,18 @@ public class EmployeeController {
         }
         return new ModelAndView(("Tier3Home"), model);
     }
+	
+	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
+    public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Employee Tier_emp = (Employee) session.getAttribute("EmployeeObject");
+        Customer cust_emp = (Customer) session.getAttribute("CustomerObject"); 
+        if (Tier_emp == null && cust_emp==null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("ChangePassword"), model);
+    }
     
     @RequestMapping(value="/EmployeeRegister", method = RequestMethod.GET)
     public ModelAndView EmployeeRegister(HttpServletRequest request, HttpSession session){
@@ -98,7 +110,6 @@ public class EmployeeController {
         	request.setAttribute("Phone", emp.getPhoneNumber());
         }
         request.setAttribute("EmployeeObject",(Employee)emp);
-        //request.setAttribute("DOB", Admin_emp.getDateOfBirth());
         return new ModelAndView(("EmployeeUpdate"), model);
     }
     

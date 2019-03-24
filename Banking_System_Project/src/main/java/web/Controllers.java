@@ -36,8 +36,8 @@ public class Controllers {
 	IAccountServices accountServices;
     
 	
-	@RequestMapping(value="/passwordchanges",method = RequestMethod.POST)
-	public ModelAndView passwordChanges(HttpServletRequest request, HttpSession session){
+	@RequestMapping(value="/setpassword",method = RequestMethod.POST)
+	public ModelAndView Setpassword(HttpServletRequest request, HttpSession session){
 		String userName = (String) request.getParameter("username");
 		String password = (String) request.getParameter("password");
 		String confirmpassword = (String) request.getParameter("confirmpassword");
@@ -45,11 +45,11 @@ public class Controllers {
 		if(userServices.isNewUser(userName))
         {
 			if(("").equals(password)){
-				mav = new ModelAndView("redirect:/ChangePassword");
+				mav = new ModelAndView("redirect:/SetPassword");
 			    mav.addObject("message", "password cannot be empty");
 			}
 			else if(!password.equals(confirmpassword)){
-				mav = new ModelAndView("redirect:/ChangePassword");
+				mav = new ModelAndView("redirect:/SetPassword");
 			    mav.addObject("message", "password and confirm password does not match");
 			}
 			else
@@ -60,7 +60,7 @@ public class Controllers {
 				}
 				else
 				{
-					mav = new ModelAndView("redirect:/ChangePassword");
+					mav = new ModelAndView("redirect:/SetPassword");
 				    mav.addObject("message", "password couldnt be updated!!");
 				}
 			}
@@ -68,14 +68,48 @@ public class Controllers {
 		return mav;
 	}
 	
-    @RequestMapping(value="/redirectuser", method = RequestMethod.POST)
+	@RequestMapping(value="/changepassword", method = RequestMethod.POST)
+    public ModelAndView Changethepassword(HttpServletRequest request, HttpSession session){
+    	ModelAndView mav = new ModelAndView();
+		String userName = (String) request.getParameter("username");
+		String oldpassword = (String) request.getParameter("oldpassword");
+		User user = userServices.ValidateUser(userName, oldpassword);
+    	if (user == null)
+    	{
+    		return new ModelAndView("Login");
+    	}
+    	else 
+    	{
+    		String newpassword = (String) request.getParameter("newpassword");
+    		String confirmpassword = (String) request.getParameter("confirmpassword");
+    		if(!newpassword.equals(confirmpassword)){
+				mav = new ModelAndView("redirect:/ChangePassword");
+			    mav.addObject("message", "new password and confirm password does not match");
+			}
+			else
+			{
+				if(userServices.updatePassword(userName, oldpassword, newpassword))
+				{
+					mav = new ModelAndView("redirect:/login");
+				}
+				else
+				{
+					mav = new ModelAndView("redirect:/ChangePassword");
+				    mav.addObject("message", "password couldnt be updated!!");
+				}
+			}
+    	}
+    	return mav;
+	}
+	
+	@RequestMapping(value="/redirectuser", method = RequestMethod.POST)
     public ModelAndView sortUser(HttpServletRequest request, HttpSession session){
     	String userName = (String) request.getParameter("uname");
 		String password = (String) request.getParameter("psw");
         if(userServices.isNewUser(userName))
         {
         	session.setAttribute("EmployeeUsername", userName);
-        	return new ModelAndView("redirect:/ChangePassword");
+        	return new ModelAndView("redirect:/SetPassword");
         }
         else
         {
@@ -170,11 +204,34 @@ public class Controllers {
         return "Login";
     }
 	
-	@RequestMapping(value= {"/ChangePassword"}, method = RequestMethod.GET)
-    public String ForgotPassword(ModelMap model){
+	@RequestMapping(value= {"/ScheduleAppointment"}, method = RequestMethod.GET)
+	public ModelAndView ScheduleAppointment(HttpServletRequest request, HttpSession session){
+    	ModelMap model = new ModelMap();
+        Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+        if (user_cust == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("ScheduleAppointment"), model);
+    }
+	
+	@RequestMapping(value= {"/appointment"}, method = RequestMethod.POST)
+    public ModelAndView BookAppointment(HttpServletRequest request, HttpSession session){
+		
+		ModelMap model = new ModelMap();
+		Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+		String username = (String)user_cust.getUsername();
+		String DOB = (String)request.getParameter("schedule_date").trim();
+		String reason = (String) request.getParameter("appointment").trim();
+		
+		return new ModelAndView(("redirect:/ScheduleAppointment"), model);
+    }
+	
+	@RequestMapping(value= {"/SetPassword"}, method = RequestMethod.GET)
+    public String SetupPassword(ModelMap model){
         String name = (String) model.get("name");
-        model.put("ChangePassword", name);
-        return "ChangePassword";
+        model.put("SetPassword", name);
+        return "SetPassword";
     }
 	
 	@RequestMapping(value= {"/payments"}, method = RequestMethod.POST)
@@ -189,8 +246,6 @@ public class Controllers {
     public ModelAndView paymentaction(HttpServletRequest request, HttpSession session){
 		
 		ModelMap model = new ModelMap();
-//		Customer customer = (Customer) session.getAttribute("CustomerObject");
-//		String recipient = (String) request.getParameter("Recipient");
 		String accountNumber = (String) request.getParameter("AccountNumber");
 		String amount = (String) request.getParameter("Amount");
 		int payer = Integer.parseInt(session.getAttribute("SelectedAccount").toString());

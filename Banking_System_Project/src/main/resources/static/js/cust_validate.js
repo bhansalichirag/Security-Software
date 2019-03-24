@@ -98,4 +98,15 @@ $().ready(function(){
 	    return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(value);
 	}, "Enter a proper email format");
 	
+	$("#ScheduleAppointment").validate({
+		rules:{
+			appointment: "required",
+			schedule_date:"required"
+	},
+	messages:{
+		appointment:"Please select a customer type",
+		schedule_date:{required:"Please enter your DOB"},
+	}
+});
+	
 })

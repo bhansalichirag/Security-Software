@@ -58,7 +58,7 @@ $().ready(function(){
 	
 	jQuery.validator.addMethod("passwordvalidation", function(value, element) {
 	    return this.optional(element) || /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i.test(value);
-	}, "Enter a proper valid password");
+	}, "Enter a proper valid strong password");
 	
 	jQuery.validator.addMethod( "phoneUS", function( phone_number, element ) {
 		phone_number = phone_number.replace( /\s+/g, "" );
@@ -124,6 +124,68 @@ $().ready(function(){
 			username:{
 				minlength:"Username should be atleast 2 characters long",
 				required:"Please enter a username"
+			}
+		}
+	});
+	
+	$("#SetPassword").validate({
+		rules:{
+			username:{minlength:2,
+				required: true},
+				password:{minlength:6,
+					required: true,
+					passwordvalidation: true},
+				confirmpassword:{minlength:6,
+					required: true,
+					equalTo:"#password",
+					passwordvalidation: true}	
+		},
+		messages:{
+			username:{
+				minlength:"Username should be atleast 2 characters long",
+				required:"Please enter a username"
+			},
+			password:{
+				minLength:"Password should be atleast 6 characters long",
+				required:"Please enter a password"
+			},
+			confirmpassword:{
+				minLength:"Password should be atleast 6 characters long",
+				required:"Please enter a password",
+				equalTo:"Passwords dont match"
+			}
+		}
+	});
+	
+	$("#ChangePassword").validate({
+		rules:{
+			username:{minlength:2,
+				required: true},
+				oldpassword:{required:true},
+				newpassword:{minlength:6,
+					required: true,
+					passwordvalidation: true,
+					notEqual:"#oldpassword"},
+				confirmpassword:{minlength:6,
+					required: true,
+					equalTo:"#newpassword",
+					passwordvalidation: true}	
+		},
+		messages:{
+			username:{
+				minlength:"Username should be atleast 2 characters long",
+				required:"Please enter a username"
+			},
+			oldpassword:"Please enter your old password",
+			newpassword:{
+				minLength:"Password should be atleast 6 characters long",
+				required:"Please enter your new password",
+				notEqual:"Old and New Passwords cant be same"
+			},
+			confirmpassword:{
+				minLength:"Password should be atleast 6 characters long",
+				required:"Please confirm your password",
+				equalTo:"Passwords dont match"
 			}
 		}
 	});
