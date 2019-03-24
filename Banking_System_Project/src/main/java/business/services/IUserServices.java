@@ -25,4 +25,7 @@ public interface IUserServices {
 
 	boolean isNewUser(String username);
 
+	boolean UpdateEmployee(String firstName, String middleName, String lastName, String username, Date dateOfBirth,
+			String password, String phoneNumber, String email);
+
 }
