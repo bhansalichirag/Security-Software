@@ -53,6 +53,9 @@ public abstract class Customer extends User{
 		this.seqQuestion2 = seqQuestion2;
 	}
 	
+	public void addAccount(Account account) {
+		accountsList.add(account);
+	}
 	
 	public List<Account> getAccountsList() {
 		return accountsList;
