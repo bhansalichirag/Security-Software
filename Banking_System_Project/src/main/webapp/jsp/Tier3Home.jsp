@@ -25,6 +25,16 @@
               </td>
             </tr>
             <tr>
+            <td>
+            To update your info <a href="EmployeeUpdate">Update Info</a>
+            </td>
+            </tr>
+            <tr>
+            <td>
+            To update/ <a href="ChangePassword">Change Password</a>
+            </td>
+            </tr>
+            <tr>
             	<td>
             	<a href="/login">Log Out</a>
             	</td>

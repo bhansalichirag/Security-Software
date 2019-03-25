@@ -1,7 +1,9 @@
 package main.java.web;
 
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IUserServices;
+import main.java.dal.users.customers.Customer;
 import main.java.dal.users.employees.Admin;
+import main.java.dal.users.employees.Employee;
+import main.java.dal.users.employees.Tier1;
 
 @Controller
 public class EmployeeController {
@@ -27,34 +32,160 @@ public class EmployeeController {
 	@RequestMapping(value="/AdminHome", method = RequestMethod.GET)
     public ModelAndView AdminHome(HttpServletRequest request, HttpSession session){
     	ModelMap model = new ModelMap();
-        Admin Admin_emp = (Admin) session.getAttribute("AdminObject");
+        Admin Admin_emp = (Admin) session.getAttribute("EmployeeObject");
         if (Admin_emp == null)
         {
-        	return new ModelAndView("Employee_Login");
+        	return new ModelAndView("redirect:/login");
         }
         return new ModelAndView(("Tier3Home"), model);
+    }
+	
+	@RequestMapping(value= "/TierEmployeeDashboard", method = RequestMethod.GET)
+    public ModelAndView TierEmployeeDashboard(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Tier1 Tier_emp = (Tier1) session.getAttribute("EmployeeObject");
+        if (Tier_emp == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("Tier3Home"), model);
+    }
+	
+	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
+    public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Employee Tier_emp = (Employee) session.getAttribute("EmployeeObject");
+        Customer cust_emp = (Customer) session.getAttribute("CustomerObject"); 
+        if (Tier_emp == null && cust_emp==null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("ChangePassword"), model);
     }
     
     @RequestMapping(value="/EmployeeRegister", method = RequestMethod.GET)
     public ModelAndView EmployeeRegister(HttpServletRequest request, HttpSession session){
     	ModelMap model = new ModelMap();
-        Admin Admin_emp = (Admin) session.getAttribute("AdminObject");
+        Admin Admin_emp = (Admin) session.getAttribute("EmployeeObject");
         if (Admin_emp == null)
         {
-        	return new ModelAndView("EmployeeLogin");
+        	return new ModelAndView("redirect:/login");
         }
+        /*if(request.getAttribute("alertMsg")==null)
+        {
+        	request.setAttribute("alertMsg", "");
+        }*/
         return new ModelAndView(("EmployeeInsert"), model);
+    }
+    
+    @RequestMapping(value="/EmployeeUpdate", method = RequestMethod.GET)
+    public ModelAndView EmployeeUpdate(HttpServletRequest request, HttpSession session){
+    	ModelMap model = new ModelMap();
+    	Employee emp = (Employee) session.getAttribute("EmployeeObject");
+        if (emp == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        String abc = emp.getEmail();
+        model.addAttribute("empusername",emp.getUsername());
+        request.setAttribute("Email",abc);
+        request.setAttribute("FirstName",emp.getFirstName());
+        String temp_mid = emp.getMiddleName();
+        if(temp_mid==null || temp_mid=="")
+        {
+        	request.setAttribute("MiddleName", "");
+        }
+        else
+        {
+        	request.setAttribute("MiddleName", temp_mid);
+        }
+        request.setAttribute("LastName", emp.getLastName());
+        String temp_phone = emp.getPhoneNumber();
+        if(temp_phone==null || temp_phone=="")
+        {
+        	request.setAttribute("Phone", "");
+        }
+        else
+        {
+        	request.setAttribute("Phone", emp.getPhoneNumber());
+        }
+        request.setAttribute("EmployeeObject",(Employee)emp);
+        return new ModelAndView(("EmployeeUpdate"), model);
     }
     
     @RequestMapping(value="/EmployeeDelete", method = RequestMethod.GET)
     public ModelAndView EmployeeDelete(HttpServletRequest request, HttpSession session){
     	ModelMap model = new ModelMap();
-        Admin Admin_emp = (Admin) session.getAttribute("AdminObject");
+    	Admin Admin_emp = (Admin) session.getAttribute("EmployeeObject");
         if (Admin_emp == null)
         {
-        	return new ModelAndView("EmployeeLogin");
+        	return new ModelAndView("redirect:/login");
         }
         return new ModelAndView(("EmployeeDelete"), model);
+    }
+    
+    @RequestMapping(value = "/emp_update", method = RequestMethod.POST)
+    public ModelAndView EmployeeUpdateValues(HttpServletRequest request, HttpSession session) throws ParseException {
+    	Employee emp = (Employee) session.getAttribute("EmployeeObject");
+    	String username = emp.getUsername();
+    	String firstname = (String) request.getParameter("firstname");
+		String middlename = (String) request.getParameter("middlename");
+		String lastname = (String) request.getParameter("lastname");
+		String phonenumber = (String) request.getParameter("phone");
+		String email = (String) request.getParameter("email");
+		String ssn = (String)request.getParameter("ssn");	
+		String DOB = (String)request.getParameter("date_of_birth");
+		String SeqQuestion1 = (String)request.getParameter("seqquestion1");
+		String SeqQuestion2 = (String)request.getParameter("seqquestion2");
+    	ModelAndView mav =null;
+    	if(("").equals(firstname)) {
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+		    mav.addObject("message", "first name cannot be empty");
+		}
+		else if(("").equals(lastname)){
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+		    mav.addObject("message", "last name cannot be empty");
+		}
+		else if(("").equals(DOB)){
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+		    mav.addObject("message", "date cannot be empty");
+		}
+		else if(("").equals(phonenumber)){
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+		    mav.addObject("message", "phone number cannot be empty");
+		}
+		else if(("").equals(email)){
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+		    mav.addObject("message", "email cannot be empty");
+		}
+		else if(("").equals(ssn)) {
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+			mav.addObject("message","ssn cannot be empty");
+		}
+		else if(("").equals(SeqQuestion1)) {
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+			mav.addObject("message","ssn cannot be empty");
+		}
+		else if(("").equals(SeqQuestion2)) {
+			mav = new ModelAndView("redirect:/EmployeeUpdate");
+			mav.addObject("message","ssn cannot be empty");
+		}
+		else {
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = (Date)formatter.parse(DOB);
+			Boolean user = userServices.UpdateUser(firstname, middlename, lastname,username, date, "", phonenumber, email, "", ssn, SeqQuestion1, SeqQuestion2);
+			if (user)
+			{
+				mav =  new ModelAndView("redirect:/EmployeeUpdate");
+				mav.addObject("message","Employee created successfully!!");
+			}
+			else
+			{
+				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav.addObject("message","Some issue with insertion!!");
+			}
+		}
+	    return mav;
     }
     
     @RequestMapping(value = "/emp_insert", method = RequestMethod.POST)
@@ -63,17 +194,11 @@ public class EmployeeController {
 		String middlename = (String) request.getParameter("middlename");
 		String lastname = (String) request.getParameter("lastname");
 		String username = (String) request.getParameter("username");
-		//String password = (String) request.getParameter("password");
-		//String confirmpassword = (String) request.getParameter("confirmpassword");
-		String password = username;	//initial password is same as the username, after initial login the tier1or2 user has to change the password
-		String confirmpassword = username;
-		String phonenumber = (String) request.getParameter("phonenumber");
+		String phonenumber = (String) request.getParameter("phone");
 		String email = (String) request.getParameter("email");
 		String access = (String)request.getParameter("designation");	
 		String DOB = (String)request.getParameter("date_of_birth");
-		String address = (String)request.getParameter("Address");
 		//String SSN = (String)request.getParameter("ssn");
-		String SSN = "000000000000";
 		
 		ModelAndView mav = null;
 		
@@ -85,21 +210,9 @@ public class EmployeeController {
 			mav = new ModelAndView("redirect:/EmployeeRegister");
 		    mav.addObject("message", "last name cannot be empty");
 		}
-		else if(("").equals(middlename)){
-			mav = new ModelAndView("redirect:/EmployeeRegister");
-		    mav.addObject("message", "middle name cannot be empty");
-		}
 		else if(("").equals(username)){
 			mav = new ModelAndView("redirect:/EmployeeRegister");
 		    mav.addObject("message", "user name cannot be empty");
-		}
-		else if(("").equals(password)){
-			mav = new ModelAndView("redirect:/EmployeeRegister");
-		    mav.addObject("message", "password cannot be empty");
-		}
-		else if(!password.equals(confirmpassword)){
-			mav = new ModelAndView("redirect:/EmployeeRegister");
-		    mav.addObject("message", "password and confirm password does not match");
 		}
 		else if(("").equals(DOB)){
 			mav = new ModelAndView("redirect:/EmployeeRegister");
@@ -118,21 +231,59 @@ public class EmployeeController {
 		    mav.addObject("message", "email cannot be empty");
 		}
 		else {
-			//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd",Locale.US);
-			Date date1 = new Date();
-			Boolean user = userServices.CreateCustomerUser(access, firstname, middlename, lastname, username,date1, password, phonenumber, email, address,SSN, "abc","def");
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = (Date)formatter.parse(DOB);
+			Boolean user = userServices.CreateEmployeeUser(access, firstname, middlename, lastname, username, date, phonenumber, email);
 			if (user)
 			{
-				mav =  new ModelAndView("redirect:AdminHome");
+				mav =  new ModelAndView("redirect:/AdminHome");
 				mav.addObject("message","Employee created successfully!!");
+				//request.setAttribute("alertMsg", "Employee created successfully");
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:AdminHome");
+				mav = new ModelAndView("redirect:/AdminHome");
 				mav.addObject("message","Some issue with insertion!!");
 			}
 		}
 	    return mav;
 	  }
-	
+    
+    @RequestMapping(value = "/emp_delete", method = RequestMethod.POST)
+	  public ModelAndView deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
+		String firstname = (String) request.getParameter("firstname");
+		String lastname = (String) request.getParameter("lastname");
+		String username = (String) request.getParameter("username");
+		ModelAndView mav = null;
+		if(firstname.equals("")) {
+			mav = new ModelAndView("redirect:/EmployeeDelete");
+		    mav.addObject("message", "first name cannot be empty");
+		}
+		else if(lastname.equals("")){
+			mav = new ModelAndView("redirect:/EmployeeDelete");
+		    mav.addObject("message", "last name cannot be empty");
+		}
+		else if(username.equals("")){
+			mav = new ModelAndView("redirect:/EmployeeDelete");
+		    mav.addObject("message", "user name cannot be empty");
+		}
+		else {
+			Boolean user = userServices.DeleteUser(username);
+			if (user)
+			{
+				mav =  new ModelAndView("redirect:/EmployeeDelete");
+				mav.addObject("message","Employee username deleted successfully!!");
+				
+			}
+			else
+			{
+				mav = new ModelAndView("redirect:/EmployeeDelete");
+				mav.addObject("message","Username doesnt exist!!");
+				
+			}
+		}
+		
+		return mav;
+	  }
+
 }
