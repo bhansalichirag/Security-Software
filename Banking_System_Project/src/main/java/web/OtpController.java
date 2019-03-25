@@ -2,6 +2,7 @@ package main.java.web;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import main.java.business.EmailTemplate;
+import main.java.business.services.EmailService;
+import main.java.business.services.OtpService;
+import main.java.dal.users.customers.Customer;
 
-import main.java.web.*;
+
 @Controller
 public class OtpController {
 
@@ -22,22 +27,23 @@ public class OtpController {
 	@Autowired
 	public OtpService otpService;
 	@Autowired
-	public MyEmailService myEmailService;
-	
+	public EmailService myEmailService;
+
 	@GetMapping("/generateOtp")
-	public String generateOtp(){
+	public String generateOtp(HttpSession session){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
-		String username = auth.getName();
+		Customer user = (Customer) session.getAttribute("CustomerObject");
+		String username = user.getUsername();
 		int otp = otpService.generateOTP(username);
 		logger.info("OTP : "+otp);
 		//Generate The Template to send OTP 
 		EmailTemplate template = new EmailTemplate("SendOtp.html");
 		Map<String,String> replacements = new HashMap<String,String>();
-		replacements.put("user", username);
+		replacements.put("user", auth.getName());
 		replacements.put("otpnum", String.valueOf(otp));
 		String message = template.getTemplate(replacements);
 		myEmailService.sendOtpMessage("shrisowdhaman@gmail.com", "OTP -SpringBoot", message);
-		
+
 		return "otppage";
 	}
 	@RequestMapping(value ="/validateOtp", method = RequestMethod.GET)

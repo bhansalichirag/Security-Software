@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
@@ -23,6 +25,8 @@ public abstract class Customer extends User{
 	private String ssn;
 	private String seqQuestion;
 	private String seqQuestion2;
+	@OneToOne(fetch=FetchType.EAGER)
+	private Account primaryAccount;
 	
 	public Customer() {
 	}
@@ -78,5 +82,13 @@ public abstract class Customer extends User{
 
 	public void setSeqQuestion2(String seqQuestion2) {
 		this.seqQuestion2 = seqQuestion2;
+	}
+
+	public Account getPrimaryAccount() {
+		return primaryAccount;
+	}
+
+	public void setPrimaryAccount(Account primaryAccount) {
+		this.primaryAccount = primaryAccount;
 	}
 }

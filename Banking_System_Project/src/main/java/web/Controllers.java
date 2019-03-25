@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import main.java.business.services.IAccountServices;
 import main.java.business.services.IUserServices;
+import main.java.business.services.OtpService;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
@@ -178,6 +180,7 @@ public class Controllers {
 				creditcards.add((CreditCard)account);
 			}
         }
+        model.addAttribute("user", customer.getFirstName() + " " + customer.getLastName());
         model.addAttribute("checking", checking);
         model.addAttribute("savings", savings);
         model.addAttribute("creditcards", creditcards);

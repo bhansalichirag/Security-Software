@@ -27,7 +27,9 @@ public abstract class User {
 	@Column(name = "username", updatable = false, nullable = true)
 	private String username;
 	private String password;
+	@Column(unique = true)
 	private String phoneNumber;
+	@Column(unique = true)
 	private String email;
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;

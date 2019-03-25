@@ -10,5 +10,8 @@ import main.java.dal.users.User;
 public interface UserRepository extends CrudRepository<User, String> {
 	public Optional<User> findByUsernameAndPassword(String username, String password);
 	public boolean existsByLastNameOrFirstName(String lastname, String firstname);
+	public Optional<User> findByEmail(String email);
+	public Optional<User> findByPhoneNumber(String phoneNumber);
+	public Optional<User> findByEmailAndPhoneNumber(String email, String phoneNumber);
 	
 }
