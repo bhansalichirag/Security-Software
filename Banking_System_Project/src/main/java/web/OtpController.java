@@ -26,17 +26,18 @@ public class OtpController {
 	
 	@GetMapping("/generateOtp")
 	public String generateOtp(){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
-		String username = auth.getName();
-		int otp = otpService.generateOTP(username);
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+//		System.out.println(auth);
+//		String username = auth.getName();
+		int otp = otpService.generateOTP("psjagtap");
 		logger.info("OTP : "+otp);
 		//Generate The Template to send OTP 
 		EmailTemplate template = new EmailTemplate("SendOtp.html");
 		Map<String,String> replacements = new HashMap<String,String>();
-		replacements.put("user", username);
+		replacements.put("user", "psjagtap");
 		replacements.put("otpnum", String.valueOf(otp));
 		String message = template.getTemplate(replacements);
-		myEmailService.sendOtpMessage("shrisowdhaman@gmail.com", "OTP -SpringBoot", message);
+		myEmailService.sendOtpMessage("sgpt18@gmail.com", "OTP -SpringBoot", "Hi Your OTP is "+otp+" .");
 		
 		return "otppage";
 	}
@@ -44,15 +45,15 @@ public class OtpController {
 	public @ResponseBody String validateOtp(@RequestParam("otpnum") int otpnum){
 		final String SUCCESS = "Entered Otp is valid";
 		final String FAIL = "Entered Otp is NOT valid. Please Retry!";
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
-		String username = auth.getName();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+		//String username = auth.getName();
 		logger.info(" Otp Number : "+otpnum);
 		//Validate the Otp 
 		if(otpnum >= 0){
-			int serverOtp = otpService.getOtp(username);
+			int serverOtp = otpService.getOtp("psjagtap");
 			if(serverOtp > 0){
 				if(otpnum == serverOtp){
-					otpService.clearOTP(username);
+					otpService.clearOTP("psjagtap");
 					return ("Entered Otp is valid");
 				}else{
 					return SUCCESS;
