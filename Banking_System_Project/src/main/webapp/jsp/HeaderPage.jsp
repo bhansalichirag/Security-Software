@@ -13,9 +13,10 @@
 				<header role="banner">
 			        <nav role="navigation">
 			            <ul class="top-bar">
+			            	<li class="cta"><a class="OutLineButton" href="/accinfo">Home</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ScheduleAppointment">Schedule an Appointment</a></li>
-			                <li class="cta"><a class="OutLineButton" href="../ExcelUploadForm">Profile</a></li>
+			                <li class="cta"><a class="OutLineButton" href="/OpenAccount">Open An Account</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
 			            </ul>
 			        </nav>

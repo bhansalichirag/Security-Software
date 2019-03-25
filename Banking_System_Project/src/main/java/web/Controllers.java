@@ -138,12 +138,12 @@ public class Controllers {
         		else if(user instanceof Tier1)
         		{
         			session.setAttribute("EmployeeObject", (Tier1)user);
-        			return new ModelAndView("redirect:/TierEmployeeDashboard");
+        			return new ModelAndView("redirect:/Tier1Dash");
         		}
         		else
         		{
         			session.setAttribute("EmployeeObject", (Tier2)user);
-        			return new ModelAndView("redirect:/TierEmployeeDashboard");
+        			return new ModelAndView("redirect:/Tier2Dash");
         		}
         	}
         }
@@ -221,6 +221,17 @@ public class Controllers {
         return new ModelAndView(("ScheduleAppointment"), model);
     }
 	
+	@RequestMapping(value= {"/OpenAccount"}, method = RequestMethod.GET)
+	public ModelAndView OpenAccount(HttpServletRequest request, HttpSession session){
+    	ModelMap model = new ModelMap();
+        Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+        if (user_cust == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("CreateNewAccount"), model);
+    }
+	
 	@RequestMapping(value= {"/appointment"}, method = RequestMethod.POST)
     public ModelAndView BookAppointment(HttpServletRequest request, HttpSession session){
 		
@@ -231,6 +242,16 @@ public class Controllers {
 		String reason = (String) request.getParameter("appointment").trim();
 		
 		return new ModelAndView(("redirect:/ScheduleAppointment"), model);
+    }
+	
+	@RequestMapping(value= {"/openaccount"}, method = RequestMethod.POST)
+    public ModelAndView AccountOpening(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+		String account_type = (String) request.getParameter("account_type");
+		Account account = accountServices.CreateAccount(user_cust, account_type);
+		model.addAttribute("account", (Account)account);
+		return new ModelAndView(("redirect:/accinfo"),model);
     }
 	
 	@RequestMapping(value= {"/SetPassword"}, method = RequestMethod.GET)

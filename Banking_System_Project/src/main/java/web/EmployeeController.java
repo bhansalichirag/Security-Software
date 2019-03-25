@@ -4,7 +4,10 @@ package main.java.web;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +21,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IUserServices;
+import main.java.business.services.UserServiesImpl;
+import main.java.dal.accounts.Account;
+import main.java.dal.accounts.CheckingAccount;
+import main.java.dal.accounts.CreditCard;
+import main.java.dal.accounts.SavingsAccount;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.employees.Admin;
 import main.java.dal.users.employees.Employee;
 import main.java.dal.users.employees.Tier1;
+import main.java.dal.users.employees.Tier2;
+import main.java.repositories.UserRepository;
 
 @Controller
 public class EmployeeController {
@@ -43,13 +54,62 @@ public class EmployeeController {
 	@RequestMapping(value= "/TierEmployeeDashboard", method = RequestMethod.GET)
     public ModelAndView TierEmployeeDashboard(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-        Tier1 Tier_emp = (Tier1) session.getAttribute("EmployeeObject");
+        Admin Tier_emp = (Admin) session.getAttribute("EmployeeObject");
         if (Tier_emp == null)
         {
         	return new ModelAndView("redirect:/login");
         }
         return new ModelAndView(("Tier3Home"), model);
     }
+	
+	@RequestMapping(value= "/Tier2Dash", method = RequestMethod.GET)
+    public ModelAndView Tier2EmployeeDash(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Tier2 Tier_emp = (Tier2) session.getAttribute("EmployeeObject");
+        if (Tier_emp == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("Tier2Dashboard"), model);
+    }
+	
+	@RequestMapping(value= "/Tier1Dash", method = RequestMethod.GET)
+    public ModelAndView Tier1EmployeeDash(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Tier1 Tier_emp = (Tier1) session.getAttribute("EmployeeObject");
+        if (Tier_emp == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("Tier1Dashboard"), model);
+    }
+	
+	@RequestMapping(value= "/Search", method = RequestMethod.GET)
+    public ModelAndView Search(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+        Employee emp = (Employee) session.getAttribute("EmployeeObject");
+        if (emp == null)
+        {
+        	return new ModelAndView("redirect:/login");
+        }
+        return new ModelAndView(("SearchUser"), model);
+    }
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	  public ModelAndView SearchUser(HttpServletRequest request, HttpSession session) throws ParseException {
+		ModelMap model = new ModelMap();
+		String username = request.getParameter("username");
+        User emp = (User)session.getAttribute("EmployeeObject"); 
+		if (emp == null)
+        {
+        	return new ModelAndView("Login");
+        }
+        
+        List<User> checking = new ArrayList<User>();
+        checking.add((User)emp);
+        model.addAttribute("checking", checking);
+        return new ModelAndView(("SearchUser"), model);
+	}
 	
 	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
     public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){

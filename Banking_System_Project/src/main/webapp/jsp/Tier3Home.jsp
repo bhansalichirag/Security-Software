@@ -35,6 +35,11 @@
             </td>
             </tr>
             <tr>
+            <td>
+            To search/view an employee <a href="Search">Search</a>
+            </td>
+            </tr>
+            <tr>
             	<td>
             	<a href="/login">Log Out</a>
             	</td>

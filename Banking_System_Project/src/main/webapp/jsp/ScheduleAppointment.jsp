@@ -20,8 +20,8 @@
 		    
 		    var maxDate = year + 1 + '-' + month + '-' + day;
 		    var minDate = year + '-' + month + '-' + day;
-		    alert(minDate);
-		    alert(maxDate);
+		    //alert(minDate);
+		    //alert(maxDate);
 		    $('#schedule_date').attr('max', maxDate);
 		    $('#schedule_date').attr('min', minDate);
 		});
