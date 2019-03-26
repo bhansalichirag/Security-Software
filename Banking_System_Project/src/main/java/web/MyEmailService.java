@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyEmailService  {
+public class MyEmailService {
 private final Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 private JavaMailSender javaMailSender;
