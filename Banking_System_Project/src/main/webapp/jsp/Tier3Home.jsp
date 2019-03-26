@@ -36,6 +36,11 @@
             </tr>
             <tr>
             <td>
+            Authorize transactions <a href="checker">Authorize</a>
+            </td>
+            </tr>
+            <tr>
+            <td>
             To search/view an employee <a href="Search">Search</a>
             </td>
             </tr>
