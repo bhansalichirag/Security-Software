@@ -34,6 +34,11 @@
             To update/ <a href="ChangePassword">Change Password</a>
             </td>
             </tr>
+             <tr>
+            <td>
+            Authorize transactions <a href="checker">Authorize</a>
+            </td>
+            </tr>
             <tr>
             	<td>
             	<a href="/login">Log Out</a>

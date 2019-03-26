@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,21 +15,32 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
+import main.java.dal.Transaction;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.employees.Admin;
 import main.java.dal.users.employees.Employee;
 import main.java.dal.users.employees.Tier1;
+import main.java.repositories.TransactionRepository;
 
 @Controller
 public class EmployeeController {
 	
 	@Autowired
 	IUserServices userServices;
+	
+	@Autowired
+	ITransactionServices transactionServices;
+	
+	@Autowired
+	private TransactionRepository transactionRepository;
 
 	@RequestMapping(value="/AdminHome", method = RequestMethod.GET)
     public ModelAndView AdminHome(HttpServletRequest request, HttpSession session){
@@ -49,18 +62,6 @@ public class EmployeeController {
         	return new ModelAndView("redirect:/login");
         }
         return new ModelAndView(("Tier3Home"), model);
-    }
-	
-	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
-    public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){
-		ModelMap model = new ModelMap();
-        Employee Tier_emp = (Employee) session.getAttribute("EmployeeObject");
-        Customer cust_emp = (Customer) session.getAttribute("CustomerObject"); 
-        if (Tier_emp == null && cust_emp==null)
-        {
-        	return new ModelAndView("redirect:/login");
-        }
-        return new ModelAndView(("ChangePassword"), model);
     }
     
     @RequestMapping(value="/EmployeeRegister", method = RequestMethod.GET)
@@ -110,6 +111,7 @@ public class EmployeeController {
         	request.setAttribute("Phone", emp.getPhoneNumber());
         }
         request.setAttribute("EmployeeObject",(Employee)emp);
+        //request.setAttribute("DOB", Admin_emp.getDateOfBirth());
         return new ModelAndView(("EmployeeUpdate"), model);
     }
     
@@ -285,5 +287,38 @@ public class EmployeeController {
 		
 		return mav;
 	  }
+    
+    @RequestMapping(value="/checker", method = RequestMethod.GET)
+    public ModelAndView transactions(HttpServletRequest request, HttpSession session) {
+    	ModelMap model = new ModelMap();
+
+    	List<Transaction> transactions=transactionServices.GetAllPendingTransactions();
+    	
+    	model.addAttribute("transactions", transactions);
+    	
+		return new ModelAndView(("pendingTransaction"), model);
+    
+    }
+    
+    @RequestMapping(value="/authorize", method = RequestMethod.POST)
+    public ModelAndView authorize(HttpServletRequest request, HttpSession session) {
+    	ModelMap model = new ModelMap();
+    	
+  
+    	System.out.println(request.getParameter("transaction1"));
+    	//Transaction transaction=(Transaction)request.getParameter("transaction");
+    //	model.addAttribute("transactions", transaction);
+    	
+    	Optional<Transaction> t=transactionRepository.findById(7);
+		Transaction t1=t.get();
+    	Employee approver =(Employee)session.getAttribute("EmployeeObject");
+		transactionServices.ApproveTransaction(approver, t1);
+		return new ModelAndView(("pendingTransaction"));
+     
+    }
+
+
+    
+    
 
 }
