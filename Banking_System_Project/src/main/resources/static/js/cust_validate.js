@@ -108,5 +108,35 @@ $().ready(function(){
 		schedule_date:{required:"Please enter your DOB"},
 	}
 });
+
+	$("#OpenAccount").validate({
+		rules:{
+			account_type: "required",
+			firstname: {required:true,
+				alphabet:true},
+			lastname:{required:true,
+				alphabet:true},
+			email:{required:true,
+				emailvalidation:true},
+			date_of_birth:"required",
+			secquestion1:{required:true,
+				secvalidation:true},
+			secquestion2:{required:true,
+				secvalidation:true}
+		},
+		messages:{
+			account_type:"Please select an account type",
+			firstname:{
+				required:"Please enter your first name",
+				},
+			lastname:{
+				required:"Please enter your last name",
+			},
+			date_of_birth:{required:"Please enter your DOB"},
+			secquestion1:{required:"Please answer the security question"},
+			secquestion2:{required:"Please answer the security question"},
+			email:{required:"Please enter your email"}
+		}
+	});
 	
 })

@@ -249,9 +249,26 @@ public class Controllers {
 		ModelMap model = new ModelMap();
 		Customer user_cust = (Customer) session.getAttribute("CustomerObject");
 		String account_type = (String) request.getParameter("account_type");
-		Account account = accountServices.CreateAccount(user_cust, account_type);
-		model.addAttribute("account", (Account)account);
-		return new ModelAndView(("redirect:/accinfo"),model);
+		String dob = (String) request.getParameter("date_of_birth");
+		String firstname = (String) request.getParameter("firstname");
+		String lastname = (String)request.getParameter("lastname");
+		String email = (String)request.getParameter("email");
+		String secquestion1 = (String) request.getParameter("secquestion1");
+		String secquestion2 = (String) request.getParameter("secquestion2");
+		if(user_cust.getDateOfBirth().equals(dob) && user_cust.getEmail().equals(email) && user_cust.getFirstName().equals(firstname) 
+				&& user_cust.getLastName().equals(lastname) && user_cust.getSeqQuestion().equals(secquestion1) 
+				&& user_cust.getSeqQuestion2().equals(secquestion2))
+		{
+			Account account = accountServices.CreateAccount(user_cust, account_type);
+			model.addAttribute("account", (Account)account);
+			return new ModelAndView(("redirect:/accinfo"),model);
+		}
+		else
+		{
+			ModelAndView mav = new ModelAndView(("redirect:/OpenAccount"),model);
+			mav.addObject("message","Wrong details entered");
+			return mav;
+		}
     }
 	
 	@RequestMapping(value= {"/SetPassword"}, method = RequestMethod.GET)
