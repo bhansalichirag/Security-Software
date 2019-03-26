@@ -27,7 +27,7 @@
 						    </div>
 			  			</fieldset>
 			  			</form>
-			  			<c:forEach var="entry" items="${checking}">
+			  			<c:forEach var="entry" items="${personal}">
 					<div class="account-detail cards">
 					<div>
 						<div class="account-header">

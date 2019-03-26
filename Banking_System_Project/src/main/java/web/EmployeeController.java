@@ -107,7 +107,7 @@ public class EmployeeController {
         
         List<User> checking = new ArrayList<User>();
         checking.add((User)emp);
-        model.addAttribute("checking", checking);
+        model.addAttribute("personal", checking);
         return new ModelAndView(("SearchUser"), model);
 	}
 	

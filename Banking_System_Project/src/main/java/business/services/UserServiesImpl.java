@@ -154,7 +154,7 @@ public class UserServiesImpl implements IUserServices {
 			{
 				User currentUser = user.get();
 				if(currentUser instanceof User && 
-						(currentUser.getPassword() == null || currentUser.getPassword().equals(oldPassword)))
+						(currentUser.getPassword() == null || currentUser.getPassword().equals(oldPassword) || oldPassword==null))  ///added oldpassword part on 25th march for new password
 				{
 					currentUser.setPassword(newPassword);
 					userRepository.save(currentUser);

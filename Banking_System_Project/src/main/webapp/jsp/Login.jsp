@@ -30,7 +30,7 @@
 			<div class="form-group">
 		  	<button type="submit">Login</button>	   
 		  	<div class="form-group" style="background-color:#f1f1f1;height:30px">
-		    <span><a href="#">Forgot password?</a></span>
+		    <span><a href="/ForgotPassword">Forgot password?</a></span>
 		  	</div>
 		  	<div class="form-group" style="background-color:#f1f1f1;height:30px">
 		    <span><a href="/NewCustomerRegister">New Customer?</a></span>
