@@ -19,7 +19,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import main.java.business.services.ITransactionServices;
+import main.java.dal.Transaction;
 import main.java.business.services.IUserServices;
 import main.java.business.services.UserServiesImpl;
 import main.java.dal.accounts.Account;
@@ -39,6 +40,9 @@ public class EmployeeController {
 	
 	@Autowired
 	IUserServices userServices;
+	
+	@Autowired
+	ITransactionServices transactionServices;
 
 	@RequestMapping(value="/AdminHome", method = RequestMethod.GET)
     public ModelAndView AdminHome(HttpServletRequest request, HttpSession session){
@@ -345,5 +349,39 @@ public class EmployeeController {
 		
 		return mav;
 	  }
+    
+    //Authorize transaction changes--->
+        @RequestMapping(value="/checker", method = RequestMethod.GET)
+    public ModelAndView transactions(HttpServletRequest request, HttpSession session) {
+    	ModelMap model = new ModelMap();
+
+    	List<Transaction> transactions=transactionServices.GetAllPendingTransactions();
+    	session.setAttribute("pendingTransaction", transactions);
+    	model.addAttribute("transactions", transactions);
+    	
+		return new ModelAndView(("pendingTransaction"), model);
+    
+    }
+    
+    @RequestMapping(value="/authorize", method = RequestMethod.POST)
+    public ModelAndView authorize(HttpServletRequest request, HttpSession session) {
+    	ModelMap model = new ModelMap();
+    	
+  
+    	//System.out.println(request.getParameter("transaction1"));
+    
+    	Employee approver =(Employee)session.getAttribute("EmployeeObject");
+    	List<Transaction> transactions=(List<Transaction>) request.getSession().getAttribute("pendingTransaction");//transactionServices.GetAllPendingTransactions();
+    	for(Transaction transaction:transactions ) {
+    		if(transaction.getTransactionID()==Integer.parseInt(request.getParameter("transaction1"))) {
+    			transactionServices.ApproveTransaction(approver, transaction);
+    		}
+    	}
+    	List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
+    	model.addAttribute("transactions", freshtransactions);
+		return new ModelAndView("pendingTransaction",model);
+     
+    }
+    //<-----
 
 }
