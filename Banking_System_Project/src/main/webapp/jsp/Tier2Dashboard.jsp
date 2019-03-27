@@ -7,6 +7,7 @@
 <title>Tier2 HomePage</title>
 </head>
 <body>
+<%@include file="HeaderPageTier2.jsp" %>
 	<form id="Tier3home" method="post">
     	<table align="center">
         	<tr>
@@ -16,34 +17,9 @@
             </tr>
             <tr>
 	           <td>
-                 Search  <a href="#">Customer Account details</a>
+                 For<a href="#">CreateAccount(Discuss)</a>
               </td>
             </tr>
-            <tr>
-            	<td>
-                 Approve/Decline  <a href="#">A New Account Opening Request</a>
-              </td>
-            </tr>
-            <tr>
-            <td>
-            Approve/Decline  <a href="#">A transaction</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            To update/ <a href="ChangePassword">Change Password</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            To search/view a  <a href="Search">Tier1 employee</a>
-            </td>
-            </tr>
-            <tr>
-            	<td>
-            	<a href="/login">Log Out</a>
-            	</td>
-            	</tr>
     </table>
  </form>
 </body>

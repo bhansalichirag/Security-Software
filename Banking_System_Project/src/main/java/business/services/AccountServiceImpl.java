@@ -146,7 +146,7 @@ public class AccountServiceImpl implements IAccountServices {
 	
 	public List<Account> getAllPendingAccounts()
 	{
-		Iterable<Account> accounts = accountRepository.findAllByApprovalStatusAndApprovalDate(true, null);
+		Iterable<Account> accounts = accountRepository.findAllByApprovalStatusAndApprovalDate(false, null);
 		return AccountIterableToListHelper(accounts);
 	}
 	

@@ -5,6 +5,12 @@
 <html>
 <meta charset="ISO-8859-1">
 <body>
+<div class="content-wrapper">
+<c:choose>
+		<c:when test="${role eq 'Tier1'}"><%@include file="HeaderPageTier1.jsp" %></c:when>
+		<c:otherwise><%@include file="HeaderPageTier3.jsp" %></c:otherwise>
+	</c:choose>
+</div>
 <div class="col-md-12" id="page-content" align="center">
 			<div class="panel panel-primary">
   				<div class="panel-heading">
@@ -31,7 +37,7 @@
 					<div class="account-detail cards">
 					<div>
 						<div class="account-header">
-							<h1>Employee Details</h1>
+							<h1>Personal Details</h1>
 						</div>
 						<div class="account-body">
 							<div>
@@ -43,8 +49,8 @@
 									<label> ${entry.firstName}</label>
 							</div>
 							<div>
-								<label>Last Name: </label>
-								<label>${entry.lastName}</label>
+								<label>Middle Name: </label>
+								<label>${entry.middleName}</label>
 							</div>
 							
 							<div>

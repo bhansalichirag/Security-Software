@@ -1,9 +1,17 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/employee_validate.js"></script>
 <script src="js/jquery.validate.js"></script>
 	<div class="content-wrapper">
+	<c:choose>
+		<c:when test="${role eq 'Individual'}"><%@include file="HeaderPage.jsp" %></c:when>
+		<c:when test="${role eq 'Admin'}"><%@include file="HeaderPageTier3.jsp" %></c:when>
+		<c:when test="${role eq 'Tier2'}"><%@include file="HeaderPageTier2.jsp" %></c:when>
+		<c:when test="${role eq 'Tier1'}"><%@include file="HeaderPageTier1.jsp" %></c:when>
+		<c:otherwise><%@include file="HeaderPageMerchant.jsp" %></c:otherwise>
+	</c:choose>
 		<div class="col-md-12" id="page-content" align="center">
 			<div class="panel panel-primary">
   				<div class="panel-heading">

@@ -3,8 +3,12 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/employee_validate.js"></script>
 <script src="js/jquery.validate.js"></script>
-	<div class="content-wrapper">
-		<div class="col-md-12" id="page-content" align="center">
+
+<div class="content-wrapper">
+<%@include file="HeaderPageTier3.jsp" %>
+</div>
+	<div>
+		<div class="col-md-12" align="center">
 			<div class="panel panel-primary">
   				<div class="panel-heading">
     				<h3 class="panel-title">Employee Registration</h3>
@@ -102,6 +106,6 @@
 		    $('#date_of_birth').attr('max', maxDate);
 		    $('#date_of_birth').attr('min', minDate);
 		});
-			
+		</script>	
 </body>
 </html>

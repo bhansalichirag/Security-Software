@@ -10,7 +10,10 @@
 		<script src="js/customer.js"></script>
 	</head>
 	<body>
-	<%@include file="HeaderPage.jsp" %>
+	<c:choose>
+		<c:when test="${role eq 'Individual'}"><%@include file="HeaderPage.jsp" %></c:when>
+		<c:otherwise><%@include file="HeaderPageMerchant.jsp" %></c:otherwise>
+	</c:choose>
 		<div class="content-container">
 			<div class="accounts-container cards">
 				<div>Howdy ${user}!</div>

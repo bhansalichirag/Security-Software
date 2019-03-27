@@ -7,39 +7,25 @@
 <title>Tier1 HomePage</title>
 </head>
 <body>
-	<form id="Tier3home" method="post">
+<%@include file="HeaderPageTier1.jsp" %>
+	<form id="Tier1Dashboard" method="post">
     	<table align="center">
-        	<tr>
+    	<tr>
 	           <td>
                  <h2>TIER-1 HOME</h2> 
               </td>
             </tr>
-            <tr>
-	           <td>
-                 To view Customer <a href="#">Account details</a>
-              </td>
-            </tr>
-            <tr>
-            	<td>
-                 Approve/Decline a <a href="#">Transaction</a>
-              </td>
-            </tr>
-            <tr>
-            <td>
-            Issue a <a href="#">Cashiers Cheque</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            To update/ <a href="ChangePassword">Change Password</a>
-            </td>
-            </tr>
-            <tr>
-            	<td>
-            	<a href="/login">Log Out</a>
-            	</td>
-            	</tr>
-    </table>
+    	<tr>
+    	<td>
+    	For<a href="#">Authorize Appointment Requests(Discuss)</a>
+    	</td>
+    	</tr>
+    	<tr>
+    	<td>
+    	For<a href="#">Viewing Transaction details</a>
+    	</td>
+    	</tr>
+    	</table>
  </form>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <title>Admin HomePage</title>
 </head>
 <body>
+<%@include file="HeaderPageTier3.jsp" %>
 	<form id="Tier3home" method="post">
     	<table align="center">
         	<tr>
@@ -14,41 +15,7 @@
                  <h2>TIER-3 HOME</h2> 
               </td>
             </tr>
-            <tr>
-	           <td>
-                 To add a new employee in TIER-1 or TIER-2 level <a href="EmployeeRegister">Add Employee</a>
-              </td>
-            </tr>
-            <tr>
-            	<td>
-                 To delete an employee in TIER-1 or TIER-2 level <a href="EmployeeDelete">Delete Employee</a>
-              </td>
-            </tr>
-            <tr>
-            <td>
-            To update your info <a href="EmployeeUpdate">Update Info</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            To update/ <a href="ChangePassword">Change Password</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            Authorize transactions <a href="checker">Authorize</a>
-            </td>
-            </tr>
-            <tr>
-            <td>
-            To search/view an employee <a href="Search">Search</a>
-            </td>
-            </tr>
-            <tr>
-            	<td>
-            	<a href="/login">Log Out</a>
-            	</td>
-            	</tr>
+            
     </table>
  </form>
 </body>

@@ -12,7 +12,10 @@
 	<body>
 		
 		<div class="content-container">
-		
+<c:choose>
+		<c:when test="${role eq 'Tier1'}"><%@include file="HeaderPageTier1.jsp" %></c:when>
+		<c:otherwise><%@include file="HeaderPageTier2.jsp" %></c:otherwise>
+	</c:choose>		
 			<table>
 				<thead>
 					<tr>
@@ -64,12 +67,16 @@
 				    			</c:choose>
 				    		</td>
 				    		<td>
-				    		 <form method="post" action="/authorize" id="authorize">
-				    		
-				    		<input type="hidden" name="transaction1" id="transaction1" value="${transaction.transactionID}">
-				    		
-				    		
+				    		<form method="post" action="/authorize" id="authorize">
+				    		<input type="hidden" name="transactionID" id="transactionID" value="${transaction.transactionID}">
 				    		<input type="submit" value="Authorize">
+				    		</form>
+				    		</td>
+				    		
+				    		<td>
+				    		<form method="post" action="/declinetransaction" id="decline">
+				    		<input type="hidden" name="transactionID" id="transactionID" value="${transaction.transactionID}">
+				    		<input type="submit" value="Decline">
 				    		</form>
 				    		</td>
 				    						    	</tr>
