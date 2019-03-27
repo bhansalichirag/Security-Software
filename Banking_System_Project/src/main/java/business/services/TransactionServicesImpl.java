@@ -21,6 +21,11 @@ public class TransactionServicesImpl implements ITransactionServices{
 	@Override
 	public Transaction ApproveTransaction(Employee approver, Transaction transaction)
 	{
+		if(!(transaction.getPayee().isApprovalStatus() && transaction.getPayer().isApprovalStatus()))
+		{
+			return null;
+		}
+		
 		transaction.setApprovalDate(new Date());
 		transaction.setApprovalStatus(true);
 		transaction.setApprover(approver);
@@ -30,9 +35,11 @@ public class TransactionServicesImpl implements ITransactionServices{
 			{
 				return null;
 			}
-			transactionRepository.save(transaction);
 			transaction.getPayee().creditAmount(transaction.getAmount());
 			transaction.getPayer().debitAmount(transaction.getAmount());
+			transaction.setPayeeBalance(transaction.getPayee().getBalance());
+			transaction.setPayerBalance(transaction.getPayer().getBalance());
+			transactionRepository.save(transaction);
 			accountRepository.save(transaction.getPayee());
 			accountRepository.save(transaction.getPayer());
 			return transaction;
@@ -102,7 +109,8 @@ public class TransactionServicesImpl implements ITransactionServices{
 		Iterable<Transaction> transactions = transactionRepository.findAllByApprovalStatusAndApprovalDate(false, null);
 		for ( Transaction item : transactions) 
 		{
-			transactionList.add(item);
+			if(item.getPayee().isApprovalStatus() && item.getPayer().isApprovalStatus())
+				transactionList.add(item);
 		}
 		return transactionList;
 	}

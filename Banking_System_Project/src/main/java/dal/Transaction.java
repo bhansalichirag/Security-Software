@@ -36,6 +36,8 @@ public class Transaction {
 	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	private Date date;
+	private double payerBalance;
+	private double payeeBalance;
 
 	public Transaction() {
 	}
@@ -82,6 +84,22 @@ public class Transaction {
 	}
 	public Date getDate() {
 		return date;
+	}
+
+	public double getPayeeBalance() {
+		return payeeBalance;
+	}
+
+	public void setPayeeBalance(double payeeBalance) {
+		this.payeeBalance = payeeBalance;
+	}
+
+	public double getPayerBalance() {
+		return payerBalance;
+	}
+
+	public void setPayerBalance(double payerBalance) {
+		this.payerBalance = payerBalance;
 	}
 	
 }

@@ -34,6 +34,10 @@ public class CashiersCheck {
 	private boolean isIssued;
 	private boolean isCashed;
 	
+	public CashiersCheck()
+	{
+		
+	}
 	
 	public CashiersCheck(Account issuingAccount, Customer recievingCustomer, double amount) 
 	{

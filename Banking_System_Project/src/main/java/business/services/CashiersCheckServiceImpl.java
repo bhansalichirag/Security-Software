@@ -29,7 +29,7 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 	private IAccountServices accountServices;
 	
 	@Override
-	public boolean OrderCashiersCheck(String firstName, String middleName, String lastName, int accountNumber, double amount)
+	public boolean OrderCashiersCheck(String firstName, String middleName, String lastName, Account accountNumber, double amount)
 	{
 		Iterable<User> customers = userRepository.findAllByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
 		
@@ -38,14 +38,10 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 			if(customer instanceof Customer && !(customer instanceof Merchant))
 			{
 				Individual indCustomer = (Individual) customer;
-				Optional<Account> issuingAccountWrapper = indCustomer.getAccountsList().stream().filter(e -> e.getAccountNumber() == accountNumber).findFirst();
-				if(issuingAccountWrapper.isPresent())
-				{
-					Account issuingAccount = issuingAccountWrapper.get();
-					CashiersCheck cashiersCheck = new CashiersCheck(issuingAccount, indCustomer, amount);
-					cashiersCheckRepository.save(cashiersCheck);
-					return true;
-				}
+				Account issuingAccount = accountNumber;
+				CashiersCheck cashiersCheck = new CashiersCheck(issuingAccount, indCustomer, amount);
+				cashiersCheckRepository.save(cashiersCheck);
+				return true;
 			}
 		}
 		return false;

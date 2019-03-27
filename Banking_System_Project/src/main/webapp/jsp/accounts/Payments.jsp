@@ -129,6 +129,49 @@
 									</form>
 								</div>
 							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse"
+											data-target="#request" aria-expanded="false"
+											aria-controls="request">Send by Email or Phone
+											Number</button>
+									</h5>
+								</div>
+								<div id="other" class="collapse" aria-labelledby="headingTwo"
+									data-parent="#accordion">
+									<form method="post" class="card-body"
+										action="/paymentactioncc" class="card-body"
+										style="text-align: left;">
+										<div class="input-group mb-3">
+											<label>Recipient Email Address</label> <input type="email"
+												minlength="4" maxlength="30" class="form-control"
+												placeholder="Recipient Email Address"
+												name="Recipient Email Address"
+												aria-describedby="basic-addon1">
+										</div>
+
+										<div class="input-group mb-3">
+											<label>Recipient Phone Number</label> <input type="tel"
+												oninvalid="this.setCustomValidity('Must be a 10 digit number')"
+												pattern="[0-9]{10}" class="form-control"
+												placeholder="Recipient Phone Number"
+												name="Recipient Phone Number"
+												aria-describedby="basic-addon2">
+										</div>
+
+										<div class="input-group mb-3">
+											<label>Amount</label> <input type="number"
+												class="form-control" min="1" max="${balance}"
+												placeholder="Amount" name="Amount" required="required">
+										</div>
+
+										<div class="input-group">
+											<input type="submit" class="btn btn-success" value="Request">
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

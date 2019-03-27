@@ -263,8 +263,8 @@ public class UserServiesImpl implements IUserServices {
 		{
 			if(user instanceof Individual)
 			{
-				boolean matches = ((Individual)user).getAccountsList().stream().anyMatch(e -> {
-					if(e.getAccountNumber() == accountNumber 
+				boolean matches = ((Individual)user).getAccountsList().stream().distinct().anyMatch(e -> {
+					if(e.getAccountNumber().equals(accountNumber)
 							&& !(e instanceof CreditCard))
 						return true;
 					else

@@ -40,9 +40,16 @@
 					<div class="col-sm-12">
 						<div class="well">
 							<div class="card">
-								<div id="send" class="" aria-labelledby="headingOne"
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse"
+											data-target="#send" aria-expanded="false"
+											aria-controls="send">Order Cashier's Check</button>
+									</h5>
+								</div>
+								<div id="send" class="collapse" aria-labelledby="headingOne"
 									data-parent="#accordion">
-									<div class="card-body" align="center">
+									<form  action="CCheckOrderAction" method="post" class="card-body" style="text-align: left;">
 										<div class="input-group mb-3">
 											<label>Recipient's First Name</label> <input type="text"
 												oninvalid="this.setCustomValidity('Enter a Proper First Name')"
@@ -87,10 +94,47 @@
 										</div>
 
 										<div class="input-group">
-											<button type="button" class="btn btn-success">Place
-												Order</button>
+											<input type="submit" class="btn btn-success" value="Order">
 										</div>
-									</div>
+									</form>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" data-toggle="collapse"
+											data-target="#request" aria-expanded="false"
+											aria-controls="request">Send by Email or Phone
+											Number</button>
+									</h5>
+								</div>
+								<div id="request" class="collapse" aria-labelledby="headingTwo"
+									data-parent="#accordion">
+									<form class="card-body"
+										action="ccheckDepositAction" method="post" class="card-body"
+										style="text-align: left;">
+										<div class="input-group mb-3">
+											<label>Cashier's Check Number</label> <input type="text"
+												pattern="[0-9]{3,}\CCX[0-9]{3,}" class="form-control"
+												placeholder="Cashier's Check Number"
+												name="Cashier's Check Number"
+												aria-describedby="basic-addon1">
+										</div>
+										
+										<div class="input-group mb-3">
+											<label>Select Account to Deposit to</label> <select name="Account"
+												class="selectpicker mr-3" id="from-account"
+												title="Select Account" data-live-search="false">
+												<c:forEach var="account" items="${accounts}">
+													<option value="${account}">${account}</option>
+												</c:forEach>
+											</select>
+										</div>
+
+										<div class="input-group">
+											<input type="submit" class="btn btn-success" value="Deposit">
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>

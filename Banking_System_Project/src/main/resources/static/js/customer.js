@@ -26,3 +26,9 @@ function OpenPayments(accountnum)
 	var params = { accountid: accountnum };
 	ButtonFormAction("/payments", params);
 }
+
+function DepositWithrawal(accountnum)
+{
+	var params = { accountid: accountnum };
+	ButtonFormAction("/depositwithdrawal", params);
+}

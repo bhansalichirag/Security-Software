@@ -30,6 +30,8 @@ public class PaymentController {
     public ModelAndView paymentactionacc(HttpServletRequest request, HttpSession session){
 		
 		ModelMap model = new ModelMap();
+		String deposit = (String) request.getParameter("Deposit");
+		String withdraw = (String) request.getParameter("Withdraw");
 		String accountNumber = (String) request.getParameter("Recipient Account Number");
 		String lastName = (String) request.getParameter("Recipient Last Name");
 		String amount = (String) request.getParameter("Amount");
@@ -38,8 +40,8 @@ public class PaymentController {
 		try 
 		{
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
-			matches = customer.getAccountsList().stream().anyMatch(e -> {
-				if(e.getAccountNumber() == payer 
+			matches = customer.getAccountsList().stream().distinct().anyMatch(e -> {
+				if(e.getAccountNumber().equals(payer)
 						&& !(e instanceof CreditCard))
 					return true;
 				else
@@ -50,17 +52,28 @@ public class PaymentController {
 		{
 			return new ModelAndView("Login");
 		}
-
-		if(matches && userServices.AccountExistsAndBelongsToLastName(Integer.parseInt(accountNumber), lastName))
+		if(matches)
 		{
-			accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
+			if("sys".equals(deposit))
+			{
+				accountServices.MakePayment(1, payer, Integer.parseInt(amount));
+			}
+			else if("sys".equals(withdraw))
+			{
+				accountServices.MakePayment(payer, 1, Integer.parseInt(amount));
+			}
+			else if(userServices.AccountExistsAndBelongsToLastName(Integer.parseInt(accountNumber), lastName))
+			{
+				accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
+			}
 			model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
 		}
+
 		else
 		{
 			return new ModelAndView("Login");
 		}
-		return new ModelAndView(("redirect:/transactions"), model);
+		return new ModelAndView(("/accinfo"), model);
     }
 	
 	
@@ -76,8 +89,8 @@ public class PaymentController {
 		try 
 		{
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
-			matches = customer.getAccountsList().stream().anyMatch(e -> {
-				if(e.getAccountNumber() == payer 
+			matches = customer.getAccountsList().stream().distinct().anyMatch(e -> {
+				if(e.getAccountNumber().equals(payer)
 						&& !(e instanceof CreditCard))
 					return true;
 				else
@@ -98,7 +111,7 @@ public class PaymentController {
 		{
 			return new ModelAndView("Login");
 		}
-		return new ModelAndView(("redirect:/transactions"), model);
+		return new ModelAndView(("/accinfo"), model);
     }
 	
 }

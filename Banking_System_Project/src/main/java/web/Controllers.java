@@ -2,6 +2,8 @@ package main.java.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -163,7 +165,9 @@ public class Controllers {
         List<CheckingAccount> checking = new ArrayList<CheckingAccount>();
         List<SavingsAccount> savings = new ArrayList<SavingsAccount>();
         List<CreditCard> creditcards = new ArrayList<CreditCard>();
-        List<Account> accounts = customer.getAccountsList();
+        List<Account> accounts = customer.getAccountsList().stream().distinct()
+        		.filter(e -> e.isApprovalStatus())
+        		.collect(Collectors.toList());
         for (Account account : accounts) 
         {
         	if(account instanceof CheckingAccount)
@@ -316,6 +320,34 @@ public class Controllers {
 			model.addAttribute("acctype", "Credit Card");
 		}
 		return new ModelAndView(("accounts/Payments"), model);
+    }
+
+	@RequestMapping(value= {"/depositwithdrawal"}, method = RequestMethod.POST)
+    public ModelAndView depositwithdrawal(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		Account account = null;
+		try {
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			account = customer.getAccountsList().stream()
+				.filter(e -> e.getAccountNumber() == Integer.parseInt(request.getParameter("accountid"))).findFirst().get();
+			
+			model.addAttribute("balance", account.getBalance());
+			model.addAttribute("accountid", account.getAccountNumber());
+			session.setAttribute("SelectedAccount", account.getAccountNumber());
+		}
+		catch(Exception e)
+		{
+			return new ModelAndView("Login");
+		}
+		if(account instanceof SavingsAccount)
+		{
+			model.addAttribute("acctype", "Savings Account");
+		}
+		else if(account instanceof CheckingAccount)
+		{
+			model.addAttribute("acctype", "Checking Account");
+		}
+		return new ModelAndView(("accounts/DepositWithdrawal"), model);
     }
 	
 	

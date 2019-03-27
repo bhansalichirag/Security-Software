@@ -19,7 +19,8 @@
 					<div class="account-detail cards">
 					<div>
 						<div class="account-header">
-							<h1>Savings Account Number: ${entry.accountNumber}</h1>
+							<h2>Savings Account Number: ${entry.accountNumber}</h2>
+							<button class="customButton" onclick="DepositWithrawal(${entry.accountNumber})">Deposit/Withdrawal</button>
 							<button class="customButton" onclick="ViewTransactions(${entry.accountNumber})">View Transactions</button>
 							<button class="customButton" onclick="OpenPayments(${entry.accountNumber})">Transfer Funds</button>
 						</div>
@@ -42,7 +43,8 @@
 					<div class="account-detail cards">
 					<div>
 						<div class="account-header">
-							<h1>Checking Account Number: ${entry.accountNumber}</h1>
+							<h2>Checking Account Number: ${entry.accountNumber}</h2>
+							<button class="customButton" onclick="DepositWithrawal(${entry.accountNumber})">Deposit/Withdrawal</button>
 							<button class="customButton" onclick="ViewTransactions(${entry.accountNumber})">View Transactions</button>
 							<button class="customButton" onclick="OpenPayments(${entry.accountNumber})">Transfer Funds</button>
 						</div>

@@ -6,7 +6,7 @@ import main.java.dal.users.employees.Employee;
 
 public interface ICashiersCheckService {
 
-	boolean OrderCashiersCheck(String firstName, String middleName, String lastName, int accountNumber, double amount);
+	boolean OrderCashiersCheck(String firstName, String middleName, String lastName, Account account, double amount);
 
 	boolean DepositCashiersCheck(String cashiersCheckID, Individual customer, Account account);
 

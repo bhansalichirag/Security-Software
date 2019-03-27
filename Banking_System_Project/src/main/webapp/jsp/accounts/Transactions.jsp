@@ -63,6 +63,10 @@
 												<c:otherwise>Debit to</c:otherwise>
 											</c:choose> </span>&nbsp;&nbsp;<c:choose>
 												<c:when
+													test="${transaction.payee.accountNumber == 1}">Withdrawal</c:when>
+												<c:when
+													test="${transaction.payer.accountNumber == 1}">Deposit</c:when>
+												<c:when
 													test="${transaction.payee.accountNumber == accountid}">${transaction.payer.accountNumber}</c:when>
 												<c:otherwise>${transaction.payee.accountNumber}</c:otherwise>
 											</c:choose> <span style="float: right;">  <c:choose>
