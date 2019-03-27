@@ -7,41 +7,38 @@
 <link href="css/loginCSS.css" rel="stylesheet">
 <title>Login Page</title>
 </head>
-<body>
-	<center>
-		<h2>Login Form</h2>
-	
-		<form action="/redirectuser" method="post">
+<div class="content-wrapper">
+<div class="col-md-12" id="page-content" align="center">
+			<div class="panel panel-primary">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Login Page</h3>
+ 				 </div>
+	  			 <div class="panel-body">
+		<form id="LoginPage" action="/redirectuser" method="post">
 		  <a href="#" style="padding-left: 20px"> <img src="img/avatar.png"
 						 style="vertical-align:top;"
 						 width="35px" height="65px" alt="avatar"></a>
-		   <div class="container">
+		   <fieldset>
+		   <div class="form-group">
 		    <label for="uname"><b>Username</b></label>
 		    <input type="text" placeholder="Enter Username" id = "userName" name="uname" required>	
+		    </div>
+		    <div class="form-group">
 		    <label for="psw"><b>Password</b></label>
 		    <input type="password" placeholder="Enter Password" id = "password" name="psw" required>	        
-		    <button type="submit">Login</button>	   
-		  </div>	 
-		
-		  <div class="container" style="background-color:#f1f1f1;height:30px">
+		    </div>	 
+			<div class="form-group">
+		  	<button type="submit">Login</button>	   
+		  	<div class="form-group" style="background-color:#f1f1f1;height:30px">
 		    <span><a href="#">Forgot password?</a></span>
+		  	</div>
+		  	<div class="form-group" style="background-color:#f1f1f1;height:30px">
+		    <span><a href="/NewCustomerRegister">New Customer?</a></span>
+		  	</div>
 		  </div>
-		  <div class="container" style="background-color:#f1f1f1;height:30px">
-		    <span><a href="/NewCustomerRegister">New User?</a></span>
-		  </div>
-		  <!--<div class="container" style="background-color:#f1f1f1;height:30px">
-		    <span><a href="jsp/Employee_Login.jsp">Employee Login</a></span>
-		  </div>
-		    -->
+		  <fieldset>
 		</form>
- 	</center>
-</body>
-<div>
-						    <table align="center">
-                			<tr>
-                    		<td >${message}</td>
-                			</tr>
-            				</table>
-            				</div> 
-
-</html>
+</div>
+</div>
+</div>
+</div>

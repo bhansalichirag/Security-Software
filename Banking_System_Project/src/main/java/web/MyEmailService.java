@@ -18,6 +18,8 @@ public void sendOtpMessage(String to, String subject, String message) {
  simpleMailMessage.setTo(to); 
  simpleMailMessage.setSubject(subject); 
  simpleMailMessage.setText(message);
+ System.out.println("-----------");
+ System.out.println(message);
  logger.info(subject);
  logger.info(to);
  logger.info(message);

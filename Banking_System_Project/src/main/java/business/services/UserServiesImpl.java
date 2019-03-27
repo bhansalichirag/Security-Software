@@ -55,11 +55,18 @@ public class UserServiesImpl implements IUserServices {
 					username, dateOfBirth, password, phoneNumber, email, 
 					address, ssn, seqQuestion, seqQuestion2);
 		}
-		
+		Optional<User> user = userRepository.findById(username);//added on 23/03/2019 for checking if the username already exists 
 		try 
 		{
-			userRepository.save(customer);
-			return true;
+			if(!user.isPresent())
+			{
+				userRepository.save(customer);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		} 
 		catch (Exception e) 
 		{
@@ -84,11 +91,18 @@ public class UserServiesImpl implements IUserServices {
 			employee = new Tier2(firstName, middleName, lastName, 
 					username, dateOfBirth, null, phoneNumber, email);
 		}
-		
+		Optional<User> user = userRepository.findById(username);//added on 23/03/2019 for checking if the username already exists
 		try 
 		{
-			userRepository.save(employee);
-			return true;
+			if(!user.isPresent())
+			{
+				userRepository.save(employee);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		} 
 		catch (Exception e) 
 		{
@@ -139,7 +153,7 @@ public class UserServiesImpl implements IUserServices {
 			if(user.isPresent())
 			{
 				User currentUser = user.get();
-				if(currentUser instanceof Employee && 
+				if(currentUser instanceof User && 
 						(currentUser.getPassword() == null || currentUser.getPassword().equals(oldPassword)))
 				{
 					currentUser.setPassword(newPassword);
@@ -191,6 +205,43 @@ public class UserServiesImpl implements IUserServices {
 			try 
 			{
 				userRepository.save(customer);
+				return true;
+			} 
+			catch (Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean UpdateEmployee(String firstName, String middleName, 
+			String lastName, String username, Date dateOfBirth, String password, 
+			String phoneNumber, String email)
+	{
+		Optional<User> user = userRepository.findById(username);
+		if(user.isPresent())
+		{
+			Employee employee = (Employee) user.get();
+			if(firstName != null && !"".equals(firstName))
+				employee.setFirstName(firstName);
+			if(middleName != null && !"".equals(middleName))
+				employee.setMiddleName(middleName);
+			if(lastName != null && !"".equals(lastName))
+				employee.setLastName(lastName);
+			if(dateOfBirth != null)
+				employee.setDateOfBirth(dateOfBirth);
+			if(password != null && !"".equals(password))
+				employee.setPassword(password);
+			if(phoneNumber != null && !"".equals(phoneNumber))
+				employee.setPhoneNumber(phoneNumber);
+			if(email != null && !"".equals(email))
+				employee.setEmail(email);
+			try 
+			{
+				userRepository.save(employee);
 				return true;
 			} 
 			catch (Exception e) 
