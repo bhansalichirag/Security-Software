@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import main.java.dal.accounts.CreditCard;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.customers.Individual;
@@ -250,6 +252,29 @@ public class UserServiesImpl implements IUserServices {
 			}
 		}
 		
+		return false;
+	}
+	
+	@Override
+	public boolean AccountExistsAndBelongsToLastName(int accountNumber, String lastName)
+	{
+		Iterable<User> userList = userRepository.findAllByLastName(lastName);
+		for( User user: userList)
+		{
+			if(user instanceof Individual)
+			{
+				boolean matches = ((Individual)user).getAccountsList().stream().anyMatch(e -> {
+					if(e.getAccountNumber() == accountNumber 
+							&& !(e instanceof CreditCard))
+						return true;
+					else
+						return false;
+				});
+				
+				if(matches)
+					return true;
+			}
+		}
 		return false;
 	}
 	

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import main.java.dal.CashiersCheck;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
@@ -13,8 +15,11 @@ import main.java.dal.accounts.CreditCard;
 import main.java.dal.accounts.SavingsAccount;
 import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
+import main.java.dal.users.customers.Individual;
+import main.java.dal.users.customers.Merchant;
 import main.java.dal.users.employees.Employee;
 import main.java.repositories.AccountRepository;
+import main.java.repositories.CashiersCheckRepository;
 import main.java.repositories.TransactionRepository;
 import main.java.repositories.UserRepository;
 
@@ -185,5 +190,21 @@ public class AccountServiceImpl implements IAccountServices {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean AccountExists(int accountNumber) {
+		
+		return accountRepository.existsById(accountNumber);
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+

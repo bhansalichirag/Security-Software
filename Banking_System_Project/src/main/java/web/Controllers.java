@@ -195,12 +195,20 @@ public class Controllers {
     	{
         	return new ModelAndView("Login");
         }
-    	List<Transaction> transactions = user.getAccountsList()
+    	
+    	Account account = user.getAccountsList()
     			.stream().filter(t -> t.getAccountNumber() == Integer.parseInt(request.getParameter("accountid")))
-    			.findFirst().get().getTransactions();
+    			.findFirst().get();
+    	List<Transaction> transactions = account.getTransactions();
     	model.addAttribute("transactions", transactions);
-    	model.addAttribute("accountid", request.getParameter("accountid"));
-		return new ModelAndView(("Transactions"), model);
+    	model.addAttribute("accountid", account.getAccountNumber());
+    	if(account instanceof SavingsAccount)
+    		model.addAttribute("accountType", "Savings Account");
+    	else if(account instanceof CheckingAccount)
+    		model.addAttribute("accountType", "Checking Account");
+    	model.addAttribute("accountid", account.getAccountNumber());
+    	model.addAttribute("balance", account.getBalance());
+		return new ModelAndView(("accounts/Transactions"), model);
     }
 
 	@RequestMapping(value= {",","/login"}, method = RequestMethod.GET)
@@ -281,23 +289,37 @@ public class Controllers {
 	@RequestMapping(value= {"/payments"}, method = RequestMethod.POST)
     public ModelAndView payments(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		model.addAttribute("accountid", request.getParameter("accountid"));
-		session.setAttribute("SelectedAccount", request.getParameter("accountid"));
-		return new ModelAndView(("Payments"), model);
+		Account account = null;
+		try {
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			account = customer.getAccountsList().stream()
+				.filter(e -> e.getAccountNumber() == Integer.parseInt(request.getParameter("accountid"))).findFirst().get();
+			
+			model.addAttribute("balance", account.getBalance());
+			model.addAttribute("accountid", account.getAccountNumber());
+			session.setAttribute("SelectedAccount", account.getAccountNumber());
+		}
+		catch(Exception e)
+		{
+			return new ModelAndView("Login");
+		}
+		if(account instanceof SavingsAccount)
+		{
+			model.addAttribute("acctype", "Savings Account");
+		}
+		else if(account instanceof CheckingAccount)
+		{
+			model.addAttribute("acctype", "Checking Account");
+		}
+		else if(account instanceof CreditCard)
+		{
+			model.addAttribute("acctype", "Credit Card");
+		}
+		return new ModelAndView(("accounts/Payments"), model);
     }
 	
-	@RequestMapping(value= {"/paymentaction"}, method = RequestMethod.POST)
-    public ModelAndView paymentaction(HttpServletRequest request, HttpSession session){
-		
-		ModelMap model = new ModelMap();
-		String accountNumber = (String) request.getParameter("AccountNumber");
-		String amount = (String) request.getParameter("Amount");
-		int payer = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
-		
-		accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
-		model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
-		return new ModelAndView(("redirect:/transactions"), model);
-    }
+	
+	
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
     public @ResponseBody String logout(HttpServletRequest request, HttpServletResponse response){

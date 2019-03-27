@@ -28,4 +28,6 @@ public interface IUserServices {
 	boolean UpdateEmployee(String firstName, String middleName, String lastName, String username, Date dateOfBirth,
 			String password, String phoneNumber, String email);
 
+	boolean AccountExistsAndBelongsToLastName(int accountNumber, String lastName);
+
 }
