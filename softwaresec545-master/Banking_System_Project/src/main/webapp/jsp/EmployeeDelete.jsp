@@ -51,20 +51,19 @@
                         <td></td>
                         <td align="left">
                             <button id="emp_del_search" name="action" value="emp_del_search">Submit</button>
+                            <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                         </td>
                     </tr>
                 </table>
                 
-                <table align="center">
+</form> 
+<table align="center">
                 <tr>
                     <td >
-                    ${message}
+                    <p>${message}
+                    </p>
                     </td>
                 </tr>
-            </table>  
-               
-                
-</form> 
-                 
+            </table>                   
 </body>
 </html>

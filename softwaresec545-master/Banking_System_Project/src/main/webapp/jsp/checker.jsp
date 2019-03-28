@@ -11,6 +11,9 @@
 	<body>
 		<%@include file="HeaderPage.jsp" %>
 		<div class="content-container">
+		<table>
+		<tr><td>${message}</td></tr>
+		</table>
 			<table>
 				<thead>
 					<tr>

@@ -115,7 +115,7 @@ public class AccountServiceImpl implements IAccountServices {
 		userRepository.save(customer);
 		return account;
 	}
-	
+	@Override
 	public boolean ApproveAccount(Employee approver, int accountnum)
 	{
 		Optional<Account> accountWrapper = accountRepository.findById(accountnum);
@@ -126,7 +126,7 @@ public class AccountServiceImpl implements IAccountServices {
 		}
 		return false;
 	}
-	
+	@Override
 	public boolean DeclineAccount(Employee approver, int accountnum)
 	{
 		Optional<Account> accountWrapper = accountRepository.findById(accountnum);
@@ -137,37 +137,79 @@ public class AccountServiceImpl implements IAccountServices {
 		}
 		return false;
 	}
-	
+	@Override
 	public List<Account> getAllApprovedAccounts()
 	{
 		Iterable<Account> accounts = accountRepository.findAllByApprovalStatus(true);
 		return AccountIterableToListHelper(accounts);
 	}
-	
+	@Override
 	public List<Account> getAllPendingAccounts()
 	{
 		Iterable<Account> accounts = accountRepository.findAllByApprovalStatusAndApprovalDate(false, null);
 		return AccountIterableToListHelper(accounts);
 	}
-	
+	@Override
 	public List<Account> getAllDeclinedAccounts()
 	{
 		Iterable<Account> accounts = accountRepository.findAllByApprovalStatusAndApprovalDateNotNull(false);
 		return AccountIterableToListHelper(accounts);
 	}
 	
+	@Override
 	public boolean PayCreditCardAccount(Account sourceAccount, CreditCard ccard, double amount)
 	{
 		Transaction transaction = new Transaction(sourceAccount, ccard, amount);
 		return CreatePaymentTransaction(transaction, sourceAccount, ccard);
 	}
 	
-
+	@Override
+	public Account GetAccount(int accountNumber)
+	{
+		return accountRepository.findById(accountNumber).get();
+	}
 
 	@Override
 	public boolean AccountExists(int accountNumber) {
 		
 		return accountRepository.existsById(accountNumber);
+	}
+	
+	@Override
+	public boolean MakePaymentToMerchant(CreditCard payer, CreditCard payee, double amount)
+	{
+		String valueString = payer.getAccountNumber().toString() + "~" + String.valueOf(amount);
+		payee.addAuthorizedMerchants(valueString);
+		accountRepository.save(payee);
+		return false;
+	}
+
+	@Override
+	public boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount)
+	{
+		Optional<Account> payerWrapper = accountRepository.findById(customeraccount);
+		if(payerWrapper.isPresent())
+		{
+			CreditCard payer = (CreditCard) payerWrapper.get();
+			Optional<String> entry = merchant.getAuthorizedMerchants().stream().filter(t -> {
+				String[] strings = t.split("~");
+				if(strings!=null && strings.length == 2 && strings[0].equals(String.valueOf(customeraccount)) && strings[1].equals(String.valueOf(amount)))
+				{
+					return true;
+				}
+				return false;
+			}
+			).findFirst();
+			if(entry.isPresent())
+			{
+				if(payer.getCvv() == cvv)
+				{
+					MakePayment(customeraccount, merchant.getAccountNumber(), amount);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	private List<Account> AccountIterableToListHelper(Iterable<Account> accounts)

@@ -29,6 +29,7 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="search_user" name="action" value="search_user">Search</button>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>
 			  			</fieldset>

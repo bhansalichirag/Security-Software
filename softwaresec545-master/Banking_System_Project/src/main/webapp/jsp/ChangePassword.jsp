@@ -21,28 +21,26 @@
 					<form class="form-horizontal" id="ChangePassword" action="/changepassword" method="post">
 			  			<fieldset>
 			  				<div class="form-group">
-			  				<div class="col-lg-6">
 						      <label for="email" class="col-lg-2 control-label">UserName</label>
+						      <div class="col-lg-5">
 						        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
-						    <div class="col-lg-6">
 						      <label for="oldpassword" class="col-lg-2 control-label">Old Password</label>
-						      
+						      <div class="col-lg-5">
 						        <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Old Password" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
-						    <div class="col-lg-6">
 						      <label for="newpassword" class="col-lg-2 control-label">Desired Password</label>
-						      
+						      <div class="col-lg-5">
 						        <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New Password" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
-						     <div class="col-lg-6">
 						      <label for="confirmpassword" class="col-lg-2 control-label">Confirm Password</label>
+						      <div class="col-lg-5">
 						        <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" required>
 						      </div>
 						    </div>
@@ -50,6 +48,8 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="change_password" name="action" value="change_password">Submit</button>
+						        <table align="center"><tr><td>${message}</td></tr></table>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>           
 			  			</fieldset>

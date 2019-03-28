@@ -12,6 +12,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnTransformer;
+
+import main.java.business.util.Constants;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
@@ -20,19 +24,32 @@ import javax.persistence.TemporalType;
     )
 public abstract class User {
 	
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//			read = "AES_DECRYPT(first_name," + Constants.key + ")" )
 	private String firstName;
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//			read = "AES_DECRYPT(middle_name," + Constants.key + ")" )
 	private String middleName;
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//			read = "AES_DECRYPT(last_name," + Constants.key + ")" )
 	private String lastName;
 	@Id
 	@Column(name = "username", updatable = false, nullable = true)
 	private String username;
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//			read = "AES_DECRYPT(password," + Constants.key + ")" )
 	private String password;
 	@Column(unique = true)
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//	read = "AES_DECRYPT(phone_number," + Constants.key + ")" )
 	private String phoneNumber;
 	@Column(unique = true)
+//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+//	read = "AES_DECRYPT(email," + Constants.key + ")" )
 	private String email;
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
+	private Integer failedAttempts;
 	
 	public User() {
 		
@@ -55,6 +72,7 @@ public abstract class User {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.failedAttempts = 0;
 	}
 	
 	public String getFirstName() {
@@ -104,5 +122,17 @@ public abstract class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getFailedAttempts() {
+		return failedAttempts;
+	}
+
+	public void incrementFailedAttempts() {
+		this.failedAttempts++;
+	}
+	
+	public void clearFailedAttempts() {
+		this.failedAttempts = 0;
 	}
 }

@@ -94,6 +94,7 @@
 										</div>
 
 										<div class="input-group">
+										<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 											<input type="submit" class="btn btn-success" value="Order">
 										</div>
 									</form>
@@ -132,6 +133,7 @@
 										</div>
 
 										<div class="input-group">
+										<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 											<input type="submit" class="btn btn-success" value="Deposit">
 										</div>
 									</form>

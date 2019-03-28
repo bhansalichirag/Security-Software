@@ -1,7 +1,6 @@
 package main.java.web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class Login {
         String name = (String) model.get("name");
         model.put("Login", name);
         return "Login";
-	}
+    }
 	
 	@RequestMapping(value="/redirectuser", method = RequestMethod.POST)
     public ModelAndView sortUser(HttpServletRequest request, HttpSession session){

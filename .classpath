@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="softwaresec545-master/Banking_System_Project/src"/>
-	<classpathentry kind="src" path="softwaresec545-master/src"/>
-	<classpathentry kind="lib" path="softwaresec545-master/Banking_System_Project/.mvn/wrapper/maven-wrapper.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>

@@ -17,8 +17,9 @@
 					<form class="form-horizontal" id="EmployeeInsert" action="emp_insert" method="post">
 			  			<fieldset>
 			  				<div class="form-group">
+			  				<div class="col-lg-5">
 						      <label for="select" class="col-lg-2 control-label">Employee Type</label>
-						      <div class="col-lg-5">
+						      
 						        <select class="form-control" name="designation" id="designation">
 						          <option value="">Select Option</option>
 						          <option value="Tier1">Tier 1</option>
@@ -27,44 +28,50 @@
 						       </div>
 						     </div>
 			  				<div class="form-group">
+			  				<div class="col-lg-5">
 						      <label for="firstname" class="col-lg-2 control-label">First Name</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="middlename" class="col-lg-2 control-label">Middle Name</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name">
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="lastname" class="col-lg-2 control-label">Last Name</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
 						      </div>
 						    </div>
 			  				<div class="form-group">
+			  				<div class="col-lg-5">
 						      <label for="username" class="col-lg-2 control-label">Desired UserName</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="email" class="col-lg-2 control-label">Email</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="phone" class="col-lg-2 control-label">Phone Number</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
 						      </div>
 						    </div>
-						    <div class="form-group">
+						    <div class="form-group"><div class="col-lg-5">
 						      <label for="date_of_birth" class="col-lg-2 control-label">DOB</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth">
 						      </div>
 						    </div>
@@ -73,13 +80,16 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="register_internal" name="action" value="register_internal">Submit</button>
+						        <table><tr><td>${message}</td></tr></table>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>
 						    <div>
 						    <p><% String message = (String)request.getAttribute("alertMsg");%></p>
+						    
 						    </div>      
 			  			</fieldset>
-		  			</form>
+    				</form>
 	 			 </div>
 			</div>
 			

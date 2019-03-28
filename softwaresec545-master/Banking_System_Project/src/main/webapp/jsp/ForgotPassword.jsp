@@ -27,6 +27,7 @@
 						    <div class="form-group">
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button id="forgot_password" name="action" value="forgot_password">Request OTP</button>
+						      	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>
 			  			</fieldset>

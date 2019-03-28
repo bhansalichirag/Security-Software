@@ -5,16 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IAccountServices;
@@ -25,12 +22,7 @@ import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
 import main.java.dal.accounts.CreditCard;
 import main.java.dal.accounts.SavingsAccount;
-import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
-import main.java.dal.users.customers.Individual;
-import main.java.dal.users.employees.Admin;
-import main.java.dal.users.employees.Tier1;
-import main.java.dal.users.employees.Tier2;
 
 @Controller
 public class Controllers {
@@ -91,11 +83,22 @@ public class Controllers {
 		{
 			return new ModelAndView("Login");
 		}
+		else
+		{
+			user = (Customer) userServices.GetCustomerByUsername(user.getUsername());
+			if(user != null)
+			{
+				session.setAttribute("CustomerObject", user);
+			}
+		}
 
 		Account account = user.getAccountsList()
-				.stream().filter(t -> t.getAccountNumber() == Integer.parseInt(request.getParameter("accountid")))
+				.stream().filter(t -> t.getAccountNumber().equals(Integer.parseInt(request.getParameter("accountid")))
+						&& t.isApprovalStatus())
 				.findFirst().get();
-		List<Transaction> transactions = account.getTransactions();
+		List<Transaction> transactions = account.getTransactions().stream()
+				.filter(t -> !(!t.isApprovalStatus() && t.getApprover() != null))
+				.collect(Collectors.toList());
 		model.addAttribute("transactions", transactions);
 		model.addAttribute("accountid", account.getAccountNumber());
 		if(account instanceof SavingsAccount)

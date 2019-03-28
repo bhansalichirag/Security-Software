@@ -36,12 +36,14 @@ public class ChangePassword {
 
 	@RequestMapping(value="/changepassword", method = RequestMethod.POST)
     public ModelAndView Changethepassword(HttpServletRequest request, HttpSession session){
-    	ModelAndView mav = new ModelAndView();
+		ModelAndView mav = null;
 		String userName = (String) request.getParameter("username");
 		String oldpassword = (String) request.getParameter("oldpassword");
 		User user = userServices.ValidateUser(userName, oldpassword);
     	if (user == null)
     	{
+    		mav = new ModelAndView("Login");
+    		mav.addObject("please login again!");
     		return new ModelAndView("Login");
     	}
     	else 
@@ -57,6 +59,7 @@ public class ChangePassword {
 				if(userServices.updatePassword(userName, oldpassword, newpassword))
 				{
 					mav = new ModelAndView("redirect:/login");
+					mav.addObject("message","password updated successfully");
 				}
 				else
 				{

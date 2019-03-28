@@ -139,13 +139,15 @@ public class EmployeeCRUDOperation {
 			Boolean user = userServices.UpdateUser(firstname, middlename, lastname,username, date, "", phonenumber, email, "", ssn, SeqQuestion1, SeqQuestion2);
 			if (user)
 			{
-				mav =  new ModelAndView("redirect:/EmployeeUpdate");
-				mav.addObject("message","Employee created successfully!!");
+				mav =  new ModelAndView("Tier3Home");
+				mav.addObject("message","Employee updates successfully!!");
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
-				mav.addObject("message","Some issue with insertion!!");
+				//mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
+				mav.addObject("message","employee update failed");
+				return mav;
 			}
 		}
 	    return mav;
@@ -205,8 +207,10 @@ public class EmployeeCRUDOperation {
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:/EmployeeRegister");
-				mav.addObject("message","username already exists, please choose a different one!");
+				System.out.println("username issue");
+				mav = new ModelAndView("EmployeeInsert");
+				mav.addObject("message","username already taken, try a different username");
+				return mav;
 			}
 		}
 	    return mav;

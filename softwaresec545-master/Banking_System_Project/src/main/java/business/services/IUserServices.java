@@ -30,4 +30,12 @@ public interface IUserServices {
 
 	boolean AccountExistsAndBelongsToLastName(int accountNumber, String lastName);
 
+	User GetCustomerByUsername(String username);
+
+	boolean incrementFailedAttempts(String username);
+
+	boolean resetFailedAttempts(String username);
+
+	boolean isUserEnabled(String username);
+
 }

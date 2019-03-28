@@ -1,5 +1,7 @@
 package main.java.web;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,6 +142,47 @@ public class PaymentController {
 		{
 			accountServices.MakePaymentToPrimary(payer, email, phone, amount);
 			model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
+		}
+		else
+		{
+			return new ModelAndView("Login");
+		}
+		return new ModelAndView(("/accinfo"), model);
+    }
+	
+	
+	
+	
+	@RequestMapping(value= {"/paymentcc"}, method = RequestMethod.POST)
+    public ModelAndView paymentcc(HttpServletRequest request, HttpSession session){
+		
+		ModelMap model = new ModelMap();
+		String merchant = (String) request.getParameter("Merchant Account Number");
+		String cvv = (String) request.getParameter("CVV");
+		double amount = Double.parseDouble(request.getParameter("Amount"));
+		int payer = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
+		Optional<Account> matches;
+		CreditCard creditcard = null;
+		try 
+		{
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			matches = customer.getAccountsList().stream().distinct().filter(e -> {
+				if(e.getAccountNumber().equals(payer)
+						&& (e instanceof CreditCard))
+					return true;
+				else
+					return false;
+			}).findFirst();
+			creditcard = (CreditCard) accountServices.GetAccount(payer);
+		}
+		catch (Exception e) 
+		{
+			return new ModelAndView("Login");
+		}
+
+		if(matches != null && ((merchant != null && !"".equals(merchant)) && (cvv != null && !"".equals(cvv))) )
+		{
+			
 		}
 		else
 		{

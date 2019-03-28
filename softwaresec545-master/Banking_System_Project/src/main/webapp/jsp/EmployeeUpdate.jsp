@@ -15,45 +15,52 @@
 					<form class="form-horizontal" id="EmployeeUpdate" action="emp_update" method="post">
 			  			<fieldset>
 			  				<div class="form-group">
+			  				<div class="col-lg-5">
 						      <label for="email" class="col-lg-2 control-label">Email</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="email" class="form-control" name="email" id="email" placeholder="Email" value=<%=request.getAttribute("Email") %>>
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="firstname" class="col-lg-2 control-label">First Name</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value=<%=request.getAttribute("FirstName") %>>
 						      </div>
 						    </div>
 						    <div class="form-group">
+						     <div class="col-lg-5">
 						      <label for="middlename" class="col-lg-2 control-label">Middle Name</label>
-						      <div class="col-lg-5">
+						     
 						        <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name" value=<%=request.getAttribute("MiddleName") %>>
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="lastname" class="col-lg-2 control-label">Last Name</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value=<%=request.getAttribute("LastName") %>>
 						      </div>
 						    </div>
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="phone" class="col-lg-2 control-label">Phone Number</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" value=<%=request.getAttribute("Phone") %>>
 						      </div>
 						    </div>
 						    <div class="form-group">
+						     <div class="col-lg-5">
 						      <label for="date_of_birth" class="col-lg-2 control-label">DOB</label>
-						      <div class="col-lg-5">
+						     
 						        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" value=<%=request.getAttribute("DOB") %>>
 						      </div>
 						    </div>
 						     
 						    <div class="form-group">
+						    <div class="col-lg-5">
 						      <label for="ssn" class="col-lg-2 control-label">SSN</label>
-						      <div class="col-lg-5">
+						      
 						        <input type="text" class="form-control" name="ssn" id="ssn" placeholder="SSN Number">
 						      </div>
 						    </div>
@@ -76,6 +83,8 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="update_internal" name="action" value="update_internal">Submit</button>
+						        <table><tr><td>${message}</td></tr></table>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>           
 			  			</fieldset>
