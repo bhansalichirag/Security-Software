@@ -91,11 +91,22 @@ public class Controllers {
 		{
 			return new ModelAndView("Login");
 		}
+		else
+		{
+			user = (Customer) userServices.GetCustomerByUsername(user.getUsername());
+			if(user != null)
+			{
+				session.setAttribute("CustomerObject", user);
+			}
+		}
 
 		Account account = user.getAccountsList()
-				.stream().filter(t -> t.getAccountNumber() == Integer.parseInt(request.getParameter("accountid")))
+				.stream().filter(t -> t.getAccountNumber().equals(Integer.parseInt(request.getParameter("accountid")))
+						&& t.isApprovalStatus())
 				.findFirst().get();
-		List<Transaction> transactions = account.getTransactions();
+		List<Transaction> transactions = account.getTransactions().stream()
+				.filter(t -> !(!t.isApprovalStatus() && t.getApprover() != null))
+				.collect(Collectors.toList());
 		model.addAttribute("transactions", transactions);
 		model.addAttribute("accountid", account.getAccountNumber());
 		if(account instanceof SavingsAccount)

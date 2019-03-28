@@ -78,6 +78,18 @@ public class UserServiesImpl implements IUserServices {
 	}
 	
 	@Override
+	public User GetCustomerByUsername(String username)
+	{
+		Optional<User> user = userRepository.findById(username);
+		if(user.isPresent())
+		{
+			return user.get();
+		}
+		
+		return null;
+	}
+	
+	@Override
 	public boolean CreateEmployeeUser(String employeeType, String firstName, String middleName, 
 			String lastName, String username, Date dateOfBirth, 
 			String phoneNumber, String email)
