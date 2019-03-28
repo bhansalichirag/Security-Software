@@ -19,53 +19,67 @@ public class ChangePassword {
 
 	@Autowired
 	IUserServices userServices;
-	
-	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
-    public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){
-		ModelMap model = new ModelMap();
-        Employee Tier_emp = (Employee) session.getAttribute("EmployeeObject");
-        Customer cust_emp = (Customer) session.getAttribute("CustomerObject"); 
-        if (Tier_emp == null && cust_emp==null)
-        {
-        	return new ModelAndView("redirect:/login");
-        }
-        String role = (String)session.getAttribute("role");
-        model.addAttribute("role",role);
-        return new ModelAndView(("ChangePassword"), model);
-    }
 
-	@RequestMapping(value="/changepassword", method = RequestMethod.POST)
-    public ModelAndView Changethepassword(HttpServletRequest request, HttpSession session){
-    	ModelAndView mav = new ModelAndView();
-		String userName = (String) request.getParameter("username");
-		String oldpassword = (String) request.getParameter("oldpassword");
-		User user = userServices.ValidateUser(userName, oldpassword);
-    	if (user == null)
-    	{
-    		return new ModelAndView("Login");
-    	}
-    	else 
-    	{
-    		String newpassword = (String) request.getParameter("newpassword");
-    		String confirmpassword = (String) request.getParameter("confirmpassword");
-    		if(!newpassword.equals(confirmpassword)){
-				mav = new ModelAndView("redirect:/ChangePassword");
-			    mav.addObject("message", "new password and confirm password does not match");
-			}
-			else
+	@RequestMapping(value= "/ChangePassword", method = RequestMethod.GET)
+	public ModelAndView ChangePasswordPath(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		try{
+			Employee Tier_emp = (Employee) session.getAttribute("EmployeeObject");
+			Customer cust_emp = (Customer) session.getAttribute("CustomerObject"); 
+			if (Tier_emp == null && cust_emp==null)
 			{
-				if(userServices.updatePassword(userName, oldpassword, newpassword))
-				{
-					mav = new ModelAndView("redirect:/login");
+				return new ModelAndView("redirect:/login");
+			}
+			String role = (String)session.getAttribute("role");
+			model.addAttribute("role",role);
+			return new ModelAndView(("ChangePassword"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+	@RequestMapping(value="/changepassword", method = RequestMethod.POST)
+	public ModelAndView Changethepassword(HttpServletRequest request, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		try {
+			String userName = (String) request.getParameter("username");
+			String oldpassword = (String) request.getParameter("oldpassword");
+			User user = userServices.ValidateUser(userName, oldpassword);
+			if (user == null)
+			{
+				mav = new ModelAndView("redirect:/ChangePassword");
+				mav.addObject("message", "Please enter a valid old password");
+			}
+			else 
+			{
+				String newpassword = (String) request.getParameter("newpassword");
+				String confirmpassword = (String) request.getParameter("confirmpassword");
+				if(!newpassword.equals(confirmpassword)){
+					mav = new ModelAndView("redirect:/ChangePassword");
+					mav.addObject("message", "new password and confirm password does not match");
 				}
 				else
 				{
-					mav = new ModelAndView("redirect:/ChangePassword");
-				    mav.addObject("message", "password couldnt be updated!!");
+					if(userServices.updatePassword(userName, oldpassword, newpassword))
+					{
+						mav = new ModelAndView("redirect:/login");
+						mav.addObject("message", "use your new password for login");
+					}
+					else
+					{
+						mav = new ModelAndView("redirect:/ChangePassword");
+						mav.addObject("message", "password couldnt be updated!!");
+					}
 				}
 			}
-    	}
-    	return mav;
+			return mav;
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
-	
+
+
 }

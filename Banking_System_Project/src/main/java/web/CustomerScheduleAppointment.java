@@ -15,25 +15,37 @@ public class CustomerScheduleAppointment {
 
 	@RequestMapping(value= {"/ScheduleAppointment"}, method = RequestMethod.GET)
 	public ModelAndView ScheduleAppointment(HttpServletRequest request, HttpSession session){
-    	ModelMap model = new ModelMap();
-        Customer user_cust = (Customer) session.getAttribute("CustomerObject");
-        if (user_cust == null)
-        {
-        	return new ModelAndView("redirect:/login");
-        }
-        return new ModelAndView(("ScheduleAppointment"), model);
-    }
-	
-	@RequestMapping(value= {"/appointment"}, method = RequestMethod.POST)
-    public ModelAndView BookAppointment(HttpServletRequest request, HttpSession session){
-		
 		ModelMap model = new ModelMap();
-		Customer user_cust = (Customer) session.getAttribute("CustomerObject");
-		String username = (String)user_cust.getUsername();
-		String DOB = (String)request.getParameter("schedule_date").trim();
-		String reason = (String) request.getParameter("appointment").trim();
-		
-		return new ModelAndView(("redirect:/ScheduleAppointment"), model);
-    }
-	
+		try{Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+		if (user_cust == null)
+		{
+			return new ModelAndView("redirect:/login");
+		}
+		return new ModelAndView(("ScheduleAppointment"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
+	@RequestMapping(value= {"/appointment"}, method = RequestMethod.POST)
+	public ModelAndView BookAppointment(HttpServletRequest request, HttpSession session){
+
+		ModelMap model = new ModelMap();
+		try
+		{
+			Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+			String username = (String)user_cust.getUsername();
+			String DOB = (String)request.getParameter("schedule_date").trim();
+			String reason = (String) request.getParameter("appointment").trim();
+
+			return new ModelAndView(("redirect:/ScheduleAppointment"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
 }

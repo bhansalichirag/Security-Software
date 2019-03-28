@@ -16,23 +16,29 @@ public class ForgotPassword {
 
 	@Autowired
 	IUserServices userServices;
-	
+
 	@RequestMapping(value = "/ForgotPassword", method = RequestMethod.GET)
-	 public ModelAndView PasswordForgotten(HttpServletRequest request, HttpServletResponse response) {
-		
-		    ModelAndView mav = new ModelAndView("ForgotPassword");
-		    mav.addObject("ForgotPassword");
-		    mav.addObject("message",request.getParameter("message"));
-	    
-	    return mav;
-	  }
-	
+	public ModelAndView PasswordForgotten(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			ModelAndView mav = new ModelAndView("ForgotPassword");
+			mav.addObject("ForgotPassword");
+			mav.addObject("message",request.getParameter("message"));
+
+			return mav;
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
 	@RequestMapping(value="/forgotpassword", method=RequestMethod.POST)
 	public ModelAndView ForgotPasswordfn(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		String username = request.getParameter("username");
-		String email = request.getParameter("email");
-		/*User user = userServices.UserFinder(username);
+		try {
+			String username = request.getParameter("username");
+			String email = request.getParameter("email");
+			/*User user = userServices.UserFinder(username);
 		if(user.getEmail()!= email)
 		{
 			mav = new ModelAndView("ForgotPassword");
@@ -42,36 +48,47 @@ public class ForgotPassword {
 		{
 			//OTP part
 		}*/
-		session.setAttribute("username", username);
-		//mav = new ModelAndView("ForgotPasswordOTP");//uncomment after otp is resolved
-		mav = new ModelAndView("NewPassword");//comment this after otp is resolved
-		return mav;
+			session.setAttribute("username", username);
+			//mav = new ModelAndView("ForgotPasswordOTP");//uncomment after otp is resolved
+			mav = new ModelAndView("NewPassword");//comment this after otp is resolved
+			return mav;
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
-	
-	
+
+
 	@RequestMapping(value="/newpassword", method=RequestMethod.POST)
 	public ModelAndView NewPassword(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		String userName = (String)session.getAttribute("username");
-		String newpassword = (String) request.getParameter("newpassword");
-		String confirmpassword = (String) request.getParameter("confirmpassword");
-		if(!newpassword.equals(confirmpassword)){
-			mav = new ModelAndView("redirect:/ChangePassword");
-		    mav.addObject("message", "new password and confirm password does not match");
-		}
-		else
-		{
-			if(userServices.updatePassword(userName, null, newpassword))
-			{
-				mav = new ModelAndView("redirect:/login");
+		try {
+			String userName = (String)session.getAttribute("username");
+			String newpassword = (String) request.getParameter("newpassword");
+			String confirmpassword = (String) request.getParameter("confirmpassword");
+			if(!newpassword.equals(confirmpassword)){
+				mav = new ModelAndView("redirect:/ChangePassword");
+				mav.addObject("message", "new password and confirm password does not match");
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:/ChangePassword");
-			    mav.addObject("message", "password couldnt be updated!!");
+				if(userServices.updatePassword(userName, null, newpassword))
+				{
+					mav = new ModelAndView("redirect:/login");
+				}
+				else
+				{
+					mav = new ModelAndView("redirect:/ChangePassword");
+					mav.addObject("message", "password couldnt be updated!!");
+				}
 			}
+			return mav;
 		}
-		return mav;
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
-	
+
 }

@@ -24,7 +24,7 @@ public class Login {
 	@Autowired
 	IUserServices userServices;
 	
-	@RequestMapping(value= {",","/login"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/","/login"}, method = RequestMethod.GET)
     public String welcome(ModelMap model){
         String name = (String) model.get("name");
         model.put("Login", name);
@@ -33,7 +33,8 @@ public class Login {
 	
 	@RequestMapping(value="/redirectuser", method = RequestMethod.POST)
     public ModelAndView sortUser(HttpServletRequest request, HttpSession session){
-    	String userName = (String) request.getParameter("uname");
+    	try {
+		String userName = (String) request.getParameter("uname");
 		String password = (String) request.getParameter("psw");
         if(userServices.isNewUser(userName))
         {
@@ -45,10 +46,24 @@ public class Login {
         	User user = userServices.ValidateUser(userName, password);
         	if (user == null)
         	{
-        		return new ModelAndView("Login");
+        		ModelAndView mav = new ModelAndView("redirect:/login");
+        		if(userServices.isUserEnabled(userName))
+        		{
+        			if(userServices.incrementFailedAttempts(userName))
+            		{
+            			mav.addObject("message", "Wrong Password entered!!");
+            		}
+        		}
+        		else
+        		{
+        			mav.addObject("message", "Account is blocked");
+        		}
+        		return mav;
         	}
         	else 
         	{
+        		if(userServices.isUserEnabled(userName) && userServices.resetFailedAttempts(userName))
+        		{
         		if(user instanceof Customer)
         		{
         			user.setPassword("");
@@ -81,9 +96,20 @@ public class Login {
         			session.setAttribute("role", "Tier2");
         			return new ModelAndView("redirect:/Tier2Dash");
         		}
+        		}
+        		else
+        		{
+        			ModelAndView mav=new ModelAndView("Login");
+        			mav.addObject("message", "Account is locked.Please contact the bank");
+        			return mav;
+        		}
         	}
         }
-        //return null;
+    	}
+    	catch(Exception ex)
+        {
+        	return new ModelAndView("Login");
+        }//return null;
     }
 	
 }

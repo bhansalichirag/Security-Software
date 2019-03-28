@@ -51,45 +51,69 @@ public class EmployeeController {
 	@RequestMapping(value="/AdminHome", method = RequestMethod.GET)
 	public ModelAndView AdminHome(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		Admin Admin_emp = (Admin) session.getAttribute("EmployeeObject");
-		if (Admin_emp == null)
-		{
-			return new ModelAndView("redirect:/login");
+		try {
+			Admin Admin_emp = (Admin) session.getAttribute("EmployeeObject");
+			if (Admin_emp == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			return new ModelAndView(("Tier3Home"), model);
 		}
-		return new ModelAndView(("Tier3Home"), model);
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
 
 	@RequestMapping(value= "/TierEmployeeDashboard", method = RequestMethod.GET)
 	public ModelAndView TierEmployeeDashboard(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		Admin Tier_emp = (Admin) session.getAttribute("EmployeeObject");
-		if (Tier_emp == null)
-		{
-			return new ModelAndView("redirect:/login");
+		try {
+			Admin Tier_emp = (Admin) session.getAttribute("EmployeeObject");
+			if (Tier_emp == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			return new ModelAndView(("Tier3Home"), model);
 		}
-		return new ModelAndView(("Tier3Home"), model);
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
 
 	@RequestMapping(value= "/Tier2Dash", method = RequestMethod.GET)
 	public ModelAndView Tier2EmployeeDash(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		Tier2 Tier_emp = (Tier2) session.getAttribute("EmployeeObject");
-		if (Tier_emp == null)
-		{
-			return new ModelAndView("redirect:/login");
+		try {
+			Tier2 Tier_emp = (Tier2) session.getAttribute("EmployeeObject");
+			if (Tier_emp == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			return new ModelAndView(("Tier2Dashboard"), model);
 		}
-		return new ModelAndView(("Tier2Dashboard"), model);
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
 
 	@RequestMapping(value= "/Tier1Dash", method = RequestMethod.GET)
 	public ModelAndView Tier1EmployeeDash(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		Tier1 Tier_emp = (Tier1) session.getAttribute("EmployeeObject");
-		if (Tier_emp == null)
-		{
-			return new ModelAndView("redirect:/login");
+		try {
+			Tier1 Tier_emp = (Tier1) session.getAttribute("EmployeeObject");
+			if (Tier_emp == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			return new ModelAndView(("Tier1Dashboard"), model);
 		}
-		return new ModelAndView(("Tier1Dashboard"), model);
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
 
 }

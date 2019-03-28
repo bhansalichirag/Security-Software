@@ -18,24 +18,30 @@ public class CustomerOpenAccount {
 
 	@Autowired
 	IAccountServices accountServices;
-	
+
 	@RequestMapping(value= {"/OpenAccount"}, method = RequestMethod.GET)
 	public ModelAndView OpenAccount(HttpServletRequest request, HttpSession session){
-    	ModelMap model = new ModelMap();
-        Customer user_cust = (Customer) session.getAttribute("CustomerObject");
-        if (user_cust == null)
-        {
-        	return new ModelAndView("redirect:/login");
-        }
-        String role = (String) session.getAttribute("role");
-        model.addAttribute("role",role);
-        return new ModelAndView(("CreateNewAccount"), model);
-    }
-	
-	@RequestMapping(value= {"/openaccount"}, method = RequestMethod.POST)
-    public ModelAndView AccountOpening(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-		Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+		try {
+			Customer user_cust = (Customer) session.getAttribute("CustomerObject");
+			if (user_cust == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			String role = (String) session.getAttribute("role");
+			model.addAttribute("role",role);
+			return new ModelAndView(("CreateNewAccount"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
+	@RequestMapping(value= {"/openaccount"}, method = RequestMethod.POST)
+	public ModelAndView AccountOpening(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		try{Customer user_cust = (Customer) session.getAttribute("CustomerObject");
 		String account_type = (String) request.getParameter("account_type");
 		String dob = (String) request.getParameter("date_of_birth");
 		String firstname = (String) request.getParameter("firstname");
@@ -57,6 +63,11 @@ public class CustomerOpenAccount {
 			mav.addObject("message","Wrong details entered");
 			return mav;
 		}
-    }
-	
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
 }

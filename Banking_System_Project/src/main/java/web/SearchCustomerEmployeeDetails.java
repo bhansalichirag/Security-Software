@@ -19,32 +19,45 @@ import main.java.dal.users.employees.Employee;
 public class SearchCustomerEmployeeDetails {
 
 	@RequestMapping(value= "/Search", method = RequestMethod.GET)
-    public ModelAndView Search(HttpServletRequest request, HttpSession session){
+	public ModelAndView Search(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
-        Employee emp = (Employee) session.getAttribute("EmployeeObject");
-        if (emp == null)
-        {
-        	return new ModelAndView("redirect:/login");
-        }
-        String role = (String)session.getAttribute("role");
-        model.addAttribute("role",role);
-        return new ModelAndView(("SearchUser"), model);
-    }
-	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	  public ModelAndView SearchUser(HttpServletRequest request, HttpSession session) throws ParseException {
-		ModelMap model = new ModelMap();
-		String username = request.getParameter("username");
-        User emp = (User)session.getAttribute("EmployeeObject"); 
-		if (emp == null)
-        {
-        	return new ModelAndView("Login");
-        }
-        
-        List<User> checking = new ArrayList<User>();
-        checking.add((User)emp);
-        model.addAttribute("personal", checking);
-        return new ModelAndView(("SearchUser"), model);
+		try {
+			Employee emp = (Employee) session.getAttribute("EmployeeObject");
+			if (emp == null)
+			{
+				return new ModelAndView("redirect:/login");
+			}
+			String role = (String)session.getAttribute("role");
+			model.addAttribute("role",role);
+			return new ModelAndView(("SearchUser"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
 	}
-	
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ModelAndView SearchUser(HttpServletRequest request, HttpSession session) throws ParseException {
+		ModelMap model = new ModelMap();
+		try {
+			String username = request.getParameter("username");
+			User emp = (User)session.getAttribute("EmployeeObject"); 
+			if (emp == null)
+			{
+				return new ModelAndView("Login");
+			}
+
+			List<User> checking = new ArrayList<User>();
+			checking.add((User)emp);
+			model.addAttribute("personal", checking);
+			return new ModelAndView(("SearchUser"), model);
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+	}
+
+
 }
