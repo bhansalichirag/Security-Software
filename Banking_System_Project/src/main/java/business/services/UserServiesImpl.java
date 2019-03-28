@@ -289,6 +289,46 @@ public class UserServiesImpl implements IUserServices {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean isUserEnabled(String username)
+	{
+		Optional<User> userWrapper = userRepository.findById(username);
+		if(userWrapper.isPresent())
+		{
+			User user = userWrapper.get();
+			return user.getFailedAttempts() <= 3;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean incrementFailedAttempts(String username)
+	{
+		Optional<User> userWrapper = userRepository.findById(username);
+		if(userWrapper.isPresent())
+		{
+			User user = userWrapper.get();
+			user.incrementFailedAttempts();
+			userRepository.save(user);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean resetFailedAttempts(String username)
+	{
+		Optional<User> userWrapper = userRepository.findById(username);
+		if(userWrapper.isPresent())
+		{
+			User user = userWrapper.get();
+			user.clearFailedAttempts();
+			userRepository.save(user);
+			return true;
+		}
+		return false;
+	}
 	
 //	public boolean PopulateAccounts(String username, String password)
 //	{

@@ -32,4 +32,10 @@ public interface IUserServices {
 
 	User GetCustomerByUsername(String username);
 
+	boolean incrementFailedAttempts(String username);
+
+	boolean resetFailedAttempts(String username);
+
+	boolean isUserEnabled(String username);
+
 }

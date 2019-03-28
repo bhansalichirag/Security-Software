@@ -128,11 +128,11 @@ public abstract class User {
 		return failedAttempts;
 	}
 
-	public void incrementFailedAttempts(Integer failedAttempts) {
+	public void incrementFailedAttempts() {
 		this.failedAttempts++;
 	}
 	
-	public void clearFailedAttempts(Integer failedAttempts) {
+	public void clearFailedAttempts() {
 		this.failedAttempts = 0;
 	}
 }

@@ -13,11 +13,13 @@ public interface IAccountServices {
 	boolean MakePaymentToPrimary(int payerAccount, String RecipientEmail, String RecipientPhoneNumber, double amount);
 	Account CreateAccount(Customer customer, String accountType);
 	boolean AccountExists(int accountNumber);
+	boolean MakePaymentToMerchant(CreditCard payer, CreditCard payee, double amount);
+	boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount);
+	Account GetAccount(int accountNumber);
 	boolean DeclineAccount(Employee approver, int accountnum);
 	boolean ApproveAccount(Employee approver, int accountnum);
 	List<Account> getAllApprovedAccounts();
 	List<Account> getAllPendingAccounts();
 	List<Account> getAllDeclinedAccounts();
 	boolean PayCreditCardAccount(Account sourceAccount, CreditCard ccard, double amount);
-	
 }
