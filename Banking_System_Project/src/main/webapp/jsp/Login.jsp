@@ -28,7 +28,8 @@
 		    <input type="password" placeholder="Enter Password" id = "password" name="psw" required>	        
 		    </div>	 
 			<div class="form-group">
-		  	<button type="submit">Login</button>	   
+		  	<button type="submit">Login</button>
+		  	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>	   
 		  	<div class="form-group" style="background-color:#f1f1f1;height:30px">
 		    <span><a href="/ForgotPassword">Forgot password?</a></span>
 		  	</div>

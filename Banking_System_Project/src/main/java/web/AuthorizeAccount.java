@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.AccountServiceImpl;
+import main.java.business.services.IAccountServices;
 import main.java.dal.accounts.Account;
 import main.java.dal.users.employees.Employee;
 import main.java.dal.users.employees.Tier2;
@@ -20,7 +21,7 @@ import main.java.dal.users.employees.Tier2;
 public class AuthorizeAccount {
 
 	@Autowired
-	AccountServiceImpl accountServices;
+	IAccountServices accountServices;
 	
 	@RequestMapping(value="/accountrequest", method = RequestMethod.GET)
     public ModelAndView accountrequest(HttpServletRequest request, HttpSession session) {

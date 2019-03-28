@@ -24,6 +24,7 @@
 					<input type="text" class="texter" name="Amount" id="Amount" required>
 				</div>
 				<input type="submit" value="Confirm">
+				<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 			</form>
 		</div>
 	</body>

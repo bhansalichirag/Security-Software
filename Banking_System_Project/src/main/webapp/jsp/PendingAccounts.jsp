@@ -46,6 +46,7 @@
 				    		<td>
 				    		<form method="post" action="/approveaccount" id="authorize">
 				    		<input type="hidden" name="accountID" id="accountID" value="${account.accountNumber}">
+				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 				    		<input type="submit" value="Authorize">
 				    		</form>
 				    		</td>
@@ -53,6 +54,7 @@
 				    		<td>
 				    		<form method="post" action="/declineaccount" id="decline">
 				    		<input type="hidden" name="accountID" id="accountID" value="${account.accountNumber}">
+				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 				    		<input type="submit" value="Decline">
 				    		</form>
 				    		</td>

@@ -69,6 +69,7 @@
 				    		<td>
 				    		<form method="post" action="/authorize" id="authorize">
 				    		<input type="hidden" name="transactionID" id="transactionID" value="${transaction.transactionID}">
+				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 				    		<input type="submit" value="Authorize">
 				    		</form>
 				    		</td>
@@ -76,6 +77,7 @@
 				    		<td>
 				    		<form method="post" action="/declinetransaction" id="decline">
 				    		<input type="hidden" name="transactionID" id="transactionID" value="${transaction.transactionID}">
+				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 				    		<input type="submit" value="Decline">
 				    		</form>
 				    		</td>
