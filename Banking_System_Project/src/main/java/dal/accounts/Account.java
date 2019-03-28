@@ -45,7 +45,6 @@ public abstract class Account {
 	private boolean approvalStatus; 
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Transaction> Transactions;
-	private Integer failedAttempts;
 	
 	public Account() {
 	}
@@ -56,7 +55,6 @@ public abstract class Account {
 		this.creationDate = new Date();
 		this.balance = balance;
 		this.interest = interest;
-		this.failedAttempts = 0;
 		this.approvalStatus = false;
 	}
 	
@@ -125,18 +123,6 @@ public abstract class Account {
 			Transactions = new ArrayList<Transaction>();
 		}
 		Transactions.add(transaction);
-	}
-
-	public Integer getFailedAttempts() {
-		return failedAttempts;
-	}
-
-	public void incrementFailedAttempts(Integer failedAttempts) {
-		this.failedAttempts++;
-	}
-	
-	public void clearFailedAttempts(Integer failedAttempts) {
-		this.failedAttempts = 0;
 	}
 	
 	

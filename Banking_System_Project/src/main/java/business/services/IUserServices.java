@@ -30,4 +30,6 @@ public interface IUserServices {
 
 	boolean AccountExistsAndBelongsToLastName(int accountNumber, String lastName);
 
+	User GetCustomerByUsername(String username);
+
 }
