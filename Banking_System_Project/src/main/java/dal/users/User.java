@@ -24,28 +24,28 @@ import main.java.business.util.Constants;
     )
 public abstract class User {
 	
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//			read = "AES_DECRYPT(first_name," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+			read = "AES_DECRYPT(first_name," + Constants.key + ")" )
 	private String firstName;
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//			read = "AES_DECRYPT(middle_name," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+			read = "AES_DECRYPT(middle_name," + Constants.key + ")" )
 	private String middleName;
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//			read = "AES_DECRYPT(last_name," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+			read = "AES_DECRYPT(last_name," + Constants.key + ")" )
 	private String lastName;
 	@Id
 	@Column(name = "username", updatable = false, nullable = true)
 	private String username;
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//			read = "AES_DECRYPT(password," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+			read = "AES_DECRYPT(password," + Constants.key + ")" )
 	private String password;
 	@Column(unique = true)
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//	read = "AES_DECRYPT(phone_number," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(phone_number," + Constants.key + ")" )
 	private String phoneNumber;
 	@Column(unique = true)
-//	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
-//	read = "AES_DECRYPT(email," + Constants.key + ")" )
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(email," + Constants.key + ")" )
 	private String email;
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
@@ -128,11 +128,11 @@ public abstract class User {
 		return failedAttempts;
 	}
 
-	public void incrementFailedAttempts(Integer failedAttempts) {
+	public void incrementFailedAttempts() {
 		this.failedAttempts++;
 	}
 	
-	public void clearFailedAttempts(Integer failedAttempts) {
+	public void clearFailedAttempts() {
 		this.failedAttempts = 0;
 	}
 }
