@@ -11,7 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import main.java.business.services.IAccountServices;
 import main.java.business.services.IUserServices;
 import main.java.business.services.OtpService;
+import main.java.dal.accounts.Account;
+import main.java.dal.accounts.CheckingAccount;
 import main.java.dal.accounts.CreditCard;
+import main.java.dal.accounts.SavingsAccount;
 import main.java.dal.users.customers.Customer;
 
 
@@ -25,6 +28,37 @@ public class PaymentController {
 	@Autowired
 	OtpService otpService;
     
+	@RequestMapping(value= {"/payments"}, method = RequestMethod.POST)
+	public ModelAndView payments(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		Account account = null;
+		try {
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			account = customer.getAccountsList().stream()
+					.filter(e -> e.getAccountNumber() == Integer.parseInt(request.getParameter("accountid"))).findFirst().get();
+
+			model.addAttribute("balance", account.getBalance());
+			model.addAttribute("accountid", account.getAccountNumber());
+			session.setAttribute("SelectedAccount", account.getAccountNumber());
+		}
+		catch(Exception e)
+		{
+			return new ModelAndView("Login");
+		}
+		if(account instanceof SavingsAccount)
+		{
+			model.addAttribute("acctype", "Savings Account");
+		}
+		else if(account instanceof CheckingAccount)
+		{
+			model.addAttribute("acctype", "Checking Account");
+		}
+		else if(account instanceof CreditCard)
+		{
+			model.addAttribute("acctype", "Credit Card");
+		}
+		return new ModelAndView(("accounts/Payments"), model);
+	}
 	
 	@RequestMapping(value= {"/paymentactionacc"}, method = RequestMethod.POST)
     public ModelAndView paymentactionacc(HttpServletRequest request, HttpSession session){

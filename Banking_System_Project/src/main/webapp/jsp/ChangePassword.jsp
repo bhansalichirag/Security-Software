@@ -12,7 +12,7 @@
 		<c:when test="${role eq 'Tier1'}"><%@include file="HeaderPageTier1.jsp" %></c:when>
 		<c:otherwise><%@include file="HeaderPageMerchant.jsp" %></c:otherwise>
 	</c:choose>
-		<div class="col-md-12" id="page-content" align="center">
+		<div class="content-container col-md-12" id="page-content" align="center">
 			<div class="panel panel-primary">
   				<div class="panel-heading">
     				<h3 class="panel-title">Change Password</h3>
