@@ -1,6 +1,7 @@
 package main.java.web;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,6 +37,18 @@ public ModelAndView transactions(HttpServletRequest request, HttpSession session
 	{
 		String role = (String)session.getAttribute("role");
 		List<Transaction> transactions=transactionServices.GetAllPendingTransactions();
+		if(emp instanceof Tier1)
+		{
+			transactions = transactions.stream()
+					.filter(t -> t.getAmount() < 1000)
+					.collect(Collectors.toList());
+		}
+		else
+		{
+			transactions = transactions.stream()
+					.filter(t -> t.getAmount() >= 1000)
+					.collect(Collectors.toList());
+		}
 		session.setAttribute("pendingTransaction", transactions);
 		model.addAttribute("transactions", transactions);
 		model.addAttribute("role", role);

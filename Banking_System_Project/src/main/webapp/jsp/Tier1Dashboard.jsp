@@ -13,13 +13,9 @@
     	<tr>
 	           <td>
                  <h2>TIER-1 HOME</h2> 
+                 <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
               </td>
             </tr>
-    	<tr>
-    	<td>
-    	For<a href="#">Authorize Appointment Requests(Discuss)</a>
-    	</td>
-    	</tr>
     	<tr>
     	<td>
     	For<a href="#">Viewing Transaction details</a>

@@ -48,6 +48,7 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="change_password" name="action" value="change_password">Submit</button>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>           
 			  			</fieldset>
