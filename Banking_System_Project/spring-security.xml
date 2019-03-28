@@ -1,0 +1,27 @@
+<b:beans xmlns="http://www.springframework.org/schema/security"
+		 xmlns:b="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+ 	<http use-expressions="true" auto-config="true">
+ 		<form-login 
+	        login-page="/login" 
+	        login-processing-url="/redirect"
+	        authentication-failure-url="/login?error="
+	        username-parameter="userName"
+            password-parameter="password"
+            authentication-success-handler-ref="customAuthenticationSuccessHandler"></form-login>
+ 		
+ 		<session-management invalid-session-url="/login" session-fixation-protection="newSession" >
+		   	<concurrency-control  max-sessions="1" error-if-maximum-exceeded="true" />
+		</session-management>
+		<logout logout-success-url="/login" delete-cookies="JSESSIONID" />
+    	<csrf />
+    </http>
+    
+    <authentication-manager>
+        <authentication-provider ref="authenticationProvider"/>
+    </authentication-manager>
+ 
+</b:beans>
