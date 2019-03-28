@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 @Entity
@@ -12,7 +13,7 @@ public class CreditCard extends Account {
 	@Column(nullable = true)
 	private int cvv;
 	
-	@Column(columnDefinition = "blob")
+	@ElementCollection
 	private List<String> authorizedMerchants;
 	
 	public CreditCard() {
