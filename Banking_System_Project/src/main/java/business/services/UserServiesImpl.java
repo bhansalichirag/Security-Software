@@ -119,7 +119,7 @@ public class UserServiesImpl implements IUserServices {
 		try 
 		{
 			Optional<User> user = userRepository.findById(username);
-			if(user.isPresent() && user.get() instanceof Employee)
+			if(user.isPresent())
 			{
 				userRepository.deleteById(username);
 				return true;
