@@ -10,6 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
+import main.java.dal.accounts.CreditCard;
+import main.java.dal.users.customers.Customer;
+import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
 
 @SpringBootApplication
@@ -24,6 +27,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	AccountRepository accountRepository;
 	
 	public static void main(String[] args) {  
 		SpringApplication.run(BankingSystemProjectApplication.class, args);
@@ -32,11 +37,19 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Override
     public void run(String... arg0) throws Exception { 
+//		System.out.println(userServices.DeleteUser("QuaeaterX"));
+//		userServices.CreateCustomerUser("Merchant", "Quaky", "Oaty", "Maker", "Merch", new Date(),"passwaad", "12252998","kfc@seller", "asdasdas",
+//				"120698755", "sq1", "sq2");
+//		@SuppressWarnings("unused")
+//		Customer x = (Customer) userRepository.findById("QuaeaterX").get();
+//		CreditCard sa = new CreditCard(50.0, 25.0);
+//		accountRepository.save(sa);
+//		x.addAccount(sa);
+//		userRepository.save(x);
+//		System.out.println();
 //		List<Transaction> transactions = transactionServices.GetAllPendingTransactions();
 //		Tier2 approver = (Tier2) userRepository.findById("tier2user").get();
 //		transactionServices.DeclineTransactions(approver, transactions);
-//		userServices.CreateEmployeeUser("Tier1", "Quaker", "Oats", "Eater", "Quaeater", new Date(), "12256998", "asdasdas");
-		System.out.println(userServices.DeleteUser("Quaeater"));
 //		userServices.ValidateUser("jhdoe","password");
 
     }

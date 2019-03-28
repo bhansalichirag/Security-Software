@@ -3,6 +3,8 @@ package main.java.business.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.java.dal.Transaction;
@@ -17,6 +19,17 @@ public class TransactionServicesImpl implements ITransactionServices{
 	private TransactionRepository transactionRepository;
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Override
+	public Transaction GetTransaction(int transactionid)
+	{
+		Optional<Transaction> transaction = transactionRepository.findById(transactionid);
+		if(transaction.isPresent())
+		{
+			return transaction.get();
+		}
+		return null;
+	}
 	
 	@Override
 	public Transaction ApproveTransaction(Employee approver, Transaction transaction)

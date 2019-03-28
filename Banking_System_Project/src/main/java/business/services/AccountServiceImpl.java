@@ -178,10 +178,15 @@ public class AccountServiceImpl implements IAccountServices {
 	@Override
 	public boolean MakePaymentToMerchant(CreditCard payer, CreditCard payee, double amount)
 	{
-		String valueString = payer.getAccountNumber().toString() + "~" + String.valueOf(amount);
-		payee.addAuthorizedMerchants(valueString);
-		accountRepository.save(payee);
-		return false;
+		try {
+			String valueString = payer.getAccountNumber().toString() + "~" + String.valueOf(amount);
+			payee.addAuthorizedMerchants(valueString);
+			accountRepository.save(payee);
+		}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

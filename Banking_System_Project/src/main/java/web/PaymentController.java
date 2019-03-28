@@ -1,7 +1,7 @@
 package main.java.web;
 
 import java.util.Optional;
-
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,9 @@ import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
 import main.java.dal.accounts.CreditCard;
 import main.java.dal.accounts.SavingsAccount;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
+import main.java.dal.users.customers.Merchant;
 
 
 @Controller
@@ -29,6 +31,8 @@ public class PaymentController {
 	IAccountServices accountServices;
 	@Autowired
 	OtpService otpService;
+	
+	private static final Logger LOG = Logger.getLogger(PaymentController.class.getName());
     
 	@RequestMapping(value= {"/payments"}, method = RequestMethod.POST)
 	public ModelAndView payments(HttpServletRequest request, HttpSession session){
@@ -150,39 +154,124 @@ public class PaymentController {
 		return new ModelAndView(("/accinfo"), model);
     }
 	
+	@RequestMapping(value= {"/OpenPayments"}, method = RequestMethod.POST)
+    public ModelAndView OpenPayments(HttpServletRequest request, HttpSession session){
 	
+		boolean matches;
+		ModelMap model = new ModelMap();
+		int account = Integer.parseInt(request.getParameter("accountid"));
+		try 
+		{
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			session.setAttribute("SelectedAccount", account);
+			matches = customer.getAccountsList().stream().distinct().anyMatch(e -> {
+				if(e.getAccountNumber().equals(account)
+						&& (e instanceof CreditCard))
+					return true;
+				else
+					return false;
+			});
+			
+		}
+		catch (Exception e) 
+		{
+			return new ModelAndView("Login");
+		}
+		
+		if(matches)
+		{
+			model.addAttribute("role", session.getAttribute("role"));
+			return new ModelAndView("accounts/CreditCardPayments",model);
+		}
+		return new ModelAndView("Login");
+	}
 	
 	
 	@RequestMapping(value= {"/paymentcc"}, method = RequestMethod.POST)
     public ModelAndView paymentcc(HttpServletRequest request, HttpSession session){
 		
 		ModelMap model = new ModelMap();
-		String merchant = (String) request.getParameter("Merchant Account Number");
+		String merchant = (String) request.getParameter("Account");
+		String merchantID = (String) request.getParameter("MerchantID");
 		String cvv = (String) request.getParameter("CVV");
 		double amount = Double.parseDouble(request.getParameter("Amount"));
-		int payer = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
-		Optional<Account> matches;
+		int payerAccount = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
+		Optional<Account> creditcardWrapper;
+		CreditCard merchantcard = null;
 		CreditCard creditcard = null;
 		try 
 		{
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
-			matches = customer.getAccountsList().stream().distinct().filter(e -> {
-				if(e.getAccountNumber().equals(payer)
-						&& (e instanceof CreditCard))
+			creditcardWrapper = customer.getAccountsList().stream().distinct().filter(e -> {
+				if(e.getAccountNumber().equals(payerAccount)
+						&& (e instanceof CreditCard) && ((CreditCard)e).getCvv() == Integer.parseInt(cvv))
 					return true;
 				else
 					return false;
 			}).findFirst();
-			creditcard = (CreditCard) accountServices.GetAccount(payer);
+			User MerchmerchantCustomer = userServices.GetCustomerByUsername(merchantID);
+			
+			if(creditcardWrapper.isPresent() && MerchmerchantCustomer != null && MerchmerchantCustomer instanceof Merchant )
+			{
+				Optional<Account> merchantWrapper = ((Merchant)MerchmerchantCustomer).getAccountsList().stream()
+						.filter(t -> t.getAccountNumber()
+								.equals(Integer.parseInt(merchant)))
+						.findFirst();
+				if(merchantWrapper.isPresent())
+				{
+					merchantcard = (CreditCard) merchantWrapper.get();
+				}
+				creditcard = (CreditCard) creditcardWrapper.get();
+			}
+			
 		}
 		catch (Exception e) 
 		{
 			return new ModelAndView("Login");
 		}
 
-		if(matches != null && ((merchant != null && !"".equals(merchant)) && (cvv != null && !"".equals(cvv))) )
+		if(creditcardWrapper.isPresent() && creditcardWrapper.isPresent())
 		{
-			
+			if(accountServices.MakePaymentToMerchant(creditcard, merchantcard, amount))
+			{
+				return new ModelAndView(("/accinfo"), model);
+			}
+		}
+		return new ModelAndView(("Login"), model);
+    }
+	
+	@RequestMapping(value= {"/takepaymentcc"}, method = RequestMethod.POST)
+    public ModelAndView takepaymentcc(HttpServletRequest request, HttpSession session){
+		
+		ModelMap model = new ModelMap();
+		String account = (String) request.getParameter("Account");
+		String cvv = (String) request.getParameter("CVV");
+		double amount = Double.parseDouble(request.getParameter("Amount"));
+		int payerAccount = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
+		CreditCard customerCard;
+		int customercvv;
+		CreditCard creditcard = null;
+		try 
+		{
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			creditcard = (CreditCard) customer.getAccountsList().stream().distinct().filter(e -> {
+				if(e.getAccountNumber().equals(payerAccount)
+						&& (e instanceof CreditCard))
+					return true;
+				else
+					return false;
+			}).findFirst().get();
+			customerCard = (CreditCard) accountServices.GetAccount(Integer.parseInt(account));
+			customercvv = Integer.parseInt(cvv);
+		}
+		catch (Exception e) 
+		{
+			return new ModelAndView("Login");
+		}
+
+		if(creditcard !=null && customercvv < 1000 && customercvv > 100)
+		{
+			accountServices.TakePayment(customerCard.getAccountNumber(), customercvv, creditcard, amount);
 		}
 		else
 		{
