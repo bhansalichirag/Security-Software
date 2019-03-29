@@ -11,6 +11,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.ColumnTransformer;
+
+import main.java.business.util.Constants;
 import main.java.dal.accounts.Account;
 import main.java.dal.users.User;
 
@@ -20,10 +23,18 @@ public abstract class Customer extends User{
 
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Account> accountsList;
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(address," + Constants.key + ")" )
 	private String address;
 	@Column(name = "ssn", nullable = false, unique = true, columnDefinition = "string default \"0\"")
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(ssn," + Constants.key + ")" )
 	private String ssn;
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(seq_question," + Constants.key + ")" )
 	private String seqQuestion;
+	@ColumnTransformer(write="AES_ENCRYPT(?," + Constants.key + ")",
+	read = "AES_DECRYPT(seq_question2," + Constants.key + ")" )
 	private String seqQuestion2;
 	@OneToOne(fetch=FetchType.EAGER)
 	private Account primaryAccount;

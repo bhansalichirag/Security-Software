@@ -81,8 +81,10 @@ public class PaymentController{
 		String amount = (String) request.getParameter("Amount");
 		int payer = Integer.parseInt(session.getAttribute("SelectedAccount").toString());
 		boolean matches = false;
+		double payAmount;
 		try 
 		{
+			payAmount = Double.parseDouble(amount);
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
 			matches = customer.getAccountsList().stream().distinct().anyMatch(e -> {
 				if(e.getAccountNumber().equals(payer)
@@ -96,19 +98,19 @@ public class PaymentController{
 		{
 			return new ModelAndView("Login");
 		}
-		if(matches)
+		if(matches && payAmount > 0)
 		{
 			if("sys".equals(deposit))
 			{
-				accountServices.MakePayment(1, payer, Integer.parseInt(amount));
+				accountServices.MakePayment(1, payer, payAmount);
 			}
 			else if("sys".equals(withdraw))
 			{
-				accountServices.MakePayment(payer, 1, Integer.parseInt(amount));
+				accountServices.MakePayment(payer, 1, payAmount);
 			}
 			else if(userServices.AccountExistsAndBelongsToLastName(Integer.parseInt(accountNumber), lastName))
 			{
-				accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
+				accountServices.MakePayment(payer, Integer.parseInt(accountNumber), payAmount);
 			}
 			else
 			{
@@ -150,7 +152,7 @@ public class PaymentController{
 			return new ModelAndView("Login");
 		}
 
-		if(matches && ((email != null && !"".equals(email)) || (phone != null && !"".equals(phone))))
+		if(amount > 0 && (matches && ((email != null && !"".equals(email)) || (phone != null && !"".equals(phone)))))
 		{
 			accountServices.MakePaymentToPrimary(payer, email, phone, amount);
 			model.addAttribute("accountid", session.getAttribute("SelectedAccount"));

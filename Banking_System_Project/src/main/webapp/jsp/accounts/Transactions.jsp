@@ -19,7 +19,7 @@
 
 </head>
 <body>
-	<%@include file="../HeaderPage.jsp" %>
+	<%@include file="../HeaderPage.jsp"%>
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-sm-8" id="credit">
@@ -27,10 +27,10 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default text-left">
 							<div class="panel-body">
-								<p contenteditable="false">${accountType} Detail</p>
+								<p contenteditable="false">${accountType}Detail</p>
 								<p>
-								<li><span>Account Number: ${accountid}</span>&nbsp;&nbsp; <span>$ ${balance}</span>&nbsp;&nbsp;
-									 <span style="float: right;">Placeholder</span></li>
+								<li><span>Account Number: ${accountid}</span>&nbsp;&nbsp; <span>$
+										${balance}</span>&nbsp;&nbsp; <span style="float: right;">Placeholder</span></li>
 								</p>
 							</div>
 						</div>
@@ -61,18 +61,23 @@
 												<c:when
 													test="${transaction.payee.accountNumber == accountid}">Credit from</c:when>
 												<c:otherwise>Debit to</c:otherwise>
-											</c:choose> </span>&nbsp;&nbsp;<c:choose>
-												<c:when
-													test="${transaction.payee.accountNumber == 1}">Withdrawal</c:when>
-												<c:when
-													test="${transaction.payer.accountNumber == 1}">Deposit</c:when>
-												<c:when
-													test="${transaction.payee.accountNumber == accountid}">${transaction.payer.accountNumber}</c:when>
-												<c:otherwise>${transaction.payee.accountNumber}</c:otherwise>
-											</c:choose> <span style="float: right;">  <c:choose>
+											</c:choose> </span>&nbsp;&nbsp;
+										<c:choose>
+											<c:when test="${transaction.payee.accountNumber == 1}">Withdrawal</c:when>
+											<c:when test="${transaction.payer.accountNumber == 1}">Deposit</c:when>
+											<c:when
+												test="${transaction.payee.accountNumber == accountid}">${transaction.payer.accountNumber}</c:when>
+											<c:otherwise>${transaction.payee.accountNumber}</c:otherwise>
+										</c:choose>
+										<span style="float: right;"> <c:choose>
 												<c:when
 													test="${transaction.payee.accountNumber == accountid}">$ ${transaction.amount}</c:when>
 												<c:otherwise>-$ ${transaction.amount}</c:otherwise>
+											</c:choose> <c:choose>
+												<c:when
+													test="${transaction.payee.accountNumber == accountid && transaction.approvalStatus}"> Closing Balance: $ ${transaction.payeeBalance}</c:when>
+												<c:when
+													test="${transaction.payee.accountNumber != accountid && transaction.approvalStatus}"> Closing Balance: $ ${transaction.payerBalance}</c:when>
 											</c:choose>
 										</span>
 									</p>

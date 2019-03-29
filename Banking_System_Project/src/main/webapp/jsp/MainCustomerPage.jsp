@@ -35,9 +35,9 @@
 						</div>
 						<div class="account-body">
 							<div>
-								<h2>
+								<h3>
 									<label>Balance: </label> <label>$ ${entry.balance}</label>
-								</h2>
+								</h3>
 							</div>
 							<div>
 								<label>Interest Rate: </label> <label>${entry.interest}%</label>
@@ -62,9 +62,9 @@
 						</div>
 						<div class="account-body">
 							<div>
-								<h2>
+								<h3>
 									<label>Balance: </label> <label>$ ${entry.balance}</label>
-								</h2>
+								</h3>
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 				<div class="account-detail cards">
 					<div>
 						<div class="account-header">
-							<h1>Credit Card Number: ${entry.accountNumber}</h1>
+							<h2>Credit Card Number: ${entry.accountNumber}</h2>
 							<c:choose>
 								<c:when test="${role = 'Individual'}">
 									<button class="customButton"
@@ -94,10 +94,10 @@
 						</div>
 						<div class="account-body">
 							<div>
-								<h2>
+								<h3>
 									<label>Current Balance: </label> <label>$
 										${entry.balance}</label>
-								</h2>
+								</h3>
 							</div>
 							<c:choose>
 								<c:when test="${role eq 'Individual'}">
@@ -105,7 +105,7 @@
 										<label>Available Balance: </label> <label>$ ${10000 - entry.balance}</label>
 									</div>
 									<div>
-										<label>Next Payment Due: </label> <label>Never</label>
+										<label>Next Payment Due: </label> <label>04/29/2019</label>
 									</div>
 									<div>
 										<label>APR Charged: </label> <label>${entry.interest}%</label>

@@ -250,7 +250,7 @@ public class AccountServiceImpl implements IAccountServices {
 
 	private boolean CreatePaymentTransaction(Transaction transaction, Account payer, Account payee) throws TransactionFailedException
 	{
-		if(transaction != null)
+		if(transaction != null && transaction.getAmount() > 0)
 		{
 			try
 			{

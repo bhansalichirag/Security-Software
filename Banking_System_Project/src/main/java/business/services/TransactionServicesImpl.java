@@ -44,7 +44,7 @@ public class TransactionServicesImpl implements ITransactionServices{
 		transaction.setApprover(approver);
 		try
 		{
-			if(transaction.getAmount() > transaction.getPayer().getBalance())
+			if(transaction.getAmount() > 0 && transaction.getAmount() > transaction.getPayer().getBalance())
 			{
 				return null;
 			}
