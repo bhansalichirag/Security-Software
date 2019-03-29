@@ -10,6 +10,7 @@ import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.dal.users.customers.Individual;
 import main.java.dal.users.customers.Merchant;
+import main.java.dal.users.employees.Admin;
 import main.java.dal.users.employees.Employee;
 import main.java.dal.users.employees.Tier1;
 import main.java.dal.users.employees.Tier2;
@@ -103,6 +104,11 @@ public class UserServiesImpl implements IUserServices {
 		else if("Tier2".equals(employeeType))
 		{
 			employee = new Tier2(firstName, middleName, lastName, 
+					username, dateOfBirth, null, phoneNumber, email);
+		}
+		else if("Admin".equals(employeeType))
+		{
+			employee = new Admin(firstName, middleName, lastName, 
 					username, dateOfBirth, null, phoneNumber, email);
 		}
 		Optional<User> user = userRepository.findById(username);//added on 23/03/2019 for checking if the username already exists

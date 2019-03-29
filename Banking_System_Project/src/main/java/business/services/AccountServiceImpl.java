@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import main.java.business.exceptions.AccountNotFoundException;
 import main.java.business.exceptions.CustomerNotFoundException;
+import main.java.business.exceptions.MerchantPaymentUnmatchedException;
 import main.java.business.exceptions.TransactionFailedException;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
@@ -203,7 +204,7 @@ public class AccountServiceImpl implements IAccountServices {
 	}
 
 	@Override
-	public boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount) throws AccountNotFoundException, TransactionFailedException
+	public boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount) throws AccountNotFoundException, TransactionFailedException, MerchantPaymentUnmatchedException
 	{
 		Optional<Account> payerWrapper = accountRepository.findById(customeraccount);
 		if(payerWrapper.isPresent())
@@ -225,6 +226,9 @@ public class AccountServiceImpl implements IAccountServices {
 					MakePayment(customeraccount, merchant.getAccountNumber(), amount);
 					return true;
 				}
+			}
+			else {
+				throw new MerchantPaymentUnmatchedException();
 			}
 		}
 		return false;

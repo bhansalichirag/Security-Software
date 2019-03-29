@@ -13,7 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.exceptions.AccountNotFoundException;
 import main.java.business.exceptions.CustomerNotFoundException;
+import main.java.business.exceptions.InvalidData;
+import main.java.business.exceptions.MerchantPaymentUnmatchedException;
 import main.java.business.exceptions.TransactionFailedException;
+import main.java.business.exceptions.WrongCVVException;
 import main.java.business.services.IAccountServices;
 import main.java.business.services.IUserServices;
 import main.java.business.services.OtpService;
@@ -250,7 +253,7 @@ public class PaymentController{
     }
 	
 	@RequestMapping(value= {"/takepaymentcc"}, method = RequestMethod.POST)
-    public ModelAndView takepaymentcc(HttpServletRequest request, HttpSession session) throws AccountNotFoundException, TransactionFailedException{
+    public ModelAndView takepaymentcc(HttpServletRequest request, HttpSession session) throws AccountNotFoundException, TransactionFailedException, MerchantPaymentUnmatchedException, WrongCVVException, InvalidData{
 		
 		ModelMap model = new ModelMap();
 		String account = (String) request.getParameter("Account");
@@ -278,13 +281,26 @@ public class PaymentController{
 			return new ModelAndView("Login");
 		}
 
-		if(creditcard !=null && customercvv < 1000 && customercvv > 100)
+		if(amount<0)
 		{
-			accountServices.TakePayment(customerCard.getAccountNumber(), customercvv, creditcard, amount);
+			throw new InvalidData();
+		}
+		
+		if(creditcard !=null)
+		{
+			if(customercvv < 1000 && customercvv > 100)
+			{
+				accountServices.TakePayment(customerCard.getAccountNumber(), customercvv, creditcard, amount);
+			}
+			else
+			{
+				throw new WrongCVVException();
+			}
+			
 		}
 		else
 		{
-			return new ModelAndView("Login");
+			throw new AccountNotFoundException();
 		}
 		return new ModelAndView(("redirect:/accinfo"), model);
     }

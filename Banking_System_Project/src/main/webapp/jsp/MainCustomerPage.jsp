@@ -76,7 +76,7 @@
 						<div class="account-header">
 							<h2>Credit Card Number: ${entry.accountNumber}</h2>
 							<c:choose>
-								<c:when test="${role = 'Individual'}">
+								<c:when test="${role eq 'Individual'}">
 									<button class="customButton"
 										onclick="ViewTransactions(${entry.accountNumber})">View
 										Transactions</button>
@@ -84,6 +84,9 @@
 										onclick="OpenMerchPayments(${entry.accountNumber})">Pay Merchant</button>
 								</c:when>
 								<c:otherwise>
+								<button class="customButton"
+										onclick="ViewTransactions(${entry.accountNumber})">View
+										Transactions</button>
 									<button class="customButton"
 										onclick="OpenMerchPayments(${entry.accountNumber})">Initiate
 										Payment</button>
@@ -94,6 +97,7 @@
 						</div>
 						<div class="account-body">
 							<div>
+							
 								<h3>
 									<label>Current Balance: </label> <label>$
 										${entry.balance}</label>

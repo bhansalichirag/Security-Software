@@ -49,8 +49,8 @@ public class CustomerOpenAccount {
 		String lastname = (String)request.getParameter("lastname");
 		String email = (String)request.getParameter("email");
 		String secquestion1 = (String) request.getParameter("secquestion1");
-		String secquestion2 = (String) request.getParameter("secquestion2");
-		if(user_cust.getDateOfBirth().equals(dob) && user_cust.getEmail().equals(email) && user_cust.getFirstName().equals(firstname) 
+		String secquestion2 = (String) request.getParameter("secquestion2"); 
+		if(user_cust.getDateOfBirth().toString().equals(dob) && user_cust.getEmail().equals(email) && user_cust.getFirstName().equals(firstname) 
 				&& user_cust.getLastName().equals(lastname) && user_cust.getSeqQuestion().equals(secquestion1) 
 				&& user_cust.getSeqQuestion2().equals(secquestion2))
 		{
@@ -60,7 +60,7 @@ public class CustomerOpenAccount {
 		}
 		else
 		{
-			ModelAndView mav = new ModelAndView(("OpenAccount"),model);
+			ModelAndView mav = new ModelAndView(("/OpenAccount"),model);
 			mav.addObject("message","Wrong details entered");
 			return mav;
 		}

@@ -40,6 +40,15 @@ public class ExceptionController {
 		return new ModelAndView(("redirect:/accinfo"), model);
 	}   
 
+
+	@ExceptionHandler(MerchantPaymentUnmatchedException.class)
+	public ModelAndView handleMerchantPaymentUnmatchedException(HttpSession session, MerchantPaymentUnmatchedException e) {
+
+		ModelMap model = new ModelMap();
+		session.setAttribute("errorMsg","Merchant not authorized or Wrong Customer Credentials");
+		return new ModelAndView(("redirect:/accinfo"), model);
+	} 
+
 	@ExceptionHandler(CashierCheckNotFoundException.class)
 	public ModelAndView handleCashierCheckNotFoundException(HttpSession session, CashierCheckNotFoundException e) {
 
@@ -47,14 +56,21 @@ public class ExceptionController {
 		session.setAttribute("errorMsg","Cashier's Check not found or not issued to this customer!");
 		return new ModelAndView(("redirect:/accinfo"), model);
 	}  
-	
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> generalExceptionHandler(Exception e) {
 
-		ModelMap model = new ModelMap();
 		return ResponseEntity
 				.status(HttpStatus.FORBIDDEN)
 				.body("<b>Unauthorized Access! Login Again</b>");
+	}   
+
+	@ExceptionHandler(InvalidData.class)
+	public ModelAndView handleInvalidData(HttpSession session, InvalidData e) {
+
+		ModelMap model = new ModelMap();
+		session.setAttribute("errorMsg","Corrupt Data Entry!");
+		return new ModelAndView(("redirect:/accinfo"), model);
 	}   
 
 }

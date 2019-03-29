@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +14,7 @@ import main.java.business.services.AppointmentServices;
 import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
 import main.java.dal.accounts.CreditCard;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
@@ -40,6 +43,7 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Override
     public void run(String... arg0) throws Exception { 
+//		userServices.CreateEmployeeUser("Tier1", "Program", "", "Tester", "Ptest12", new Date(), "8412360456", "donotreplyss545@gmail.com");
 //		appointmentServices.getAppointmentsForUser("tester.merchant");
 //		System.out.println();
 //		System.out.println(userServices.DeleteUser("QuaeaterX"));

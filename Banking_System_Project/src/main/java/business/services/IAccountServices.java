@@ -4,6 +4,7 @@ import java.util.List;
 
 import main.java.business.exceptions.AccountNotFoundException;
 import main.java.business.exceptions.CustomerNotFoundException;
+import main.java.business.exceptions.MerchantPaymentUnmatchedException;
 import main.java.business.exceptions.TransactionFailedException;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CreditCard;
@@ -17,7 +18,7 @@ public interface IAccountServices {
 	Account CreateAccount(Customer customer, String accountType);
 	boolean AccountExists(int accountNumber);
 	boolean MakePaymentToMerchant(CreditCard payer, CreditCard payee, double amount);
-	boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount) throws AccountNotFoundException, TransactionFailedException;
+	boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount) throws AccountNotFoundException, TransactionFailedException, MerchantPaymentUnmatchedException;
 	Account GetAccount(int accountNumber);
 	boolean DeclineAccount(Employee approver, int accountnum);
 	boolean ApproveAccount(Employee approver, int accountnum);
