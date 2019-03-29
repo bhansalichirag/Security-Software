@@ -1,6 +1,7 @@
 package main.java.business.services;
 
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.java.dal.Appointments;
@@ -12,6 +13,8 @@ public class AppointmentServices {
 
 	@Autowired
 	AppointmentRepository appointmentRepository;
+	@Autowired
+	IUserServices userServices;
 
 	public boolean isDateAvailable(Date date)
 	{
@@ -26,6 +29,22 @@ public class AppointmentServices {
 		return true;
 
 	}
+	
+	public List<Appointments> getAppointmentsForUser(String username)
+	{
+		int count = 0;
+		Customer customer = (Customer)userServices.GetCustomerByUsername(username);
+		Iterable<Appointments> appointments = appointmentRepository.findAllByCustomer(customer);
+		for ( Appointments appointment: appointments)
+		{
+			count++;
+			if(count>4)
+				return null;
+		}
+		return null;
+
+	}
+	
 	public boolean isCustomerAlreadyBookedOnDate(Customer customer, Date date)
 	{
 		Iterable<Appointments> appointments = appointmentRepository.findAllByDate(date);
