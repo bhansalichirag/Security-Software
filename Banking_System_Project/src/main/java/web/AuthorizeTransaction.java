@@ -57,7 +57,7 @@ public class AuthorizeTransaction {
 			}
 			else
 			{
-				ModelAndView mav = new ModelAndView("redirect:/login");
+				ModelAndView mav = new ModelAndView("Login");
 				mav.addObject("message","not authorized for this task");
 				return mav;
 			}
@@ -87,6 +87,7 @@ public class AuthorizeTransaction {
 				}
 				List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
 				model.addAttribute("transactions", freshtransactions);
+				model.addAttribute("message", "Transaction approved");
 				return new ModelAndView("pendingTransaction",model);
 			}
 			else {
@@ -122,10 +123,11 @@ public class AuthorizeTransaction {
 				}
 				List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
 				model.addAttribute("transactions", freshtransactions);
+				model.addAttribute("message", "Transaction declined");
 				return new ModelAndView("pendingTransaction",model);
 			}
 			else {
-				ModelAndView mav = new ModelAndView("redirect:/login");
+				ModelAndView mav = new ModelAndView("Login");
 				mav.addObject("message","not authorized for this task");
 				return mav;
 			}

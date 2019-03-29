@@ -43,33 +43,40 @@ public class ChangePassword {
 	public ModelAndView Changethepassword(HttpServletRequest request, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		try {
-			String userName = (String) request.getParameter("username");
-			String oldpassword = (String) request.getParameter("oldpassword");
-			User user = userServices.ValidateUser(userName, oldpassword);
-			if (user == null)
+			String userName = (String) request.getParameter("username").trim();
+			String oldpassword = (String) request.getParameter("oldpassword").trim();
+			String newpassword = (String) request.getParameter("newpassword").trim();
+			String confirmpassword = (String) request.getParameter("confirmpassword").trim();
+			if(userName=="" || oldpassword=="" || newpassword=="" || confirmpassword=="")
 			{
-				mav = new ModelAndView("redirect:/ChangePassword");
-				mav.addObject("message", "Please enter a valid old password");
+				mav = new ModelAndView("ChangePassword");
+				mav.addObject("message", "Please enter proper values for all");
 			}
-			else 
-			{
-				String newpassword = (String) request.getParameter("newpassword");
-				String confirmpassword = (String) request.getParameter("confirmpassword");
-				if(!newpassword.equals(confirmpassword)){
-					mav = new ModelAndView("redirect:/ChangePassword");
-					mav.addObject("message", "new password and confirm password does not match");
-				}
-				else
+			else {
+				User user = userServices.ValidateUser(userName, oldpassword);
+				if (user == null)
 				{
-					if(userServices.updatePassword(userName, oldpassword, newpassword))
-					{
-						mav = new ModelAndView("redirect:/login");
-						mav.addObject("message", "use your new password for login");
+					mav = new ModelAndView("ChangePassword");
+					mav.addObject("message", "Please enter a valid old password");
+				}
+				else 
+				{
+					if(!newpassword.equals(confirmpassword)){
+						mav = new ModelAndView("ChangePassword");
+						mav.addObject("message", "new password and confirm password does not match");
 					}
 					else
 					{
-						mav = new ModelAndView("redirect:/ChangePassword");
-						mav.addObject("message", "password couldnt be updated!!");
+						if(userServices.updatePassword(userName, oldpassword, newpassword))
+						{
+							mav = new ModelAndView("Login");
+							mav.addObject("message", "use your new password for login");
+						}
+						else
+						{
+							mav = new ModelAndView("ChangePassword");
+							mav.addObject("message", "password couldnt be updated!!");
+						}
 					}
 				}
 			}

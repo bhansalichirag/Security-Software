@@ -54,16 +54,11 @@
                             <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
                         </td>
                     </tr>
+                    <tr>
+            <td>${message}</td>
+            </tr>
                 </table>
                 
-</form> 
-<table align="center">
-                <tr>
-                    <td >
-                    <p>${message}
-                    </p>
-                    </td>
-                </tr>
-            </table>                   
+</form>               
 </body>
 </html>

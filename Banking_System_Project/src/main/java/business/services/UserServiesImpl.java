@@ -297,7 +297,7 @@ public class UserServiesImpl implements IUserServices {
 		if(userWrapper.isPresent())
 		{
 			User user = userWrapper.get();
-			return user.getFailedAttempts() <= 3;
+			return user.getFailedAttempts() < 3;
 		}
 		return false;
 	}

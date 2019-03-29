@@ -6,10 +6,7 @@
 <meta charset="ISO-8859-1">
 <body>
 <div class="content-wrapper">
-<c:choose>
-		<c:when test="${role eq 'Tier1'}"><%@include file="HeaderPageTier1.jsp" %></c:when>
-		<c:otherwise><%@include file="HeaderPageTier3.jsp" %></c:otherwise>
-	</c:choose>
+		<%@include file="HeaderPageTier3.jsp" %>
 </div>
 <div class="col-md-12" id="page-content" align="center">
 			<div class="panel panel-primary">
@@ -22,7 +19,7 @@
 			  			<div class="form-group">
 						      <label for="username" class="col-lg-2 control-label">User Name</label>
 						      <div class="col-lg-5">
-						        <input type="text" class="form-control" id="username" name="username" placeholder="User Name">
+						        <input type="text" class="form-control" id="username" name="username" placeholder="User Name" required>
 						      </div>
 						    </div>
 						    <div class="form-group">
@@ -30,6 +27,9 @@
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="search_user" name="action" value="search_user">Search</button>
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						      </div>
+						      <div>
+						      <p>${message}</p>
 						      </div>
 						    </div>
 			  			</fieldset>

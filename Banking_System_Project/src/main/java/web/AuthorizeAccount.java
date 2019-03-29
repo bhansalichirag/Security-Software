@@ -73,11 +73,12 @@ public class AuthorizeAccount {
 				}
 				List<Account> freshaccounts=accountServices.getAllPendingAccounts();
 				model.addAttribute("accounts", freshaccounts);
+				model.addAttribute("message", "Account request approved");
 				return new ModelAndView("PendingAccounts",model);
 			}
 			else
 			{
-				ModelAndView mav = new ModelAndView("redirect:/login");
+				ModelAndView mav = new ModelAndView("Login");
 				mav.addObject("message","not authorized for this task");
 				return mav; 
 			}
@@ -107,11 +108,12 @@ public class AuthorizeAccount {
 				}
 				List<Account> freshaccounts=accountServices.getAllPendingAccounts();
 				model.addAttribute("accounts", freshaccounts);
+				model.addAttribute("message", "Account request declined");
 				return new ModelAndView("PendingAccounts",model);
 			}
 			else
 			{
-				ModelAndView mav = new ModelAndView("redirect:/login");
+				ModelAndView mav = new ModelAndView("Login");
 				mav.addObject("message","not authorized for this task");
 				return mav; 
 			}

@@ -59,7 +59,7 @@ public class CustomerOpenAccount {
 		}
 		else
 		{
-			ModelAndView mav = new ModelAndView(("redirect:/OpenAccount"),model);
+			ModelAndView mav = new ModelAndView(("OpenAccount"),model);
 			mav.addObject("message","Wrong details entered");
 			return mav;
 		}

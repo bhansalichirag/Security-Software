@@ -266,9 +266,9 @@ public class EmployeeCRUDOperation {
 				}
 				else
 				{
-					mav = new ModelAndView("redirect:/EmployeeDelete");
-					mav.addObject("message","Username doesnt exist!!");
-
+					ModelMap model = new ModelMap();
+					model.addAttribute("message","Username doesnt exist!!");
+					mav = new ModelAndView("EmployeeDelete", model);
 				}
 			}
 

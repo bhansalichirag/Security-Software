@@ -12,7 +12,7 @@
 			        <nav role="navigation">
 			            <ul class="top-bar">
 			            	<li class="cta"><a class="OutLineButton" href="/Tier1Dash">Home</a></li>
-			                <li class="cta"><a class="OutLineButton" href="/Search">Customer Info</a></li>
+			                <li class="cta"><a class="OutLineButton" href="/SearchAccount">Customer Account Info</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/checker">Approve/Decline Transaction</a></li>
 			                <li class="cta"><a class="OutLineButton" href="#">Cashiers Cheque</a></li>
 			                <li class="ctd"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
