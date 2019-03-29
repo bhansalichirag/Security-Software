@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+import main.java.business.services.AppointmentServices;
 import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
 import main.java.dal.accounts.CreditCard;
@@ -29,6 +30,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	UserRepository userRepository;
 	@Autowired
 	AccountRepository accountRepository;
+	@Autowired
+	AppointmentServices appointmentServices;
 	
 	public static void main(String[] args) {  
 		SpringApplication.run(BankingSystemProjectApplication.class, args);
@@ -37,6 +40,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Override
     public void run(String... arg0) throws Exception { 
+//		appointmentServices.getAppointmentsForUser("tester.merchant");
+//		System.out.println();
 //		System.out.println(userServices.DeleteUser("QuaeaterX"));
 //		userServices.CreateCustomerUser("Merchant", "Quaky", "Oaty", "Maker", "Merch", new Date(),"passwaad", "12252998","kfc@seller", "asdasdas",
 //				"120698755", "sq1", "sq2");

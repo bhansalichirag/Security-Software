@@ -4,6 +4,13 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/jquery.keyboard.js"></script>
+<script src="js/jquery.keyboard.extension-typing.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<link rel="stylesheet" href="css/keyboard.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
 </head>
 <body>
 	<div th:replace="header :: header" />
@@ -32,8 +39,6 @@
 			</form>
 		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 $(document).ready(function () {
     $("#otpsender").click(function (event) {
@@ -58,6 +63,15 @@ $(document).ready(function () {
         });
     });
 }); 
+
+$('#otpnum')
+.keyboard({
+	layout : 'num',
+	restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in
+	preventPaste : true,  // prevent ctrl-v and right click
+	autoAccept : true
+})
+.addTyping();
 </script>
 </body>
 </html>

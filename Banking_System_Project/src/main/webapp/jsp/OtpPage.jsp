@@ -4,6 +4,13 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/jquery.keyboard.js"></script>
+<script src="js/jquery.keyboard.extension-typing.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<link rel="stylesheet" href="css/keyboard.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
 </head>
 <body>
 	<div th:replace="header :: header" />
@@ -16,13 +23,14 @@
 						<div class="alert alert-danger">Invalid Otp Try Again</div>
 					</div> --%>
 					<div class="form-group">
-						<input type="number" name="otpnum" id="otpnum" step="1" max="1000000"
-							class="form-control input-lg" required="true" autofocus="true" />
+						<input type="number" name="otpnum" id="otpnum" step="1"
+							max="1000000" class="form-control input-lg" required="true"
+							autofocus="true" />
 					</div>
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6">
-							<button  id="otpsender" class="btn btn-lg btn-primary btn-block">Submit</button>
-								
+							<button id="otpsender" class="btn btn-lg btn-primary btn-block">Submit</button>
+
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 						</div>
@@ -32,8 +40,7 @@
 			</form>
 		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 	<script type="text/javascript">
 $(document).ready(function () {
     $("#otpsender").click(function (event) {
@@ -57,7 +64,15 @@ $(document).ready(function () {
                 }
         });
     });
-}); 
+});
+$('#otpnum')
+.keyboard({
+	layout : 'num',
+	restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in
+	preventPaste : true,  // prevent ctrl-v and right click
+	autoAccept : true
+})
+.addTyping();
 </script>
 </body>
 </html>
