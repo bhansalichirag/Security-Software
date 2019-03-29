@@ -187,7 +187,6 @@ public class PaymentController{
 		{
 			return new ModelAndView("Login");
 		}
-		
 		if(matches)
 		{
 			model.addAttribute("role", session.getAttribute("role"));

@@ -27,10 +27,9 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default text-left">
 							<div class="panel-body">
-								<p contenteditable="false">Account Detail</p>
-								<li><span>account1</span>&nbsp;&nbsp; <span>balance</span>&nbsp;&nbsp;
-									<span>credit</span> <span style="float: right;">Payment
-										Due Date</span></li>
+								<p contenteditable="false">Online Cashier's Check Portal</p>
+								<li><span>Order Checks</span>&nbsp;&nbsp; <span>Deposit Check</span>&nbsp;&nbsp;
+									<span>Online</span> </li>
 							</div>
 						</div>
 					</div>
