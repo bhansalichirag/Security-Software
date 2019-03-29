@@ -70,6 +70,7 @@
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>
+						    <div><p>${message}</p></div>
 						    
 						     </fieldset>
 						     </form>

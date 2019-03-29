@@ -113,7 +113,9 @@
 						        <button id="register_external" name="action" value="register_external">Submit</button>
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
-						    </div>           
+						    </div>  
+						    <div><p>${message}</p></div>
+						             
 			  			</fieldset>
 		  			</form>
 	 			 </div>

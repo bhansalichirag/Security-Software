@@ -27,7 +27,11 @@
 				    		
 				    		
 				<tbody>
-				
+				<tr>
+				<td>
+				<p>${message}</p>
+				</td>
+				</tr>
 				
 				    <c:forEach items="${accounts}" var="account" varStatus="i">
 				    

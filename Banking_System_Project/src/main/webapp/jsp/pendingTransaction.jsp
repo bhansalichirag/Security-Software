@@ -33,8 +33,11 @@
 				    		
 				    		
 				<tbody>
-				
-				
+				<tr>
+				<td>
+				<p>${message}</p>
+				</td>
+				</tr>
 				    <c:forEach items="${transactions}" var="transaction" varStatus="i">
 				    
 				    	<tr>

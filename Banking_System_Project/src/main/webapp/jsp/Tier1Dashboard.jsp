@@ -16,11 +16,9 @@
                  <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
               </td>
             </tr>
-    	<tr>
-    	<td>
-    	For<a href="#">Viewing Transaction details</a>
-    	</td>
-    	</tr>
+            <tr>
+            <td>${message}</td>
+            </tr>
     	</table>
  </form>
 </body>
