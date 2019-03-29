@@ -28,10 +28,11 @@ public class CustomerScheduleAppointment {
 	public ModelAndView ScheduleAppointment(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
 		try{Customer user_cust = (Customer) session.getAttribute("CustomerObject");
-		if (user_cust == null)
+		if (user_cust == null && session.getAttribute("OtpValid") == null)
 		{
 			return new ModelAndView("redirect:/login");
 		}
+		session.setAttribute("OtpValid", null);
 		return new ModelAndView(("ScheduleAppointment"), model);
 		}
 		catch(Exception ex)

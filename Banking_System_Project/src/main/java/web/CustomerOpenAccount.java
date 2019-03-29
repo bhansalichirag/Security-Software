@@ -24,10 +24,11 @@ public class CustomerOpenAccount {
 		ModelMap model = new ModelMap();
 		try {
 			Customer user_cust = (Customer) session.getAttribute("CustomerObject");
-			if (user_cust == null)
+			if (user_cust == null && session.getAttribute("OtpValid") == null)
 			{
 				return new ModelAndView("redirect:/login");
 			}
+			session.setAttribute("OtpValid", null);
 			String role = (String) session.getAttribute("role");
 			model.addAttribute("role",role);
 			return new ModelAndView(("CreateNewAccount"), model);

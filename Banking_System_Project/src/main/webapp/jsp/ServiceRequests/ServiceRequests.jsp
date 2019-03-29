@@ -10,7 +10,7 @@
 	<%@include file="../HeaderPage.jsp"%>
 	<div style="display: flex; flex-direction: column; margin: auto">
 		<button class="customButton"
-			onclick="window.location.href = '/ScheduleAppointment'">Schedule
+			onclick="window.location.href = '/generateAppointmentOtp'">Schedule
 			Appointment</button>
 		<button class="customButton"
 			onclick="window.location.href = '/OrderCCheck'">Order

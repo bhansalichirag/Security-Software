@@ -60,8 +60,34 @@ public class OtpController {
 
 		return new ModelAndView("OtpPage",model);
 	}
+	
+	@RequestMapping(value ="/generateAppointmentOtp", method = RequestMethod.GET)
+	public ModelAndView generateAppointmentOtp(HttpServletRequest request, HttpSession session){
+		ModelMap model = new ModelMap();
+		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+		
+		User user = (User) session.getAttribute("CustomerObject");
+		if(user == null)
+		{
+			return new ModelAndView("Login");
+		}
+		String username = user.getUsername();
+		int otp = otpService.generateOTP(username);
+		logger.info("OTP : "+otp);
+		//Generate The Template to send OTP 
+		EmailTemplate template = new EmailTemplate("emailTemplate.html");
+		Map<String,String> replacements = new HashMap<String,String>();
+		replacements.put("user", username);
+		replacements.put("otpnum", String.valueOf(otp));
+		String message = "Your Otp is : " + String.valueOf(otp) + " . Please enter it exactly";
+		myEmailService.sendOtpMessage("do.no.reply.ss545@gmail.com", "OTP for Login", message);
+
+		return new ModelAndView("OtpPageAppointment",model);
+	}
+	
 	@RequestMapping(value ="/validateOtp", method = RequestMethod.GET)
-	public @ResponseBody String validateOtp(@RequestParam("otpnum") int otpnum){
+	public @ResponseBody String validateOtp(@RequestParam("otpnum") int otpnum, HttpSession session){
 		final String SUCCESS = "Entered Otp is valid";
 		final String FAIL = "Entered Otp is NOT valid. Please Retry!";
 		logger.info(" Otp Number : "+otpnum); 
@@ -70,6 +96,7 @@ public class OtpController {
 			int serverOtp = otpService.getOtp("QuaeaterX");
 			if(serverOtp > 0){
 				if(otpnum == serverOtp){
+					session.setAttribute("OtpValid", serverOtp);
 					otpService.clearOTP("QuaeaterX");
 					
 					return SUCCESS;

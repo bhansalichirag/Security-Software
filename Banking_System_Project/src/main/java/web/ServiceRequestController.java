@@ -81,7 +81,7 @@ public class ServiceRequestController {
 		{
 			return new ModelAndView("Login");
 		}
-		if(matches.isPresent())
+		if(matches.isPresent() && amount > 0)
 		{
 			cashiersCheckService.OrderCashiersCheck(firstName, middleName, lastName, matches.get(), amount);
 		}
