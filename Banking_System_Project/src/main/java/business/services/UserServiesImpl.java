@@ -263,7 +263,6 @@ public class UserServiesImpl implements IUserServices {
 				System.out.println(e.getMessage());
 			}
 		}
-		
 		return false;
 	}
 	

@@ -6,6 +6,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class CreditCard extends Account {
@@ -13,7 +17,8 @@ public class CreditCard extends Account {
 	@Column(nullable = true)
 	private int cvv;
 	
-	@ElementCollection
+	@ElementCollection()
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<String> authorizedMerchants;
 	
 	public CreditCard() {

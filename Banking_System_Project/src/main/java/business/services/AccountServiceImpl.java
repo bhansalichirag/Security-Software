@@ -8,6 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import main.java.business.exceptions.AccountNotFoundException;
+import main.java.business.exceptions.CustomerNotFoundException;
+import main.java.business.exceptions.TransactionFailedException;
 import main.java.dal.Transaction;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CheckingAccount;
@@ -33,7 +36,7 @@ public class AccountServiceImpl implements IAccountServices {
 	private ITransactionServices transactionService;
 	
 	@Override
-	public boolean MakePayment(int payerAccount, int recipientAccount, double amount)
+	public boolean MakePayment(int payerAccount, int recipientAccount, double amount) throws AccountNotFoundException, TransactionFailedException
 	{
 		Optional<Account> payerWrapper = accountRepository.findById(payerAccount);
 		Optional<Account> payeeWrapper = accountRepository.findById(recipientAccount);
@@ -44,11 +47,14 @@ public class AccountServiceImpl implements IAccountServices {
 			Transaction transaction = new Transaction(payer, payee, amount);
 			return CreatePaymentTransaction(transaction, payer, payee);
 		}
-		return false;
+		else
+		{
+			throw new AccountNotFoundException();
+		}
 	}
 	
 	@Override
-	public boolean MakePaymentToPrimary(int payerAccount, String RecipientEmail, String RecipientPhoneNumber, double amount)
+	public boolean MakePaymentToPrimary(int payerAccount, String RecipientEmail, String RecipientPhoneNumber, double amount) throws TransactionFailedException, CustomerNotFoundException, AccountNotFoundException
 	{
 		Optional<User> user = null;
 		if((RecipientEmail != null && !"".equalsIgnoreCase(RecipientEmail)) 
@@ -66,7 +72,7 @@ public class AccountServiceImpl implements IAccountServices {
 		}
 		else 
 		{
-			return false;
+			throw new CustomerNotFoundException();
 		}
 		
 		if(user.isPresent())
@@ -80,8 +86,15 @@ public class AccountServiceImpl implements IAccountServices {
 				Transaction transaction = new Transaction(payer, payee, amount);
 				return CreatePaymentTransaction(transaction, payer, payee);
 			}
+			else
+			{
+				throw new AccountNotFoundException();
+			}
 		}
-		return false;
+		else
+		{
+			throw new CustomerNotFoundException();
+		}
 	}
 	
 	@Override
@@ -157,7 +170,7 @@ public class AccountServiceImpl implements IAccountServices {
 	}
 	
 	@Override
-	public boolean PayCreditCardAccount(Account sourceAccount, CreditCard ccard, double amount)
+	public boolean PayCreditCardAccount(Account sourceAccount, CreditCard ccard, double amount) throws TransactionFailedException
 	{
 		Transaction transaction = new Transaction(sourceAccount, ccard, amount);
 		return CreatePaymentTransaction(transaction, sourceAccount, ccard);
@@ -178,14 +191,19 @@ public class AccountServiceImpl implements IAccountServices {
 	@Override
 	public boolean MakePaymentToMerchant(CreditCard payer, CreditCard payee, double amount)
 	{
-		String valueString = payer.getAccountNumber().toString() + "~" + String.valueOf(amount);
-		payee.addAuthorizedMerchants(valueString);
-		accountRepository.save(payee);
-		return false;
+		try {
+			String valueString = payer.getAccountNumber().toString() + "~" + String.valueOf(amount);
+			payee.addAuthorizedMerchants(valueString);
+			accountRepository.save(payee);
+		}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount)
+	public boolean TakePayment(int customeraccount, int cvv, CreditCard merchant, double amount) throws AccountNotFoundException, TransactionFailedException
 	{
 		Optional<Account> payerWrapper = accountRepository.findById(customeraccount);
 		if(payerWrapper.isPresent())
@@ -230,16 +248,22 @@ public class AccountServiceImpl implements IAccountServices {
 		accountRepository.save(account);
 	}
 
-	private boolean CreatePaymentTransaction(Transaction transaction, Account payer, Account payee)
+	private boolean CreatePaymentTransaction(Transaction transaction, Account payer, Account payee) throws TransactionFailedException
 	{
 		if(transaction != null)
 		{
+			try
+			{
 			transactionRepository.save(transaction);
 			payer.addTransaction(transaction);
 			payee.addTransaction(transaction);
 			accountRepository.save(payer);
 			accountRepository.save(payee);
 			return true;
+			}
+			catch (Exception e) {
+				throw new TransactionFailedException();
+			}
 		}
 		return false;
 	}

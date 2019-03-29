@@ -12,5 +12,6 @@ public interface ITransactionServices {
 	List<Boolean> DeclineTransactions(Employee approver, List<Transaction> transactions);
 	List<Boolean> ApproveTransactions(Employee approver, List<Transaction> transactions);
 	List<Transaction> GetAllPendingTransactions();
+	Transaction GetTransaction(int transactionid);
 
 }

@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import main.java.business.exceptions.AccountNotFoundException;
+import main.java.business.exceptions.CashierCheckNotFoundException;
+import main.java.business.exceptions.TransactionFailedException;
 import main.java.dal.CashiersCheck;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CreditCard;
@@ -64,7 +67,7 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 	}
 
 	@Override
-	public boolean DepositCashiersCheck(String cashiersCheckID, Individual customer, Account account)
+	public boolean DepositCashiersCheck(String cashiersCheckID, Individual customer, Account account) throws AccountNotFoundException, TransactionFailedException, CashierCheckNotFoundException
 	{
 		Optional<CashiersCheck> cashiersCheckWrapper = cashiersCheckRepository.findById(cashiersCheckID);
 		if(cashiersCheckWrapper.isPresent())
@@ -83,8 +86,15 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 				cashiersCheckRepository.save(cashiersCheck);
 				return true;
 			}
+			else
+			{
+				throw new CashierCheckNotFoundException();
+			}
 		}
-		return false;
+		else
+		{
+			throw new CashierCheckNotFoundException();
+		}
 	}
 	
 }
