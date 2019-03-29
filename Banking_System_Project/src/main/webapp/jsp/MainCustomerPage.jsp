@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/cstyles.css" />
 <script src="js/customer.js"></script>
 </head>
-<body>
+<body onload="loadError()">
 	<c:choose>
 		<c:when test="${role eq 'Individual'}"><%@include
 				file="HeaderPage.jsp"%></c:when>
@@ -81,11 +81,11 @@
 										onclick="ViewTransactions(${entry.accountNumber})">View
 										Transactions</button>
 									<button class="customButton"
-										onclick="OpenPayments(${entry.accountNumber})">Pay Merchant</button>
+										onclick="OpenMerchPayments(${entry.accountNumber})">Pay Merchant</button>
 								</c:when>
 								<c:otherwise>
 									<button class="customButton"
-										onclick="OpenPayments(${entry.accountNumber})">Initiate
+										onclick="OpenMerchPayments(${entry.accountNumber})">Initiate
 										Payment</button>
 								</c:otherwise>
 							</c:choose>
@@ -118,5 +118,6 @@
 			</c:forEach>
 		</div>
 	</div>
+	<input type="hidden" id="errorMsg" value="${errorMsg}">
 </body>
 </html>

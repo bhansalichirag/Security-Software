@@ -11,6 +11,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import main.java.business.exceptions.CashierCheckNotFoundException;
 import main.java.business.services.ICashiersCheckService;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CreditCard;
@@ -83,8 +85,12 @@ public class ServiceRequestController {
 		{
 			cashiersCheckService.OrderCashiersCheck(firstName, middleName, lastName, matches.get(), amount);
 		}
+		else
+		{
+			return new ModelAndView("Login");
+		}
 		
-		return new ModelAndView(("/OrderCCheck"), model);
+		return new ModelAndView(("redirect:/accinfo"), model);
 	}
 	
 	@RequestMapping(value= {"/PrimeAccount"}, method = RequestMethod.GET)
@@ -109,7 +115,7 @@ public class ServiceRequestController {
 	}
 	
 	@RequestMapping(value= {"/ccheckDepositAction"}, method = RequestMethod.POST)
-	public ModelAndView ccheckDepositAction(HttpServletRequest request, HttpSession session){
+	public ModelAndView ccheckDepositAction(HttpServletRequest request, HttpSession session) throws CashierCheckNotFoundException{
 
 		ModelMap model = new ModelMap();
 		String ccNumber = (String) request.getParameter("Cashier's Check Number");
@@ -130,6 +136,14 @@ public class ServiceRequestController {
 			{
 				cashiersCheckService.DepositCashiersCheck(ccNumber, (Individual)customer, matches.get());
 			}
+			else
+			{
+				return new ModelAndView("Login");
+			}
+		}
+		catch (CashierCheckNotFoundException cashierCheckNotFoundException) 
+		{
+			throw cashierCheckNotFoundException;
 		}
 		catch (Exception e) 
 		{
@@ -137,7 +151,7 @@ public class ServiceRequestController {
 		}
 		
 		
-		return new ModelAndView(("/OrderCCheck"), model);
+		return new ModelAndView(("redirect:/accinfo"), model);
 	}
 
 }

@@ -16,7 +16,7 @@
 			onclick="window.location.href = '/OrderCCheck'">Order
 			Cashier's Check</button>
 		<button class="customButton"
-			onclick="window.location.href = '/OpenAccount'">Open New
+			onclick="window.location.href = '/generateAccountOtp'">Open New
 			Account</button>
 		<button class="customButton"
 			onclick="window.location.href = '/PrimeAccount'">Set Primary

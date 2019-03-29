@@ -1,3 +1,13 @@
+function loadError()
+{
+	var t = document.getElementById("errorMsg").value;
+	if(t)
+		{
+			alert(t);
+		}
+}
+
+
 function ButtonFormAction(path, params) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -33,7 +43,7 @@ function DepositWithrawal(accountnum)
 	ButtonFormAction("/depositwithdrawal", params);
 }
 
-function OpenPayments(accountnum)
+function OpenMerchPayments(accountnum)
 {
 	var params = { accountid: accountnum };
 	ButtonFormAction("/OpenPayments", params);

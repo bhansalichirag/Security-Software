@@ -44,7 +44,11 @@ public class Controllers {
 			{
 				return new ModelAndView("Login");
 			}
-
+			if(session.getAttribute("errorMsg") != null && !"".equals(session.getAttribute("errorMsg")))
+			{
+				model.addAttribute("errorMsg",session.getAttribute("errorMsg"));
+				session.setAttribute("errorMsg", null);
+			}
 			List<CheckingAccount> checking = new ArrayList<CheckingAccount>();
 			List<SavingsAccount> savings = new ArrayList<SavingsAccount>();
 			List<CreditCard> creditcards = new ArrayList<CreditCard>();

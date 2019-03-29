@@ -10,6 +10,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import main.java.business.exceptions.AccountNotFoundException;
+import main.java.business.exceptions.CustomerNotFoundException;
+import main.java.business.exceptions.TransactionFailedException;
 import main.java.business.services.IAccountServices;
 import main.java.business.services.IUserServices;
 import main.java.business.services.OtpService;
@@ -23,7 +27,7 @@ import main.java.dal.users.customers.Merchant;
 
 
 @Controller
-public class PaymentController {
+public class PaymentController{
 
 	@Autowired
 	IUserServices userServices;
@@ -67,7 +71,7 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value= {"/paymentactionacc"}, method = RequestMethod.POST)
-    public ModelAndView paymentactionacc(HttpServletRequest request, HttpSession session){
+    public ModelAndView paymentactionacc(HttpServletRequest request, HttpSession session) throws NumberFormatException, AccountNotFoundException, TransactionFailedException{
 		
 		ModelMap model = new ModelMap();
 		String deposit = (String) request.getParameter("Deposit");
@@ -106,6 +110,10 @@ public class PaymentController {
 			{
 				accountServices.MakePayment(payer, Integer.parseInt(accountNumber), Integer.parseInt(amount));
 			}
+			else
+			{
+				throw new AccountNotFoundException();
+			}
 			model.addAttribute("accountid", session.getAttribute("SelectedAccount"));
 		}
 
@@ -113,12 +121,12 @@ public class PaymentController {
 		{
 			return new ModelAndView("Login");
 		}
-		return new ModelAndView(("/accinfo"), model);
+		return new ModelAndView(("redirect:/accinfo"), model);
     }
 	
 	
 	@RequestMapping(value= {"/paymentactionemph"}, method = RequestMethod.POST)
-    public ModelAndView paymentactionemph(HttpServletRequest request, HttpSession session){
+    public ModelAndView paymentactionemph(HttpServletRequest request, HttpSession session) throws TransactionFailedException, CustomerNotFoundException, AccountNotFoundException{
 		
 		ModelMap model = new ModelMap();
 		String email = (String) request.getParameter("Recipient Email Address");
@@ -151,7 +159,7 @@ public class PaymentController {
 		{
 			return new ModelAndView("Login");
 		}
-		return new ModelAndView(("/accinfo"), model);
+		return new ModelAndView(("redirect:/accinfo"), model);
     }
 	
 	@RequestMapping(value= {"/OpenPayments"}, method = RequestMethod.POST)
@@ -234,14 +242,14 @@ public class PaymentController {
 		{
 			if(accountServices.MakePaymentToMerchant(creditcard, merchantcard, amount))
 			{
-				return new ModelAndView(("/accinfo"), model);
+				return new ModelAndView(("redirect:/accinfo"), model);
 			}
 		}
 		return new ModelAndView(("Login"), model);
     }
 	
 	@RequestMapping(value= {"/takepaymentcc"}, method = RequestMethod.POST)
-    public ModelAndView takepaymentcc(HttpServletRequest request, HttpSession session){
+    public ModelAndView takepaymentcc(HttpServletRequest request, HttpSession session) throws AccountNotFoundException, TransactionFailedException{
 		
 		ModelMap model = new ModelMap();
 		String account = (String) request.getParameter("Account");
@@ -277,7 +285,7 @@ public class PaymentController {
 		{
 			return new ModelAndView("Login");
 		}
-		return new ModelAndView(("/accinfo"), model);
+		return new ModelAndView(("redirect:/accinfo"), model);
     }
 	
 }
