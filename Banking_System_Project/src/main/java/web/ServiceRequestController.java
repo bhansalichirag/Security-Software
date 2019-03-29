@@ -39,7 +39,7 @@ public class ServiceRequestController {
 		ModelMap model = new ModelMap();
 		try 
 		{
-			Individual customer = (Individual) session.getAttribute("CustomerObject");
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
 			List<Integer> accounts = customer.getAccountsList().stream()
 					.filter(t -> !(t instanceof CreditCard))
 					.map(e -> e.getAccountNumber()).distinct()
