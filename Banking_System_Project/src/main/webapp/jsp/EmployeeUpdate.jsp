@@ -12,8 +12,32 @@
     				<h3 class="panel-title">Employee Update</h3>
  				 </div>
 	  			 <div class="panel-body">
+	  			 <form class="form-horizontal" id="EmployeeUpdateSearch" action="emp_update_search" method="post">
+	  			 <div class="form-group">
+						      <label for="username_search" class="col-lg-2 control-label">User Name</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" id="username_search" name="username_search" placeholder="User Name" required>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <div class="col-lg-7 col-lg-offset-2">
+						      	<button type="reset" class="btn btn-default">Reset</button>
+						        <button id="emp_update_search" name="action" value="emp_update_search">Search</button>
+						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						      </div>
+						      <div>
+						      <p>${message}</p>
+						      </div>
+						    </div>
+	  			 </form>
 					<form class="form-horizontal" id="EmployeeUpdate" action="emp_update" method="post">
 			  			<fieldset>
+			  				<div class="form-group">
+						      <label for="empusername" class="col-lg-2 control-label">Employee Username</label>
+						      <div class="col-lg-5">
+						        <input type="text" class="form-control" name="empusername" id="empusername" placeholder="Username" value=<%=request.getAttribute("empusername") %>>
+						      </div>
+						    </div>
 			  				<div class="form-group">
 						      <label for="email" class="col-lg-2 control-label">Email</label>
 						      <div class="col-lg-5">
@@ -51,7 +75,7 @@
 						      </div>
 						    </div>
 						     
-						    <div class="form-group">
+						    <!-- <div class="form-group">
 						      <label for="ssn" class="col-lg-2 control-label">SSN</label>
 						      <div class="col-lg-5">
 						        <input type="text" class="form-control" name="ssn" id="ssn" placeholder="SSN Number">
@@ -69,7 +93,7 @@
 						      <div class="col-lg-5">
 						        <input type="text" class="form-control" name="seqquestion2" id="seqquestion2" placeholder="Security Question 2">
 						      </div>
-						    </div>
+						    </div> -->
 						    
 						        <br>
 						     <div class="form-group">

@@ -21,7 +21,7 @@
 
                 <table align="center">
                     <tr>
-                    	<td></td>
+                    	<td><p>${message}</p></td>
                     </tr>
                     <tr>
                     	<td>

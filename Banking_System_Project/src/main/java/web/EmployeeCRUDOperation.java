@@ -3,7 +3,9 @@ package main.java.web;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.services.IUserServices;
+import main.java.dal.users.User;
 import main.java.dal.users.employees.Admin;
 import main.java.dal.users.employees.Employee;
+import main.java.dal.users.employees.Tier1;
+import main.java.dal.users.employees.Tier2;
 @Controller
 public class EmployeeCRUDOperation {
 
@@ -51,30 +56,14 @@ public class EmployeeCRUDOperation {
 			{
 				return new ModelAndView("redirect:/login");
 			}
-			String abc = emp.getEmail();
-			model.addAttribute("empusername",emp.getUsername());
-			request.setAttribute("Email",abc);
-			request.setAttribute("FirstName",emp.getFirstName());
-			String temp_mid = emp.getMiddleName();
-			if(temp_mid==null || temp_mid=="")
-			{
-				request.setAttribute("MiddleName", "");
-			}
-			else
-			{
-				request.setAttribute("MiddleName", temp_mid);
-			}
-			request.setAttribute("LastName", emp.getLastName());
-			String temp_phone = emp.getPhoneNumber();
-			if(temp_phone==null || temp_phone=="")
-			{
-				request.setAttribute("Phone", "");
-			}
-			else
-			{
-				request.setAttribute("Phone", emp.getPhoneNumber());
-			}
+			/*String abc = emp.getEmail();
 			request.setAttribute("EmployeeObject",(Employee)emp);
+			*/
+			request.setAttribute("Email","");
+			request.setAttribute("FirstName","");
+			request.setAttribute("MiddleName", "");
+			request.setAttribute("Phone", "");
+			request.setAttribute("LastName", "");
 			return new ModelAndView(("EmployeeUpdate"), model);
 		}
 		catch(Exception ex)
@@ -100,43 +89,113 @@ public class EmployeeCRUDOperation {
 		}
 	}
 
+	@RequestMapping(value="/emp_update_search", method= RequestMethod.POST)
+	public ModelAndView EmployeeSearch(HttpServletRequest request, HttpSession session) throws ParseException {
+		ModelMap model = new ModelMap();
+		try {
+			String username = request.getParameter("username_search").trim();
+			User emp = (User)session.getAttribute("EmployeeObject"); 
+			if (emp == null)
+			{
+				return new ModelAndView("Login");
+			}
+			if(username!="")
+			{
+				User user = (User)userServices.GetCustomerByUsername(username);
+				if(user!=null)
+				{
+					if(user instanceof Employee && emp instanceof Admin)
+					{
+						model.addAttribute("empusername",user.getUsername());
+						request.setAttribute("Email",user.getEmail());
+						request.setAttribute("FirstName",user.getFirstName());
+						String temp_mid = user.getMiddleName();
+						if(temp_mid==null || temp_mid=="")
+						{
+							request.setAttribute("MiddleName", "");
+						}
+						else
+						{
+							request.setAttribute("MiddleName", temp_mid);
+						}
+						request.setAttribute("LastName", user.getLastName());
+						String temp_phone = user.getPhoneNumber();
+						if(temp_phone==null || temp_phone=="")
+						{
+							request.setAttribute("Phone", "");
+						}
+						else
+						{
+							request.setAttribute("Phone", user.getPhoneNumber());
+						}
+						return new ModelAndView(("EmployeeUpdate"), model);
+					}
+					else
+					{
+						model.addAttribute("message", "You are not authorized to see this users info");
+						return new ModelAndView(("EmployeeUpdate"), model);
+					}
+				}
+				else
+				{
+					model.addAttribute("message", "No such user exists currently");
+					return new ModelAndView(("EmployeeUpdate"), model);
+				}
+			}
+			else
+			{
+				model.addAttribute("message", "please enter a username");
+				return new ModelAndView(("EmployeeUpdate"), model);
+			}
+		}
+		catch(Exception ex)
+		{
+			return new ModelAndView("Login");
+		}
+		
+	}
+	
 	@RequestMapping(value = "/emp_update", method = RequestMethod.POST)
 	public ModelAndView EmployeeUpdateValues(HttpServletRequest request, HttpSession session) throws ParseException {
 		try {
 			Employee emp = (Employee) session.getAttribute("EmployeeObject");
-			String username = emp.getUsername();
+			String username = (String) request.getParameter("empusername");
 			String firstname = (String) request.getParameter("firstname");
 			String middlename = (String) request.getParameter("middlename");
 			String lastname = (String) request.getParameter("lastname");
 			String phonenumber = (String) request.getParameter("phone");
 			String email = (String) request.getParameter("email");
-			String ssn = (String)request.getParameter("ssn");	
+			//String ssn = (String)request.getParameter("ssn");	
 			String DOB = (String)request.getParameter("date_of_birth");
-			String SeqQuestion1 = (String)request.getParameter("seqquestion1");
-			String SeqQuestion2 = (String)request.getParameter("seqquestion2");
+			//String SeqQuestion1 = (String)request.getParameter("seqquestion1");
+			//String SeqQuestion2 = (String)request.getParameter("seqquestion2");
 			ModelAndView mav =null;
+			if(("").equals(username)) {
+				mav = new ModelAndView("EmployeeUpdate");
+				mav.addObject("message", "first name cannot be empty");
+			}
 			if(("").equals(firstname)) {
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message", "first name cannot be empty");
 			}
 			else if(("").equals(lastname)){
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message", "last name cannot be empty");
 			}
 			else if(("").equals(DOB)){
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message", "date cannot be empty");
 			}
 			else if(("").equals(phonenumber)){
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message", "phone number cannot be empty");
 			}
 			else if(("").equals(email)){
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message", "email cannot be empty");
 			}
-			else if(("").equals(ssn)) {
-				mav = new ModelAndView("redirect:/EmployeeUpdate");
+			/*else if(("").equals(ssn)) {
+				mav = new ModelAndView("EmployeeUpdate");
 				mav.addObject("message","ssn cannot be empty");
 			}
 			else if(("").equals(SeqQuestion1)) {
@@ -146,19 +205,19 @@ public class EmployeeCRUDOperation {
 			else if(("").equals(SeqQuestion2)) {
 				mav = new ModelAndView("redirect:/EmployeeUpdate");
 				mav.addObject("message","ssn cannot be empty");
-			}
+			}*/
 			else {
 				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 				Date date = (Date)formatter.parse(DOB);
-				Boolean user = userServices.UpdateUser(firstname, middlename, lastname,username, date, "", phonenumber, email, "", ssn, SeqQuestion1, SeqQuestion2);
+				Boolean user = userServices.UpdateEmployee(firstname, middlename, lastname, username, date, "", phonenumber, email);
 				if (user)
 				{
-					mav =  new ModelAndView("redirect:/EmployeeUpdate");
-					mav.addObject("message","Employee created successfully!!");
+					mav =  new ModelAndView("EmployeeUpdate");
+					mav.addObject("message","Employee updated successfully!!");
 				}
 				else
 				{
-					mav = new ModelAndView("redirect:/EmployeeUpdate");
+					mav = new ModelAndView("EmployeeUpdate");
 					mav.addObject("message","Some issue with insertion!!");
 				}
 			}
@@ -186,31 +245,31 @@ public class EmployeeCRUDOperation {
 			ModelAndView mav = null;
 
 			if(("").equals(firstname)) {
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "first name cannot be empty");
 			}
 			else if(("").equals(lastname)){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "last name cannot be empty");
 			}
 			else if(("").equals(username)){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "user name cannot be empty");
 			}
 			else if(("").equals(DOB)){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "date cannot be empty");
 			}
 			else if(access == null){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "specify the access granted to the employee");
 			}
 			else if(("").equals(phonenumber)){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "phone number cannot be empty");
 			}
 			else if(("").equals(email)){
-				mav = new ModelAndView("redirect:/EmployeeRegister");
+				mav = new ModelAndView("EmployeeRegister");
 				mav.addObject("message", "email cannot be empty");
 			}
 			else {
@@ -219,13 +278,13 @@ public class EmployeeCRUDOperation {
 				Boolean user = userServices.CreateEmployeeUser(access, firstname, middlename, lastname, username, date, phonenumber, email);
 				if (user)
 				{
-					mav =  new ModelAndView("redirect:/AdminHome");
+					mav =  new ModelAndView("AdminHome");
 					mav.addObject("message","Employee created successfully!!");
 					//request.setAttribute("alertMsg", "Employee created successfully");
 				}
 				else
 				{
-					mav = new ModelAndView("redirect:/AdminHome");
+					mav = new ModelAndView("AdminHome");
 					mav.addObject("message","Some issue with insertion!!");
 				}
 			}
@@ -245,22 +304,22 @@ public class EmployeeCRUDOperation {
 			String username = (String) request.getParameter("username");
 			ModelAndView mav = null;
 			if(firstname.equals("")) {
-				mav = new ModelAndView("redirect:/EmployeeDelete");
+				mav = new ModelAndView("EmployeeDelete");
 				mav.addObject("message", "first name cannot be empty");
 			}
 			else if(lastname.equals("")){
-				mav = new ModelAndView("redirect:/EmployeeDelete");
+				mav = new ModelAndView("EmployeeDelete");
 				mav.addObject("message", "last name cannot be empty");
 			}
 			else if(username.equals("")){
-				mav = new ModelAndView("redirect:/EmployeeDelete");
+				mav = new ModelAndView("EmployeeDelete");
 				mav.addObject("message", "user name cannot be empty");
 			}
 			else {
 				Boolean user = userServices.DeleteUser(username);
 				if (user)
 				{
-					mav =  new ModelAndView("redirect:/EmployeeDelete");
+					mav =  new ModelAndView("EmployeeDelete");
 					mav.addObject("message","Employee username deleted successfully!!");
 
 				}

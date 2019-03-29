@@ -12,6 +12,7 @@
 	  			 <div class="panel-body">
 					<form class="form-horizontal" id="RegistrationExternal" action="/externalregister" method="post">
 			  			<fieldset>
+			  			<div><p>${message}</p></div>
 			  				<div class="form-group">
 						      <label for="select" class="col-lg-2 control-label">Customer Type</label>
 						      <div class="col-lg-5">
@@ -114,7 +115,7 @@
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 						      </div>
 						    </div>  
-						    <div><p>${message}</p></div>
+						    
 						             
 			  			</fieldset>
 		  			</form>

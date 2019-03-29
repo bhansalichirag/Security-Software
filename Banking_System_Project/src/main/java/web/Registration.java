@@ -56,47 +56,47 @@ public class Registration {
 		
 		
 		if(("").equals(firstname)) {
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "first name cannot be empty");
 		}
 		else if(("").equals(lastname)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "last name cannot be empty");
 		}
 		else if(("").equals(username)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "user name cannot be empty");
 		}
 		else if(("").equals(password)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "password cannot be empty");
 		}
 		else if(!password.equals(confirmpassword)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "password and confirm password does not match");
 		}
 		else if(("").equals(DOB)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "date cannot be empty");
 		}
 		else if(access == null){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "specify the access granted to the employee");
 		}
 		else if(("").equals(phonenumber)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "phone number cannot be empty");
 		}
 		else if(("").equals(email)){
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "email cannot be empty");
 		}
 		else if(("").equals(SecQuestion1)) {
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "Please enter value for Security Question 1");
 		}
 		else if(("").equals(SecQuestion2)) {
-			mav = new ModelAndView("redirect:/NewCustomerRegister");
+			mav = new ModelAndView("RegistrationExternal");
 		    mav.addObject("message", "Please enter value for Security Question 2");
 		}
 		else {
@@ -105,13 +105,13 @@ public class Registration {
 			Boolean user = userServices.CreateCustomerUser(access, firstname, middlename, lastname, username,date, password, phonenumber, email, address,SSN, SecQuestion1,SecQuestion2);
 			if (user)
 			{
-				mav =  new ModelAndView("redirect:/login");
+				mav =  new ModelAndView("Login");
 				mav.addObject("message","Use your username and password to login");
 			}
 			else
 			{
-				mav = new ModelAndView("redirect:/NewCustomerRegister");
-				mav.addObject("message",user+"Username already exist!!");
+				mav = new ModelAndView("RegistrationExternal");
+				mav.addObject("message","Username already exist!!");
 			}
 		}
 		
@@ -119,8 +119,8 @@ public class Registration {
 		}
 		catch(Exception ex){
 			mav = new ModelAndView();
-			mav = new ModelAndView("redirect:jsp/RegsitrationExternal.jsp");
-			mav.addObject("message",ex.getMessage());
+			mav = new ModelAndView("RegistrationExternal");
+			mav.addObject("message","Please try after sometime");
 		}
 		finally {
 			return mav;

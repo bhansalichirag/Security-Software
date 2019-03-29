@@ -16,6 +16,7 @@
 	  			 <div class="panel-body">
 					<form class="form-horizontal" id="EmployeeInsert" action="emp_insert" method="post">
 			  			<fieldset>
+			  			<div><p>${message}</p></div>
 			  				<div class="form-group">
 						      <label for="select" class="col-lg-2 control-label">Employee Type</label>
 						      <div class="col-lg-5">

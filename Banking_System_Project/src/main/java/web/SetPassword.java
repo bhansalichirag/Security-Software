@@ -34,22 +34,23 @@ public class SetPassword {
 			if(userServices.isNewUser(userName))
 			{
 				if(("").equals(password)){
-					mav = new ModelAndView("redirect:/SetPassword");
+					mav = new ModelAndView("SetPassword");
 					mav.addObject("message", "password cannot be empty");
 				}
 				else if(!password.equals(confirmpassword)){
-					mav = new ModelAndView("redirect:/SetPassword");
+					mav = new ModelAndView("SetPassword");
 					mav.addObject("message", "password and confirm password does not match");
 				}
 				else
 				{
 					if(userServices.updatePassword(userName, null, password))
 					{
-						mav = new ModelAndView("redirect:/login");
+						mav = new ModelAndView("Login");
+						mav.addObject("message", "Use your username and new password for login");
 					}
 					else
 					{
-						mav = new ModelAndView("redirect:/SetPassword");
+						mav = new ModelAndView("SetPassword");
 						mav.addObject("message", "password couldnt be updated!!");
 					}
 				}
