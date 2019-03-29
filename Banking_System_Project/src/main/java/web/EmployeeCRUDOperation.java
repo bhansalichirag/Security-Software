@@ -245,31 +245,31 @@ public class EmployeeCRUDOperation {
 			ModelAndView mav = null;
 
 			if(("").equals(firstname)) {
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "first name cannot be empty");
 			}
 			else if(("").equals(lastname)){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "last name cannot be empty");
 			}
 			else if(("").equals(username)){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "user name cannot be empty");
 			}
 			else if(("").equals(DOB)){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "date cannot be empty");
 			}
 			else if(access == null){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "specify the access granted to the employee");
 			}
 			else if(("").equals(phonenumber)){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "phone number cannot be empty");
 			}
 			else if(("").equals(email)){
-				mav = new ModelAndView("EmployeeRegister");
+				mav = new ModelAndView("EmployeeInsert");
 				mav.addObject("message", "email cannot be empty");
 			}
 			else {
@@ -278,13 +278,13 @@ public class EmployeeCRUDOperation {
 				Boolean user = userServices.CreateEmployeeUser(access, firstname, middlename, lastname, username, date, phonenumber, email);
 				if (user)
 				{
-					mav =  new ModelAndView("AdminHome");
+					mav =  new ModelAndView("EmployeeInsert");
 					mav.addObject("message","Employee created successfully!!");
 					//request.setAttribute("alertMsg", "Employee created successfully");
 				}
 				else
 				{
-					mav = new ModelAndView("AdminHome");
+					mav = new ModelAndView("EmployeeInsert");
 					mav.addObject("message","Some issue with insertion!!");
 				}
 			}

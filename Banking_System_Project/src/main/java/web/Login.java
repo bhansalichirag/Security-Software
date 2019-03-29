@@ -46,7 +46,7 @@ public class Login {
         	User user = userServices.ValidateUser(userName, password);
         	if (user == null)
         	{
-        		ModelAndView mav = new ModelAndView("redirect:/login");
+        		ModelAndView mav = new ModelAndView("Login");
         		if(userServices.isUserEnabled(userName))
         		{
         			if(userServices.incrementFailedAttempts(userName))
