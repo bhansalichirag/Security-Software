@@ -40,8 +40,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	
 	@Override
     public void run(String... arg0) throws Exception { 
-		appointmentServices.getAppointmentsForUser("tester.merchant");
-		System.out.println();
+//		appointmentServices.getAppointmentsForUser("tester.merchant");
+//		System.out.println();
 //		System.out.println(userServices.DeleteUser("QuaeaterX"));
 //		userServices.CreateCustomerUser("Merchant", "Quaky", "Oaty", "Maker", "Merch", new Date(),"passwaad", "12252998","kfc@seller", "asdasdas",
 //				"120698755", "sq1", "sq2");

@@ -1,10 +1,13 @@
 package main.java.business.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.java.dal.Appointments;
+import main.java.dal.users.User;
 import main.java.dal.users.customers.Customer;
 import main.java.repositories.AppointmentRepository;
 
@@ -32,16 +35,14 @@ public class AppointmentServices {
 	
 	public List<Appointments> getAppointmentsForUser(String username)
 	{
-		int count = 0;
 		Customer customer = (Customer)userServices.GetCustomerByUsername(username);
+		List<Appointments> appointmentsList = new ArrayList<Appointments>();
 		Iterable<Appointments> appointments = appointmentRepository.findAllByCustomer(customer);
 		for ( Appointments appointment: appointments)
 		{
-			count++;
-			if(count>4)
-				return null;
+			appointmentsList.add(appointment);
 		}
-		return null;
+		return appointmentsList;
 
 	}
 	
