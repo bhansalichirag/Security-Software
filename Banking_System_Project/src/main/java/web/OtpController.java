@@ -3,13 +3,13 @@ package main.java.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,18 +87,25 @@ public class OtpController {
 	}
 	
 	@RequestMapping(value ="/validateOtp", method = RequestMethod.GET)
-	public @ResponseBody String validateOtp(@RequestParam("otpnum") int otpnum, HttpSession session){
-		final String SUCCESS = "Entered Otp is valid";
-		final String FAIL = "Entered Otp is NOT valid. Please Retry!";
+	public @ResponseBody ResponseEntity<String> validateOtp(@RequestParam("otpnum") int otpnum, HttpSession session){
+		
+		
+		final ResponseEntity<String> SUCCESS = ResponseEntity.status(200).body("Entered Otp is valid");
+		final ResponseEntity<String> FAIL = ResponseEntity.status(405).body("Entered Otp is NOT valid. Please Retry!");
+		User user = (User) session.getAttribute("CustomerObject");
+		if(user == null)
+		{
+			return FAIL;
+		}
+		String username = user.getUsername();
 		logger.info(" Otp Number : "+otpnum); 
 		//Validate the Otp 
 		if(otpnum >= 0){
-			int serverOtp = otpService.getOtp("QuaeaterX");
+			int serverOtp = otpService.getOtp(username);
 			if(serverOtp > 0){
 				if(otpnum == serverOtp){
 					session.setAttribute("OtpValid", serverOtp);
-					otpService.clearOTP("QuaeaterX");
-					
+					otpService.clearOTP(username);
 					return SUCCESS;
 				}else{
 					return FAIL;
