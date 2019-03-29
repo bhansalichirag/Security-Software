@@ -38,7 +38,7 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 		
 		for( User customer: customers) 
 		{
-			if(customer instanceof Customer && !(customer instanceof Merchant))
+			if(customer instanceof Customer)
 			{
 				Individual indCustomer = (Individual) customer;
 				Account issuingAccount = accountNumber;
