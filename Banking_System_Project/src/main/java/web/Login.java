@@ -127,10 +127,7 @@ public class Login {
         		{
         		if(user instanceof Customer)
         		{
-<<<<<<< HEAD
         			//user.setPassword("");
-=======
->>>>>>> d29ff425ff849e1f1e7cb0fbcf522008b392e7b9
         			if(user instanceof Individual)
         			{
         				session.setAttribute("role", "Individual");

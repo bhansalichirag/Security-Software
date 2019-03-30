@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -51,7 +50,6 @@
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="change_password" name="action" value="change_password">Submit</button>
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-						        <sec:csrfInput /> 
 						      </div>
 						    </div>           
 			  			</fieldset>

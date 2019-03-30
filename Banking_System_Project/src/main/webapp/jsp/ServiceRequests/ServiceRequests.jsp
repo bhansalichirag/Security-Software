@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,7 +8,7 @@
 </head>
 <body>
 	<%@include file="../HeaderPage.jsp"%>
-	<sec:csrfInput /> 
+	 
 	<div style="display: flex; flex-direction: column; margin: auto">
 		<button class="customButton"
 			onclick="window.location.href = '/generateAppointmentOtp'">Schedule
@@ -24,6 +23,6 @@
 			onclick="window.location.href = '/PrimeAccount'">Set Primary
 			Account</button>
 	</div>
-
+<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </body>
 </html>

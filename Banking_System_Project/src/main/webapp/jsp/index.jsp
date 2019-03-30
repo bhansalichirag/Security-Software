@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,7 +15,7 @@
 		                <li class="cta"><a class="OutLineButton" href="../ManualUploadForm">View Something</a></li>
 		                <li class="cta"><a class="OutLineButton" href="../ExcelUploadForm">Profile</a></li>
 		                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
-		                <sec:csrfInput /> 
+<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/> 
 		            </ul>
 		        </nav>
 			</header>
