@@ -99,14 +99,20 @@
 							<div>
 							
 								<h3>
+								<c:choose>
+								<c:when test="${role eq 'Individual'}">
 									<label>Current Balance: </label> <label>$
-										${entry.balance}</label>
+										${10000 - entry.balance}</label>
+										</c:when>
+										<c:otherwise><label>Balance: </label> <label>$
+										${entry.balance}</label></c:otherwise>
+										</c:choose>
 								</h3>
 							</div>
 							<c:choose>
 								<c:when test="${role eq 'Individual'}">
 									<div>
-										<label>Available Balance: </label> <label>$ ${10000 - entry.balance}</label>
+										<label>Available Balance: </label> <label>$ ${entry.balance}</label>
 									</div>
 									<div>
 										<label>Next Payment Due: </label> <label>04/29/2019</label>

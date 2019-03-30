@@ -255,6 +255,8 @@ public class AccountServiceImpl implements IAccountServices {
 				if(payer.getCvv() == cvv)
 				{
 					MakePayment(customeraccount, merchant.getAccountNumber(), amount);
+					merchant.getAuthorizedMerchants().remove(entry.get());
+					accountRepository.save(merchant);
 					return true;
 				}
 			}

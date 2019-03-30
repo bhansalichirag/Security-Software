@@ -157,7 +157,6 @@
 			alert("Both Email and Phone Number fields cannot be blank! Enter either or both!")
 			return false;
 		}
-		
 		</script>
 </body>
 
