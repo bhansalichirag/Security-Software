@@ -24,7 +24,7 @@
 
 	<div class="container text-center">
 		<div class="row">
-			<div class="col-sm-8" id="credit">
+			<div class="col-sm-12" id="credit">
 
 				<div class="row">
 					<div class="col-sm-12">
@@ -100,7 +100,7 @@
 								<div id="request" class="collapse" aria-labelledby="headingTwo"
 									data-parent="#accordion">
 									<form method="post" class="card-body"
-										action="/paymentactionemph" class="card-body"
+										action="/paymentactionemph" class="card-body" 
 										style="text-align: left;">
 										<div class="input-group mb-3">
 											<label>Recipient Email Address</label> <input type="email"
@@ -127,7 +127,7 @@
 
 										<div class="input-group">
 											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="submit"
+												value="${_csrf.token}" /> <input type="submit" onclick="return validate();"
 												class="btn btn-success" value="Request">
 										</div>
 									</form>
@@ -139,26 +139,26 @@
 			</div>
 
 
-			<div class="col-sm-4 well" id="transfer">
-				<div class="thumbnail">
-					<p>Brief Statement</p>
-				</div>
-				<div class="well">
-					<p>account1</p>
-					<p>balance</p>
-					<p>date</p>
-				</div>
-				<div class="well">
-					<p>account1</p>
-					<p>balance</p>
-					<p>date</p>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript">
+		function validate()
+		{
+			var phone = document.getElementsByName("Recipient Phone Number")[0].value;
+			var email = document.getElementsByName("Recipient Email Address")[0].value;
+			if(phone || email)
+			{
+				return true;
+			}
+			alert("Both Email and Phone Number fields cannot be blank! Enter either or both!")
+			return false;
+		}
+		
+		</script>
 </body>
 
 </html>
