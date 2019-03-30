@@ -1,7 +1,5 @@
 package main.java;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,19 +7,20 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-
 import main.java.business.services.AppointmentServices;
 import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
-import main.java.dal.accounts.CreditCard;
-import main.java.dal.users.User;
-import main.java.dal.users.customers.Customer;
+import main.java.business.services.LoggingService;
 import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @ComponentScan(basePackages = {"main.java.web","main.java.business.services","main.java.business.repositories"})
+<<<<<<< HEAD
+=======
+//@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})//bypass this spring boot security mechanism.
+>>>>>>> d29ff425ff849e1f1e7cb0fbcf522008b392e7b9
 public class BankingSystemProjectApplication implements CommandLineRunner{
 
 	@Autowired
@@ -35,6 +34,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 	AccountRepository accountRepository;
 	@Autowired
 	AppointmentServices appointmentServices;
+	@Autowired
+	LoggingService logger;
 	
 	public static void main(String[] args) {  
 		SpringApplication.run(BankingSystemProjectApplication.class, args);

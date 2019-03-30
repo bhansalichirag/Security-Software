@@ -43,7 +43,7 @@
 							<div class="card">
 								<div id="send" class="" aria-labelledby="headingOne"
 									data-parent="#accordion">
-									<form action="CCheckOrderAction" method="post"
+									<form action="/setprimary" method="post"
 										class="card-body" style="text-align: left;">
 										<div class="input-group mb-3">
 											<label>Select Primary Account</label> <select name="Account"
@@ -54,7 +54,6 @@
 												</c:forEach>
 											</select>
 										</div>
-
 										<div class="input-group">
 										<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 											<input type="submit" class="btn btn-success" value="Change">
@@ -68,5 +67,7 @@
 			</div>
 		</div>
 	</div>
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 </body>
 </html>

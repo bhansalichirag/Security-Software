@@ -26,4 +26,5 @@ public interface IAccountServices {
 	List<Account> getAllPendingAccounts();
 	List<Account> getAllDeclinedAccounts();
 	boolean PayCreditCardAccount(Account sourceAccount, CreditCard ccard, double amount) throws TransactionFailedException;
+	boolean SetPrimaryAccount(Account primary, String username);
 }

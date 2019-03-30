@@ -112,7 +112,7 @@ public class AccountServiceImpl implements IAccountServices {
 		}
 		else if("CreditCard".equals(accountType))
 		{
-			account = new CreditCard(0.0, -10.0);
+			account = new CreditCard(10000.0, -10.0);
 		}
 		else
 		{
@@ -129,6 +129,31 @@ public class AccountServiceImpl implements IAccountServices {
 		userRepository.save(customer);
 		return account;
 	}
+	
+	@Override
+	public boolean SetPrimaryAccount(Account primary, String username)
+	{
+		Optional<User> customerWrapper = userRepository.findById(username);
+		if(customerWrapper.isPresent() && customerWrapper.get() instanceof Customer)
+		{
+			Customer customer = (Customer) customerWrapper.get();
+			if(customer.getAccountsList().stream().anyMatch(t -> t.getAccountNumber().equals(primary.getAccountNumber())))
+			{
+				try {
+					customer.setPrimaryAccount(primary);
+					userRepository.save(customer);
+					return true;
+				}
+				catch(Exception e)
+				{
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
 	@Override
 	public boolean ApproveAccount(Employee approver, int accountnum)
 	{
@@ -180,7 +205,13 @@ public class AccountServiceImpl implements IAccountServices {
 	@Override
 	public Account GetAccount(int accountNumber)
 	{
-		return accountRepository.findById(accountNumber).get();
+		try {
+			return accountRepository.findById(accountNumber).get();
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 
 	@Override

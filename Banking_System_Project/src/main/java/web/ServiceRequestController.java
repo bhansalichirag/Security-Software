@@ -1,8 +1,11 @@
 package main.java.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.java.business.exceptions.CashierCheckNotFoundException;
+import main.java.business.services.IAccountServices;
 import main.java.business.services.ICashiersCheckService;
 import main.java.dal.accounts.Account;
 import main.java.dal.accounts.CreditCard;
@@ -26,6 +30,8 @@ public class ServiceRequestController {
 	
 	@Autowired
 	ICashiersCheckService cashiersCheckService;
+	@Autowired
+	IAccountServices accountServices;
 	
 	@RequestMapping(value="/ServiceRequest", method=RequestMethod.GET)
 	public String ServiceRequest(){
@@ -100,11 +106,21 @@ public class ServiceRequestController {
 		try 
 		{
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
-			List<Integer> accounts = customer.getAccountsList().stream().distinct().map(t -> t.getAccountNumber())
-					.filter(t -> !t.equals(customer.getPrimaryAccount().getAccountNumber()))
-					.collect(Collectors.toList());
+			List<Integer> accounts = new ArrayList<Integer>();
+			Stream<Integer> accountsMap = customer.getAccountsList().stream().distinct()
+					.filter(t -> !(t instanceof CreditCard))
+					.map(t -> t.getAccountNumber());
+			if(customer.getPrimaryAccount() == null)
+			{
+				accounts = accountsMap.collect(Collectors.toList());
+			}
+			else
+			{
+				accounts = accountsMap.filter(t -> !t.equals(customer.getPrimaryAccount().getAccountNumber()))
+						.collect(Collectors.toList());
+				model.addAttribute("prime_account", customer.getPrimaryAccount().getAccountNumber());
+			}		
 			model.addAttribute("accounts", accounts);
-			model.addAttribute("prime_account", customer.getPrimaryAccount().getAccountNumber());
 		}
 		catch (Exception e) 
 		{
@@ -112,6 +128,43 @@ public class ServiceRequestController {
 		}
 		
 		return new ModelAndView(("ServiceRequests/PrimaryAccount"), model);
+	}
+	
+	@RequestMapping(value= {"/setprimary"}, method = RequestMethod.POST)
+	public ModelAndView SetPrimary(HttpServletRequest request, HttpSession session){
+
+		ModelMap model = new ModelMap();
+		Integer account = Integer.parseInt(request.getParameter("Account"));
+		try 
+		{
+			Customer customer = (Customer) session.getAttribute("CustomerObject");
+			List<Integer> accounts = new ArrayList<Integer>();
+			Optional<Account> matches = customer.getAccountsList().stream().distinct().filter(e -> {
+				if(e.getAccountNumber().equals(account)
+						&& !(e instanceof CreditCard))
+					return true;
+				else
+					return false;
+			}).findFirst();
+
+			Account accObj = accountServices.GetAccount(account);
+			if(matches.isPresent() && accObj != null)
+			{
+				if(accountServices.SetPrimaryAccount(accObj, customer.getUsername()))
+				{
+					return new ModelAndView(("redirect:/accinfo"), model);
+				}
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+		catch (Exception e) 
+		{
+			return new ModelAndView("Login");
+		}
+		return new ModelAndView("Login");
 	}
 	
 	@RequestMapping(value= {"/ccheckDepositAction"}, method = RequestMethod.POST)

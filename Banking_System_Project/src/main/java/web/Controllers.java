@@ -110,6 +110,7 @@ public class Controllers {
 					.findFirst().get();
 			List<Transaction> transactions = account.getTransactions().stream()
 					.filter(t -> !(!t.isApprovalStatus() && t.getApprover() != null))
+					.sorted((a,b) -> b.getTransactionID().compareTo(a.getTransactionID()))
 					.collect(Collectors.toList());
 			model.addAttribute("transactions", transactions);
 			model.addAttribute("accountid", account.getAccountNumber());
@@ -118,7 +119,16 @@ public class Controllers {
 			else if(account instanceof CheckingAccount)
 				model.addAttribute("accountType", "Checking Account");
 			model.addAttribute("accountid", account.getAccountNumber());
+			if(account instanceof CreditCard)
+			{
+				model.addAttribute("balance", 10000 - account.getBalance());
+			}
+			else
+			{
+				model.addAttribute("balance", account.getBalance());
+			}
 			model.addAttribute("balance", account.getBalance());
+			model.addAttribute("user", user.getFirstName() + " " + user.getLastName());
 			return new ModelAndView(("accounts/Transactions"), model);
 		}
 		catch(Exception ex)
