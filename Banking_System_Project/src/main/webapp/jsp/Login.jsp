@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
@@ -54,5 +53,5 @@
 			</div>
 		</div>
 	</div>
-<sec:csrfInput />
+<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </div>

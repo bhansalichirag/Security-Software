@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -12,15 +11,12 @@
 				<header role="banner">
 			        <nav role="navigation">
 			            <ul class="top-bar">
+			            	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 			            	<li class="cta"><a class="OutLineButton" href="/accinfo">Home</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ServiceRequest">Service Requests</a></li>
-<<<<<<< HEAD
 			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
-			                <sec:csrfInput /> 
-=======
 			                <li class="cta"><a class="OutLineButton" href="/logout">Log Out</a></li>
->>>>>>> d29ff425ff849e1f1e7cb0fbcf522008b392e7b9
 			            </ul>
 			        </nav>
 				</header>

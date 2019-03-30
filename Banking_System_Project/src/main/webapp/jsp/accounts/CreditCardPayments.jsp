@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -36,7 +35,6 @@
 											placeholder="Customer Credit Card Number" name="Account"
 											aria-describedby="basic-addon1">
 									</div>
-									<sec:csrfInput /> 
 									<div class="input-group mb-3">
 										<label>Customer CVV Number</label> <input type="number"
 											

@@ -295,3 +295,68 @@ Caused by: java.net.SocketTimeoutException: Read timed out
 2019-03-30 10:30:20.094 TRACE 856 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
 2019-03-30 10:31:19.151 TRACE 856 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
 2019-03-30 10:39:58.123 TRACE 3628 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
+2019-03-30 11:55:46.045  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 9968 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 11:55:46.045 DEBUG 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 11:55:46.045  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 11:56:03.549  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 18.697 seconds (JVM running for 20.378)
+2019-03-30 11:56:23.583 TRACE 9968 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 11:56:25.079 TRACE 9968 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 11:57:00.284 TRACE 9968 --- [http-nio-8080-exec-7] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 11:58:26.535  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 9968 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 11:58:26.535 DEBUG 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 11:58:26.536  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 11:58:30.509  INFO 9968 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 4.037 seconds (JVM running for 167.342)
+2019-03-30 11:58:39.810 TRACE 9968 --- [http-nio-8080-exec-7] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 11:59:33.887  INFO 6448 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 6448 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 11:59:33.887 DEBUG 6448 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 11:59:33.887  INFO 6448 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 11:59:43.718  INFO 6448 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 10.401 seconds (JVM running for 11.642)
+2019-03-30 11:59:51.350 TRACE 6448 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 11:59:52.518 TRACE 6448 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:00:47.675  INFO 9256 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 9256 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:00:47.675 DEBUG 9256 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:00:47.675  INFO 9256 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:00:56.654  INFO 9256 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 9.491 seconds (JVM running for 10.877)
+2019-03-30 12:01:09.795 TRACE 9256 --- [http-nio-8080-exec-2] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:02:51.798  INFO 4424 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 4424 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:02:51.798 DEBUG 4424 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:02:51.813  INFO 4424 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:02:59.759  INFO 4424 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 8.458 seconds (JVM running for 9.788)
+2019-03-30 12:03:05.952 TRACE 4424 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:03:07.044 TRACE 4424 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:05:26.741  INFO 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 11516 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:05:26.741 DEBUG 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:05:26.741  INFO 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:05:37.609  INFO 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 11.416 seconds (JVM running for 12.759)
+2019-03-30 12:06:20.900  INFO 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 11516 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:06:20.900 DEBUG 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:06:20.900  INFO 11516 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:07:28.606  INFO 10540 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 10540 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:07:28.638 DEBUG 10540 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:07:28.638  INFO 10540 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:07:40.049  INFO 10540 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 12.151 seconds (JVM running for 15.282)
+2019-03-30 12:07:51.800 TRACE 10540 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:07:55.900 TRACE 10540 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:09:19.064  INFO 11412 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 11412 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:09:19.064 DEBUG 11412 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:09:19.064  INFO 11412 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:09:27.636  INFO 11412 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 9.085 seconds (JVM running for 10.492)
+2019-03-30 12:09:35.028 TRACE 11412 --- [http-nio-8080-exec-2] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:09:36.518 TRACE 11412 --- [http-nio-8080-exec-2] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:13:32.616  INFO 240 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 240 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:13:32.616 DEBUG 240 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:13:32.616  INFO 240 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:13:41.451  INFO 240 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 9.341 seconds (JVM running for 10.595)
+2019-03-30 12:13:48.632 TRACE 240 --- [http-nio-8080-exec-2] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:13:50.743 TRACE 240 --- [http-nio-8080-exec-5] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:18:44.880  INFO 1420 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 1420 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:18:44.911 DEBUG 1420 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:18:44.911  INFO 1420 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:19:15.709  INFO 1420 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 31.403 seconds (JVM running for 32.739)
+2019-03-30 12:20:28.321 TRACE 1420 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:20:33.263 TRACE 1420 --- [http-nio-8080-exec-3] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 12:47:40.935  INFO 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : Starting BankingSystemProjectApplication on chirag with PID 9276 (started by bhans in E:\Spring 19 ASU\Software Security\SoftSecProject\Banking_System_Project)
+2019-03-30 12:47:40.951 DEBUG 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2019-03-30 12:47:40.951  INFO 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
+2019-03-30 12:48:00.277  INFO 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 20.289 seconds (JVM running for 22.111)
+2019-03-30 12:49:49.245 TRACE 9276 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.

@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default text-left">
 							<div class="panel-body">
-							<sec:csrfInput /> 
+							 
 								<p contenteditable="false">User Primary Account Interface</p>
 								<li><span>Current Primary Account:</span>&nbsp;&nbsp; <span>${prime_account}</span>&nbsp;&nbsp;
 								</li>
