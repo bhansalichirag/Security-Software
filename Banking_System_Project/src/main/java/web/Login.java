@@ -55,9 +55,9 @@ public class Login {
 			}
 			if(session.getAttribute("EmployeeObject") !=null  && (session.getAttribute("EmployeeObject") instanceof Employee))
 			{
-				if(loginUserService.removeUserLoggedIn(((Customer)session.getAttribute("EmployeeObject")).getUsername()))
+				if(loginUserService.removeUserLoggedIn(((Employee)session.getAttribute("EmployeeObject")).getUsername()))
 				{
-					String username = ((Customer)session.getAttribute("EmployeeObject")).getUsername();
+					String username = ((Employee)session.getAttribute("EmployeeObject")).getUsername();
 					session.setAttribute("EmployeeObject", null);
 					loggingService.log("Employee with username: " + username + " was logged out.");
 				}
@@ -114,7 +114,7 @@ public class Login {
         			oldUser = session.getAttribute("EmployeeObject");
         			if(oldUser != null && oldUser instanceof Employee)
             		{
-            			loginUserService.removeUserLoggedIn(((Customer)oldUser).getUsername());
+            			loginUserService.removeUserLoggedIn(((Employee)oldUser).getUsername());
             		}
         		}
         		if(!loginUserService.addUserLoggedIn(user.getUsername()))

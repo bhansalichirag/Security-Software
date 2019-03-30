@@ -79,11 +79,14 @@ public class EmployeeController {
 			if (emp instanceof Admin)
 			{
 				List<String> logLines = new ArrayList<String>();
-				File file = ResourceUtils.getFile("classpath:logger.log");
+				File file = new File("C:\\SS Proj Repo\\softwaresec545\\Banking_System_Project\\src\\main\\resources\\logger.log");//.getFile("classpath:logger.log");
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
-				while (line != null && line.contains("TRACE")) {
-					logLines.add(line);
+				while (line != null) {
+					if(line.contains("TRACE"))
+					{
+						logLines.add(line);
+					}
 					line = reader.readLine();
 				}
 				reader.close();

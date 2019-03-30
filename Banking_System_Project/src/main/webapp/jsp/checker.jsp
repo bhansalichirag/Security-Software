@@ -16,8 +16,8 @@
 					<tr>
 						<th>Date</th>
 						<th>Transaction ID</th>
-						<th>Transaction Type</th>
-						<th>Recipient/Sender Account Number</th>
+						<th>Sender Account Number</th>
+						<th>Recipient Account Number</th>
 						<th>Amount</th>
 						<th>Status</th>
 					</tr>
@@ -29,16 +29,10 @@
 				    		<td>${transaction.transactionID}</td>
 				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/> 
 				    		<td>
-				    			<c:choose>
-				    				<c:when test="${transaction.payee.accountNumber == accountid}">Credit</c:when>
-				    				<c:otherwise>Debit</c:otherwise>
-				    			</c:choose>
+				    			${transaction.payer.accountNumber}
 				    		</td>
 				    		<td>
-				    			<c:choose>
-				    				<c:when test="${transaction.payee.accountNumber == accountid}">${transaction.payer.accountNumber}</c:when>
-				    				<c:otherwise>${transaction.payee.accountNumber}</c:otherwise>
-				    			</c:choose>
+				    			${transaction.payee.accountNumber}
 				    		</td>
 				    		<td>
 				    		<c:choose>
