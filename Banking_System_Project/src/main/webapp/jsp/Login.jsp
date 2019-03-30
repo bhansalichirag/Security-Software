@@ -27,7 +27,6 @@
 							<label for="uname"><b>Username</b></label> <input type="text"
 								placeholder="Enter Username" id="userName" name="uname"  
 								maxlength="30" minlength="2"
-								
 								required>
 						</div>
 						<div class="form-group">
@@ -38,11 +37,9 @@
 						</div>
 						<div class="form-group">
 							<button type="submit">Login</button>
-								 
-							<!-- <div class="form-group"
-								style="background-color: #f1f1f1; height: 30px">
-								<span><a href="/ForgotPassword">Forgot password?</a></span>
-							</div> -->
+								
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 							<div class="form-group"
 								style="background-color: #f1f1f1; height: 30px">
 								<span><a href="/NewCustomerRegister">New Customer?</a></span>
@@ -53,5 +50,4 @@
 			</div>
 		</div>
 	</div>
-<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </div>

@@ -74,27 +74,6 @@
 						        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth" value=<%=request.getAttribute("DOB") %>>
 						      </div>
 						    </div>
-						     
-						    <!-- <div class="form-group">
-						      <label for="ssn" class="col-lg-2 control-label">SSN</label>
-						      <div class="col-lg-5">
-						        <input type="text" class="form-control" name="ssn" id="ssn" placeholder="SSN Number">
-						      </div>
-						    </div>
-						    
-						    <div class="form-group">
-						      <label for="securityquestion1" class="col-lg-2 control-label">What is your childhood nickname?</label>
-						      <div class="col-lg-5">
-						        <input type="text" class="form-control" name="seqquestion1" id="seqquestion1" placeholder="Security Question 1">
-						      </div>
-						    </div>
-						    <div class="form-group">
-						      <label for="securityquestion2" class="col-lg-2 control-label">Who was your childhood hero?</label>
-						      <div class="col-lg-5">
-						        <input type="text" class="form-control" name="seqquestion2" id="seqquestion2" placeholder="Security Question 2">
-						      </div>
-						    </div> -->
-						    
 						        <br>
 						     <div class="form-group">
 						      <div class="col-lg-7 col-lg-offset-2">

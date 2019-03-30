@@ -3,9 +3,7 @@ package main.java;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import main.java.business.services.AppointmentServices;
 import main.java.business.services.ITransactionServices;
@@ -15,7 +13,7 @@ import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @ComponentScan(basePackages = {"main.java.web","main.java.business.services","main.java.business.repositories"})
 public class BankingSystemProjectApplication implements CommandLineRunner{
 

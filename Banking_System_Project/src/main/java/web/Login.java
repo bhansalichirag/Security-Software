@@ -127,7 +127,6 @@ public class Login {
         		{
         		if(user instanceof Customer)
         		{
-        			//user.setPassword("");
         			if(user instanceof Individual)
         			{
         				session.setAttribute("role", "Individual");

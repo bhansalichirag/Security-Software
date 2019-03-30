@@ -360,3 +360,7 @@ Caused by: java.net.SocketTimeoutException: Read timed out
 2019-03-30 12:47:40.951  INFO 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : No active profile set, falling back to default profiles: default
 2019-03-30 12:48:00.277  INFO 9276 --- [restartedMain] m.java.BankingSystemProjectApplication   : Started BankingSystemProjectApplication in 20.289 seconds (JVM running for 22.111)
 2019-03-30 12:49:49.245 TRACE 9276 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 13:03:09.614 TRACE 13040 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 127.0.0.1 recieved.
+2019-03-30 13:03:13.957 TRACE 13040 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Merchant with username: Merch logged In.
+2019-03-30 13:10:16.185 TRACE 9800 --- [http-nio-8080-exec-1] m.java.business.services.LoggingService  : Login Attempt from IP: 0:0:0:0:0:0:0:1 recieved.
+2019-03-30 13:10:22.418 TRACE 9800 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Merchant with username: Merch logged In.

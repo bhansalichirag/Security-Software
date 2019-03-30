@@ -13,7 +13,6 @@
 	<artifactId>Banking_System_Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Banking_System_Project</name>
-	<packaging>jar</packaging>
 	<description>Spring Boot Starter(Add Log4J)</description>
 
 	<properties>

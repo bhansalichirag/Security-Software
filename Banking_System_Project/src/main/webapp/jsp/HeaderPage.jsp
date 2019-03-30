@@ -11,7 +11,7 @@
 				<header role="banner">
 			        <nav role="navigation">
 			            <ul class="top-bar">
-			            	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+			            	<input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
 			            	<li class="cta"><a class="OutLineButton" href="/accinfo">Home</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ServiceRequest">Service Requests</a></li>
