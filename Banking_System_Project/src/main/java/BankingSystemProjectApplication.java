@@ -9,6 +9,7 @@ import main.java.business.services.AppointmentServices;
 import main.java.business.services.ITransactionServices;
 import main.java.business.services.IUserServices;
 import main.java.business.services.LoggingService;
+import main.java.dal.users.customers.Customer;
 import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
 
@@ -36,6 +37,7 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
     public void run(String... arg0) throws Exception { 
 //		userServices.CreateEmployeeUser("Tier1", "Program", "", "Tester", "Ptest12", new Date(), "8412360456", "donotreplyss545@gmail.com");
@@ -45,7 +47,8 @@ public class BankingSystemProjectApplication implements CommandLineRunner{
 //		userServices.CreateCustomerUser("Merchant", "Quaky", "Oaty", "Maker", "Merch", new Date(),"passwaad", "12252998","kfc@seller", "asdasdas",
 //				"120698755", "sq1", "sq2");
 //		@SuppressWarnings("unused")
-//		Customer x = (Customer) userRepository.findById("QuaeaterX").get();
+		Customer x = (Customer) userRepository.findById("QuaeaterX").get();
+		System.out.println();
 //		CreditCard sa = new CreditCard(50.0, 25.0);
 //		accountRepository.save(sa);
 //		x.addAccount(sa);

@@ -18,7 +18,7 @@
 					<tr>
 						<th>Date</th>
 						<th>Account ID</th>
-						<th>Requested by</th>
+						<th>Balance</th>
 						<th>Status</th>
 					</tr>
 				</thead>

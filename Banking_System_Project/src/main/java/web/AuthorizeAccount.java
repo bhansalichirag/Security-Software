@@ -1,6 +1,7 @@
 package main.java.web;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,9 @@ public class AuthorizeAccount {
 			else if(emp instanceof Tier2)
 			{
 				String role = (String) session.getAttribute("role");
-				List<Account> accounts=accountServices.getAllPendingAccounts();
+				List<Account> accounts=accountServices.getAllPendingAccounts().stream()
+						.sorted((a,b) -> b.getAccountNumber().compareTo(a.getAccountNumber()))
+						.collect(Collectors.toList());
 				session.setAttribute("pendingAccounts", accounts);
 				model.addAttribute("accounts", accounts);
 				model.addAttribute("role",role);
