@@ -16,7 +16,7 @@
 			                <li class="cta"><a class="OutLineButton" href="/checker">Approve/Decline Transaction</a></li>
 			                <li class="cta"><a class="OutLineButton" href="#">Cashiers Cheque</a></li>
 			                <li class="ctd"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
-			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
+			                <li class="cta"><a class="OutLineButton" href="/logout">Log Out</a></li>
 			            </ul>
 			        </nav>
 				</header>

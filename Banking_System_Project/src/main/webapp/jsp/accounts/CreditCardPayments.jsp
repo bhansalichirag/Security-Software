@@ -37,7 +37,7 @@
 									</div>
 									<div class="input-group mb-3">
 										<label>Customer CVV Number</label> <input type="number"
-											oninvalid="this.setCustomValidity('Must be a 3 digit number')"
+											
 											pattern="[0-9]{3}" class="form-control" step="1"
 											placeholder="Customer CVV Number" name="CVV"
 											aria-describedby="basic-addon2">
@@ -50,6 +50,8 @@
 									<div class="input-group">
 										<input type="submit" class="btn btn-success" value="Request">
 									</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}" />
 								</form>
 							</div>
 						</div>
@@ -74,7 +76,7 @@
 									</div>
 									<div class="input-group mb-3">
 										<label>Enter Your CVV Number</label> <input type="number"
-											oninvalid="this.setCustomValidity('Must be a 3 digit number')"
+											
 											pattern="[0-9]{3}" class="form-control" step="1"
 											placeholder="Enter Your CVV Number" name="CVV"
 											aria-describedby="basic-addon2">
@@ -87,6 +89,8 @@
 									<div class="input-group">
 										<input type="submit" class="btn btn-success" value="Request">
 									</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}" />
 								</form>
 							</div>
 						</div>

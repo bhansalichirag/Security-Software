@@ -17,7 +17,7 @@
 	</c:choose>
 	<div class="content-container">
 		<div class="accounts-container cards">
-			<div>Howdy ${user}!</div>
+			<div>Hello ${user}!</div>
 			<label>Accounts</label>
 			<c:forEach var="entry" items="${savings}">
 				<div class="account-detail cards">
@@ -122,6 +122,10 @@
 			</c:forEach>
 		</div>
 	</div>
+	<form id="dummyform" action="">
+		<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+	</form>
 	<input type="hidden" id="errorMsg" value="${errorMsg}">
 </body>
 </html>

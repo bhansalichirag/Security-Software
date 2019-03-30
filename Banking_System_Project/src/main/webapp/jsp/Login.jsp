@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,11 +25,16 @@
 						</div>
 						<div class="form-group">
 							<label for="uname"><b>Username</b></label> <input type="text"
-								placeholder="Enter Username" id="userName" name="uname" required>
+								placeholder="Enter Username" id="userName" name="uname"  
+								maxlength="30" minlength="2"
+								
+								required>
 						</div>
 						<div class="form-group">
 							<label for="psw"><b>Password</b></label> <input type="password"
-								placeholder="Enter Password" id="password" name="psw" required>
+								placeholder="Enter Password" id="password" name="psw" 
+								maxlength="50" minlength="2"
+								required>
 						</div>
 						<div class="form-group">
 							<button type="submit">Login</button>

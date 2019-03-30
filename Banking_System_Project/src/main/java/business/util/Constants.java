@@ -13,4 +13,5 @@ public class Constants {
 	{
 		return String.format("AES_ENCRYPT(?,%s)", key);
 	}
+	
 }

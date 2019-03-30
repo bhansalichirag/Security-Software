@@ -57,6 +57,9 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 		if(cashiersCheckWrapper.isPresent())
 		{
 			CashiersCheck cashiersCheck = cashiersCheckWrapper.get();
+			if(cashiersCheck.isCashed() || cashiersCheck.isIssued())
+				return false;
+			
 			cashiersCheck.setIssued(true);
 			cashiersCheck.setIssueDate(new Date());
 			cashiersCheck.setIssuer(issuer);
@@ -78,7 +81,7 @@ public class CashiersCheckServiceImpl implements ICashiersCheckService {
 					cashiersCheck.getRecievingCustomer().getMiddleName() == customer.getMiddleName() &&
 					cashiersCheck.getRecievingCustomer().getLastName() == customer.getLastName() &&
 					!(account instanceof CreditCard) && 
-					match && cashiersCheck.isIssued())
+					match && cashiersCheck.isIssued() && !cashiersCheck.isCashed())
 			{
 				accountServices.MakePayment(cashiersCheck.getIssuingAccount().getAccountNumber(), account.getAccountNumber(), cashiersCheck.getAmount());
 				cashiersCheck.setCashed(true);

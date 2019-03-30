@@ -59,7 +59,7 @@
 
 										<div class="input-group mb-3">
 											<label>Deposit Amount</label> <input type="number"
-												class="form-control" min="1" max="${balance}"
+												class="form-control" min="1" max="${100000}"
 												placeholder="Deposit Amount" name="Amount" required="required">
 										</div>
 										<input type="hidden" name="Deposit" value="sys"/>

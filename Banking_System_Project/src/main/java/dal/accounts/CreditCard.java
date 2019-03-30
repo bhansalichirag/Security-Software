@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -25,7 +24,7 @@ public class CreditCard extends Account {
 	}
 	
 	public CreditCard(Double balance, Double interest) {
-		super(balance, interest);
+		super(10000.0, interest);
 		this.cvv = 0;
 		authorizedMerchants = new ArrayList<String>();
 	}

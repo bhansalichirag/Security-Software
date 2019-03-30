@@ -14,7 +14,7 @@
 			            	<li class="cta"><a class="OutLineButton" href="/accinfo">Home</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ChangePassword">Change Password</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/ServiceRequest">Service Requests</a></li>
-			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
+			                <li class="cta"><a class="OutLineButton" href="/logout">Log Out</a></li>
 			            </ul>
 			        </nav>
 				</header>

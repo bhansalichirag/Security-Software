@@ -17,7 +17,7 @@
 			                <li class="cta"><a class="OutLineButton" href="/EmployeeDelete">Delete Employee</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/EmployeeUpdate">Update Employee Info</a></li>
 			                <li class="ctd"><a class="OutLineButton" href="/Search">Search Employee</a></li>
-			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
+			                <li class="cta"><a class="OutLineButton" href="/logout">Log Out</a></li>
 			            </ul>
 			        </nav>
 				</header>

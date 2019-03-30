@@ -51,7 +51,7 @@
 									<form  action="CCheckOrderAction" method="post" class="card-body" style="text-align: left;">
 										<div class="input-group mb-3">
 											<label>Recipient's First Name</label> <input type="text"
-												oninvalid="this.setCustomValidity('Enter a Proper First Name')"
+												
 												pattern="[a-zA-Z]{1,30}" class="form-control"
 												placeholder="Recipient's First Name"
 												name="Recipient's First Name"
@@ -104,8 +104,7 @@
 									<h5 class="mb-0">
 										<button class="btn btn-link collapsed" data-toggle="collapse"
 											data-target="#request" aria-expanded="false"
-											aria-controls="request">Send by Email or Phone
-											Number</button>
+											aria-controls="request">Deposit Cashier's Check</button>
 									</h5>
 								</div>
 								<div id="request" class="collapse" aria-labelledby="headingTwo"

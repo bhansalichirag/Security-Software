@@ -13,15 +13,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="css/index.css">
 
 </head>
 <body>
 	<%@include file="../HeaderPage.jsp"%>
 	<div class="container text-center">
-		<div class="row">
+		<div class="row" id="getter">
 			<div class="col-sm-8" id="credit">
 				<div class="row">
 					<div class="col-sm-12">
@@ -29,17 +30,14 @@
 							<div class="panel-body">
 								<p contenteditable="false">${accountType}Detail</p>
 								<p>
-								<li><span>Account Number: ${accountid}</span>&nbsp;&nbsp; <span>$
-										${balance}</span>&nbsp;&nbsp; <span style="float: right;">Placeholder</span></li>
-								</p>
+									<span>Account Number: ${accountid}</span>&nbsp;&nbsp; <span>Balance:&nbsp;&nbsp; $
+										${balance}</span>&nbsp;&nbsp; 
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-				<c:forEach items="${transactions}" var="transaction">
-					<tr>
+				<div id="xvg">
+					<c:forEach items="${transactions}" var="transaction">
 						<div class="row">
 							<div class="col-sm-3">
 								<div class="well">
@@ -49,7 +47,8 @@
 							<div class="col-sm-9">
 								<div class="well">
 									<p align="left">
-										<b> <span>Status: </span> <span> <c:choose>
+									<span>Transaction Date: </span> <span>${transaction.date}</span>
+										<b style="float: right;"> <span>Status: </span> <span> <c:choose>
 													<c:when test="${transaction.approvalStatus}">Approved</c:when>
 													<c:otherwise>Pending</c:otherwise>
 												</c:choose>
@@ -75,36 +74,39 @@
 												<c:otherwise>-$ ${transaction.amount}</c:otherwise>
 											</c:choose> <c:choose>
 												<c:when
-													test="${transaction.payee.accountNumber == accountid && transaction.approvalStatus}"> Closing Balance: $ ${transaction.payeeBalance}</c:when>
+													test="${transaction.payee.accountNumber == accountid && transaction.approvalStatus}">
+													<b>Closing Balance:</b> $ ${transaction.payeeBalance}</c:when>
 												<c:when
-													test="${transaction.payee.accountNumber != accountid && transaction.approvalStatus}"> Closing Balance: $ ${transaction.payerBalance}</c:when>
+													test="${transaction.payee.accountNumber != accountid && transaction.approvalStatus}">
+													<b>Closing Balance:</b> $ ${transaction.payerBalance}</c:when>
 											</c:choose>
 										</span>
 									</p>
 								</div>
 							</div>
 						</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
 			<div class="col-sm-4 well" id="transfer">
 				<div class="thumbnail">
-					<p>Brief Statement</p>
+					<button id="cmd" onclick="">Statement Download</button>
 				</div>
 				<div class="well">
-					<p>account1</p>
-					<p>balance</p>
-					<p>date</p>
-				</div>
-				<div class="well">
-					<p>account1</p>
-					<p>balance</p>
-					<p>date</p>
+					<p>Account Holder</p>
+					<p>${user}</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript">
+	var doc = new jsPDF();         
+	var source = window.document.getElementById("credit");
+	doc.fromHTML(
+	    source,
+	    15,
+	    15);
+	doc.save('sample-file.pdf');
+	</script>
 </body>
 </html>

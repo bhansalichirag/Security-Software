@@ -9,7 +9,7 @@ function loadError()
 
 
 function ButtonFormAction(path, params) {
-    var form = document.createElement("form");
+    var form = document.getElementById("dummyform");
     form.setAttribute("method", "post");
     form.setAttribute("action", path);
 
