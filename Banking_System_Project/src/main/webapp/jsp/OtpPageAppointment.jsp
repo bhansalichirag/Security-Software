@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -23,15 +25,17 @@
 						<div class="alert alert-danger">Invalid Otp Try Again</div>
 					</div> --%>
 					<div class="form-group">
-						<input type="number" name="otpnum" id="otpnum" step="1" max="1000000"
-							class="form-control input-lg" required="true" autofocus="true" />
+						<input type="number" name="otpnum" id="otpnum" step="1"
+							max="1000000" class="form-control input-lg" required="true"
+							autofocus="true" />
 					</div>
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6">
-							<button  id="otpsender" class="btn btn-lg btn-primary btn-block">Submit</button>
-								
+							<button id="otpsender" class="btn btn-lg btn-primary btn-block">Submit</button>
+
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
+							<sec:csrfInput />
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6"></div>
 					</div>

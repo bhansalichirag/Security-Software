@@ -97,7 +97,7 @@ public class Login {
         		}
         		else
         		{
-        			mav.addObject("message", "Account is blocked");
+        			mav.addObject("message", "Account is locked.Please contact the bank");
         		}
         		loggingService.log("Login Attempt from IP: " + request.getRemoteAddr() + " failed.");
         		return mav;
@@ -127,6 +127,10 @@ public class Login {
         		{
         		if(user instanceof Customer)
         		{
+<<<<<<< HEAD
+        			//user.setPassword("");
+=======
+>>>>>>> d29ff425ff849e1f1e7cb0fbcf522008b392e7b9
         			if(user instanceof Individual)
         			{
         				session.setAttribute("role", "Individual");

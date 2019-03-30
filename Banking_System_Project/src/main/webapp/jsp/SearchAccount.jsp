@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -30,6 +31,7 @@
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="search_account" name="action" value="search_account">Search</button>
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						        <sec:csrfInput /> 
 						      </div>
 						      <div>
 						      <p>${message}</p>
@@ -60,7 +62,7 @@
 							<div>
 								<label>Approval Status: </label>
 								<label><c:choose>
-		<c:when test="${account.approvalStatus}">Approved</c:when>
+		<c:when test="${entry.approvalStatus}">Approved</c:when>
 		<c:otherwise>
 		Declined/Pending/Deleted
 		</c:otherwise>

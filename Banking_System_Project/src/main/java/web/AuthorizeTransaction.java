@@ -82,16 +82,24 @@ public class AuthorizeTransaction {
 				List<Transaction> transactions=(List<Transaction>) session.getAttribute("pendingTransaction");//transactionServices.GetAllPendingTransactions();
 				for(Transaction transaction:transactions ) {
 					if(transaction.getTransactionID()==Integer.parseInt(request.getParameter("transactionID"))) {
-						transactionServices.ApproveTransaction(approver, transaction);
+						if(transactionServices.ApproveTransaction(approver, transaction) !=null) {
+							List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
+							model.addAttribute("transactions", freshtransactions);
+							model.addAttribute("message", "Transaction approved");
+							
+						}
+						else {
+							List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
+							model.addAttribute("transactions", freshtransactions);
+							model.addAttribute("message", "Transaction couldnt be processed");
+							
+						}
 					}
 				}
-				List<Transaction> freshtransactions=transactionServices.GetAllPendingTransactions();
-				model.addAttribute("transactions", freshtransactions);
-				model.addAttribute("message", "Transaction approved");
 				return new ModelAndView("pendingTransaction",model);
 			}
 			else {
-				ModelAndView mav = new ModelAndView("redirect:/login");
+				ModelAndView mav = new ModelAndView("Login");
 				mav.addObject("message","not authorized for this task");
 				return mav;
 			}

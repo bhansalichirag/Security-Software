@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -27,6 +28,7 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default text-left">
 							<div class="panel-body">
+							<sec:csrfInput /> 
 								<p contenteditable="false">Online Cashier's Check Portal</p>
 								<li><span>Order Checks</span>&nbsp;&nbsp; <span>Deposit Check</span>&nbsp;&nbsp;
 									<span>Online</span> </li>

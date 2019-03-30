@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 						      <div class="col-lg-7 col-lg-offset-2">
 						      	<button id="new_password" name="action" value="new_password">ChangePassword</button>
 						      	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						      	<sec:csrfInput /> 
 						      </div>
 						    </div>
 			  			</fieldset>

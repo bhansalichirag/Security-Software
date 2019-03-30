@@ -57,7 +57,7 @@ public class ChangePassword {
 				if (user == null)
 				{
 					mav = new ModelAndView("ChangePassword");
-					mav.addObject("message", "Please enter a valid old password");
+					mav.addObject("message", "Please enter a valid old password or username");
 				}
 				else 
 				{
