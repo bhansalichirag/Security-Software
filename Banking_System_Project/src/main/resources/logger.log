@@ -294,3 +294,4 @@ Caused by: java.net.SocketTimeoutException: Read timed out
 2019-03-30 10:28:26.563 TRACE 856 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
 2019-03-30 10:30:20.094 TRACE 856 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
 2019-03-30 10:31:19.151 TRACE 856 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.
+2019-03-30 10:39:58.123 TRACE 3628 --- [http-nio-8080-exec-4] m.java.business.services.LoggingService  : Customer of type Individual with username: QuaeaterX logged In.

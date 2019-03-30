@@ -90,7 +90,7 @@
 			</div>
 			<div class="col-sm-4 well" id="transfer">
 				<div class="thumbnail">
-					<button id="cmd" onclick="">Statement Download</button>
+					<button id="cmd" class="btn btn-success" onclick="return downloader();">Statement Download</button>
 				</div>
 				<div class="well">
 					<p>Account Holder</p>
@@ -100,13 +100,16 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	var doc = new jsPDF();         
-	var source = window.document.getElementById("credit");
-	doc.fromHTML(
-	    source,
-	    15,
-	    15);
-	doc.save('sample-file.pdf');
+	function downloader()
+	{
+		var doc = new jsPDF();         
+		var source = window.document.getElementById("credit");
+		doc.fromHTML(
+		    source,
+		    15,
+		    15);
+		doc.save('account_statement.pdf');
+	}
 	</script>
 </body>
 </html>
