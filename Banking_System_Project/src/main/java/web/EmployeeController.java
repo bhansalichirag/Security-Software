@@ -82,7 +82,7 @@ public class EmployeeController {
 				File file = ResourceUtils.getFile("classpath:logger.log");
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
-				while (line != null) {
+				while (line != null && line.contains("TRACE")) {
 					logLines.add(line);
 					line = reader.readLine();
 				}
