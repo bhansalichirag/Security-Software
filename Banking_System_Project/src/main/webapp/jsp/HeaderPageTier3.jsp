@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,9 @@
 			                <li class="cta"><a class="OutLineButton" href="/EmployeeDelete">Delete Employee</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/EmployeeUpdate">Update Employee Info</a></li>
 			                <li class="ctd"><a class="OutLineButton" href="/Search">Search Employee</a></li>
+			                <li class="ctd"><a class="OutLineButton" href="#">Signup History</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
+			                <sec:csrfInput /> 
 			            </ul>
 			        </nav>
 				</header>

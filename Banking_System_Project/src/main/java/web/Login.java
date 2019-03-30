@@ -56,7 +56,7 @@ public class Login {
         		}
         		else
         		{
-        			mav.addObject("message", "Account is blocked");
+        			mav.addObject("message", "Account is locked.Please contact the bank");
         		}
         		return mav;
         	}
@@ -66,7 +66,7 @@ public class Login {
         		{
         		if(user instanceof Customer)
         		{
-        			user.setPassword("");
+        			//user.setPassword("");
         			if(user instanceof Individual)
         			{
         				session.setAttribute("role", "Individual");

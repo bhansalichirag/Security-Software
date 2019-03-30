@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -32,6 +33,7 @@
 							<div class="panel-body">
 								<p contenteditable="false">${acctype}</p>
 								<p>
+								<sec:csrfInput /> 
 								<li><span>Account Number: ${accountid}</span> <span>Balance:
 										$ ${balance}</span></li>
 								</p>

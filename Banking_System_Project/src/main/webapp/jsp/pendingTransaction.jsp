@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -81,6 +82,7 @@
 				    		<form method="post" action="/declinetransaction" id="decline">
 				    		<input type="hidden" name="transactionID" id="transactionID" value="${transaction.transactionID}">
 				    		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+				    		<sec:csrfInput /> 
 				    		<input type="submit" value="Decline">
 				    		</form>
 				    		</td>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 							<input type="submit" class="btn btn-lg btn-primary btn-block"
 								value="Submit" />
 								<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+								<sec:csrfInput /> 
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6"></div>
 					</div>

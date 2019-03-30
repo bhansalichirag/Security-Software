@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -47,6 +48,7 @@
  		<div class="panel-body" align="center">
 					<form class="form-horizontal" id="OpenAccount" action="/openaccount" method="post">
 			  			<fieldset>
+			  			<p>${message }</p>
 			  				<div class="form-group">
 						      <label for="firstname" class="col-lg-2 control-label">First Name</label>
 						      <div class="col-lg-5">
@@ -106,6 +108,7 @@
 						      	<button type="reset" class="btn btn-default">Reset</button>
 						        <button id="openaccount" name="action" value="open_account">Submit</button>
 						        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						        <sec:csrfInput /> 
 						      </div>
 						    </div>
 						     </fieldset>

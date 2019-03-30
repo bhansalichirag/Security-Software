@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,7 @@
 			                <li class="cta"><a class="OutLineButton" href="/DeleteAccount">Delete Customer Account</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/accountrequest">Account Approval</a></li>
 			                <li class="cta"><a class="OutLineButton" href="/login">Log Out</a></li>
+			                <sec:csrfInput /> 
 			            </ul>
 			        </nav>
 				</header>

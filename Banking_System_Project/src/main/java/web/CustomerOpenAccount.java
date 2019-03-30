@@ -56,11 +56,13 @@ public class CustomerOpenAccount {
 		{
 			Account account = accountServices.CreateAccount(user_cust, account_type);
 			model.addAttribute("account", (Account)account);
-			return new ModelAndView(("redirect:/accinfo"),model);
+			ModelAndView mav = new ModelAndView(("CreateNewAccount"),model);
+			mav.addObject("message", "Request for new account sent");
+			return mav;
 		}
 		else
 		{
-			ModelAndView mav = new ModelAndView(("/OpenAccount"),model);
+			ModelAndView mav = new ModelAndView(("CreateNewAccount"),model);
 			mav.addObject("message","Wrong details entered");
 			return mav;
 		}

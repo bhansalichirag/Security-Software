@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -32,12 +33,11 @@
 						</div>
 						<div class="form-group">
 							<button type="submit">Login</button>
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
-							<div class="form-group"
+								 
+							<!-- <div class="form-group"
 								style="background-color: #f1f1f1; height: 30px">
 								<span><a href="/ForgotPassword">Forgot password?</a></span>
-							</div>
+							</div> -->
 							<div class="form-group"
 								style="background-color: #f1f1f1; height: 30px">
 								<span><a href="/NewCustomerRegister">New Customer?</a></span>
@@ -48,5 +48,5 @@
 			</div>
 		</div>
 	</div>
-
+<sec:csrfInput />
 </div>

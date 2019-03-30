@@ -20,8 +20,8 @@ import main.java.repositories.AccountRepository;
 import main.java.repositories.UserRepository;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @ComponentScan(basePackages = {"main.java.web","main.java.business.services","main.java.business.repositories"})
-@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})//bypass this spring boot security mechanism.
 public class BankingSystemProjectApplication implements CommandLineRunner{
 
 	@Autowired
