@@ -24,7 +24,7 @@ public class CustomerScheduleAppointment {
 	@Autowired
 	AppointmentServices appointmentservices;
 
-	@RequestMapping(value= {"/ScheduleAppointment"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/ScheduleAppointment"}, method = RequestMethod.POST)
 	public ModelAndView ScheduleAppointment(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
 		try{Customer user_cust = (Customer) session.getAttribute("CustomerObject");

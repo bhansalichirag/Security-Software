@@ -32,7 +32,7 @@ public class Login {
 	LoggingService loggingService;
 	
 	@RequestMapping(value= {"/","/login"}, method = RequestMethod.GET)
-    public String welcome(ModelMap model, HttpServletRequest request){
+    public String welcome(ModelMap model, HttpServletRequest request, HttpSession session){
         String name = (String) model.get("name");
         model.put("Login", name);
         loggingService.log("Login Attempt from IP: " + request.getRemoteAddr() + " recieved.");
@@ -49,25 +49,27 @@ public class Login {
 				if(loginUserService.removeUserLoggedIn(((Customer)session.getAttribute("CustomerObject")).getUsername()))
 				{
 					String username = ((Customer)session.getAttribute("CustomerObject")).getUsername();
-					session.setAttribute("CustomerObject", null);
 					loggingService.log("Customer with username: " + username + " was logged out.");
 				}
+				session.setAttribute("CustomerObject", null);
+				session.invalidate();
 			}
 			if(session.getAttribute("EmployeeObject") !=null  && (session.getAttribute("EmployeeObject") instanceof Employee))
 			{
 				if(loginUserService.removeUserLoggedIn(((Employee)session.getAttribute("EmployeeObject")).getUsername()))
 				{
 					String username = ((Employee)session.getAttribute("EmployeeObject")).getUsername();
-					session.setAttribute("EmployeeObject", null);
 					loggingService.log("Employee with username: " + username + " was logged out.");
 				}
+				session.setAttribute("EmployeeObject", null);
+				session.invalidate();
 			}
 		}
 		catch(Exception e)
 		{
 			
 		}
-        return new ModelAndView("Login");
+        return new ModelAndView("redirect:/login");
     }
 	
 	@RequestMapping(value="/redirectuser", method = RequestMethod.POST)

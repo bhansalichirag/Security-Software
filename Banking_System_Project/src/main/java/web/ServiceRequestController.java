@@ -108,7 +108,7 @@ public class ServiceRequestController {
 			Customer customer = (Customer) session.getAttribute("CustomerObject");
 			List<Integer> accounts = new ArrayList<Integer>();
 			Stream<Integer> accountsMap = customer.getAccountsList().stream().distinct()
-					.filter(t -> !(t instanceof CreditCard))
+					.filter(t -> !(t instanceof CreditCard) && t.isApprovalStatus())
 					.map(t -> t.getAccountNumber());
 			if(customer.getPrimaryAccount() == null)
 			{

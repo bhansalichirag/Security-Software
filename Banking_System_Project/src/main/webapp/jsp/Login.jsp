@@ -1,3 +1,4 @@
+<%@page import="main.java.dal.users.customers.Customer"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	
@@ -8,6 +9,12 @@
 <link href="css/loginCSS.css" rel="stylesheet">
 <title>Login Page</title>
 </head>
+<%
+	if(session.getAttribute("CustomerObject") != null || session.getAttribute("EmployeeObject") != null)
+	{
+		response.sendRedirect("/logout");
+	}
+%>
 <div class="content-wrapper">
 	<div class="col-md-12" id="page-content" align="center">
 		<div class="panel panel-primary">

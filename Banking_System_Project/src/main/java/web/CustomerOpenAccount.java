@@ -19,7 +19,7 @@ public class CustomerOpenAccount {
 	@Autowired
 	IAccountServices accountServices;
 
-	@RequestMapping(value= {"/OpenAccount"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/OpenAccount"}, method = RequestMethod.POST)
 	public ModelAndView OpenAccount(HttpServletRequest request, HttpSession session){
 		ModelMap model = new ModelMap();
 		try {
