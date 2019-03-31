@@ -56,7 +56,7 @@ public class OtpController {
 		replacements.put("user", username);
 		replacements.put("otpnum", String.valueOf(otp));
 		String message = "Your Otp is : " + String.valueOf(otp) + " . Please enter it exactly";
-		myEmailService.sendOtpMessage("do.no.reply.ss545@gmail.com", "OTP for Login", message);
+		myEmailService.sendOtpMessage(user.getEmail(), "OTP for Login", message);
 
 		return new ModelAndView("OtpPage",model);
 	}
